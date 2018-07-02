@@ -1,4 +1,5 @@
-# allaboutapps.github.io
-our engineering blog
+# allaboutapps engineering
 
-this is the `public` folder of our [hugo](https://gohugo.io) powered blog.
+This is the `public` folder of our [Hugo](https://gohugo.io) powered blog. 
+The theme is based on [Minimo](https://github.com/MunifTanjim/minimo).
+
