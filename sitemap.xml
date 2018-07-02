@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://allaboutapps.github.io/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/categories/android/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/categories/ios/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/categories/web/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/articles/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
