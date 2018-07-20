@@ -4,6 +4,7 @@
   
   <url>
     <loc>http://allaboutapps.github.io/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
@@ -12,6 +13,7 @@
   
   <url>
     <loc>http://allaboutapps.github.io/categories/ios/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
@@ -20,10 +22,21 @@
   
   <url>
     <loc>http://allaboutapps.github.io/articles/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://allaboutapps.github.io/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/articles/reactive-swift-properties/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/articles/reactive-swift-flatmap/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
@@ -32,11 +45,24 @@
   
   <url>
     <loc>http://allaboutapps.github.io/categories/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/authors/mb/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://allaboutapps.github.io/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://allaboutapps.github.io/categories/reactiveswift/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
     <priority>0</priority>
   </url>
   
