@@ -3,71 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://allaboutapps.github.io/</loc>
+    <loc>https://code.allaboutapps.at/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/categories/android/</loc>
+    <loc>https://code.allaboutapps.at/categories/android/</loc>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/categories/ios/</loc>
+    <loc>https://code.allaboutapps.at/categories/ios/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/categories/web/</loc>
+    <loc>https://code.allaboutapps.at/categories/web/</loc>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/articles/</loc>
+    <loc>https://code.allaboutapps.at/articles/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/about/</loc>
+    <loc>https://code.allaboutapps.at/about/</loc>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/articles/reactive-swift-properties/</loc>
+    <loc>https://code.allaboutapps.at/articles/reactive-swift-properties/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/articles/reactive-swift-flatmap/</loc>
+    <loc>https://code.allaboutapps.at/articles/reactive-swift-flatmap/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/authors/</loc>
+    <loc>https://code.allaboutapps.at/authors/</loc>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/categories/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://allaboutapps.github.io/authors/mb/</loc>
+    <loc>https://code.allaboutapps.at/categories/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/page/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://allaboutapps.github.io/categories/reactiveswift/</loc>
+    <loc>https://code.allaboutapps.at/authors/mb/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://allaboutapps.github.io/tags/</loc>
+    <loc>https://code.allaboutapps.at/page/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/reactiveswift/</loc>
+    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/tags/</loc>
     <priority>0</priority>
   </url>
   

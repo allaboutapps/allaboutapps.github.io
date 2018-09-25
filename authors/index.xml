@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on all about apps</title>
-    <link>http://allaboutapps.github.io/authors/</link>
+    <link>https://code.allaboutapps.at/authors/</link>
     <description>Recent content in Authors on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://allaboutapps.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://code.allaboutapps.at/authors/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Mb</title>
-      <link>http://allaboutapps.github.io/authors/mb/</link>
+      <link>https://code.allaboutapps.at/authors/mb/</link>
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
-      <guid>http://allaboutapps.github.io/authors/mb/</guid>
+      <guid>https://code.allaboutapps.at/authors/mb/</guid>
       <description></description>
     </item>
     

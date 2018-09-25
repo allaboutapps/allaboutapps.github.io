@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web on all about apps</title>
-    <link>http://allaboutapps.github.io/categories/web/</link>
+    <link>https://code.allaboutapps.at/categories/web/</link>
     <description>Recent content in Web on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://allaboutapps.github.io/categories/web/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://code.allaboutapps.at/categories/web/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>iOS on all about apps</title>
-    <link>http://allaboutapps.github.io/categories/ios/</link>
+    <link>https://code.allaboutapps.at/categories/ios/</link>
     <description>Recent content in iOS on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Jul 2018 11:50:28 +0200</lastBuildDate>
     
-	<atom:link href="http://allaboutapps.github.io/categories/ios/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://code.allaboutapps.at/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Reactive Snippet: Access Control for Mutable Properties</title>
-      <link>http://allaboutapps.github.io/articles/reactive-swift-properties/</link>
+      <link>https://code.allaboutapps.at/articles/reactive-swift-properties/</link>
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
-      <guid>http://allaboutapps.github.io/articles/reactive-swift-properties/</guid>
+      <guid>https://code.allaboutapps.at/articles/reactive-swift-properties/</guid>
       <description>Swift&amp;rsquo;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
 private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&amp;rsquo;s value we can create a private writable MutableProperty and a public read-only Property:</description>
     </item>
     
     <item>
       <title>Reactive Snippet: flatMap, flatten and combineLatest</title>
-      <link>http://allaboutapps.github.io/articles/reactive-swift-flatmap/</link>
+      <link>https://code.allaboutapps.at/articles/reactive-swift-flatmap/</link>
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
-      <guid>http://allaboutapps.github.io/articles/reactive-swift-flatmap/</guid>
+      <guid>https://code.allaboutapps.at/articles/reactive-swift-flatmap/</guid>
       <description>Most of our projects at all about apps are build using a MVVM architecture with ReactiveSwift as our reactive framework of choice. However, all code examples should be easily translatable to RxSwift.
 Often, you end up with an array of objects (e.g. View Models) which contain some reactive property that you want to bind to. The array itself is a MutableProperty as well and can change at any time (e.g. after a network request).</description>
     </item>
