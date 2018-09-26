@@ -6,9 +6,20 @@
     <description>Recent content in Android on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Tue, 25 Sep 2018 16:01:48 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Template Project</title>
+      <link>https://code.allaboutapps.at/articles/android-template-project/</link>
+      <pubDate>Tue, 25 Sep 2018 16:01:48 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/android-template-project/</guid>
+      <description>Team Android Project Template As a software development company we are starting new projects every few weeks. With every project we create a jira ticket called Project Setup.
+We walked through all our Project Setup Jira tickets and calculated the average hours for this kind of task: In average every android project needs about 3.5 hours for a simple setup. On the other hand the project setup is boring and no developer likes that work.</description>
+    </item>
     
   </channel>
 </rss>

@@ -4,11 +4,12 @@
   
   <url>
     <loc>https://code.allaboutapps.at/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/categories/android/</loc>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
   </url>
   
   <url>
@@ -22,11 +23,16 @@
   
   <url>
     <loc>https://code.allaboutapps.at/articles/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/articles/android-template-project/</loc>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
   </url>
   
   <url>
@@ -45,13 +51,19 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/authors/mb/</loc>
     <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/authors/mg/</loc>
+    <lastmod>2018-09-25T16:01:48+02:00</lastmod>
     <priority>0</priority>
   </url>
   
