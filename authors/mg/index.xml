@@ -6,10 +6,19 @@
     <description>Recent content in Mg on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Sep 2018 16:01:48 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 03 Oct 2018 16:02:48 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/authors/mg/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TimingLogger</title>
+      <link>https://code.allaboutapps.at/articles/timing-logger/</link>
+      <pubDate>Wed, 03 Oct 2018 16:02:48 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/timing-logger/</guid>
+      <description>TimingLogger Sometimes developers needs to analyze performance of a small friction of code. Maybe a RecyclerView is not scrolling smoothly or a calculation needs too much time, we have to split it up and try to find the line or block that runs inefficently. We all know to get a smooth user experience we only have 16ms for each frame to render. So it is very important to locate and optimize inefficient code.</description>
+    </item>
     
     <item>
       <title>Android Template Project</title>
