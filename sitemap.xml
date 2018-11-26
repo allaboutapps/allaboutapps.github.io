@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/</loc>
-    <lastmod>2018-10-03T16:02:48+02:00</lastmod>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
   </url>
   
   <url>
@@ -14,7 +14,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/ios/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
   </url>
   
   <url>
@@ -23,11 +23,16 @@
   
   <url>
     <loc>https://code.allaboutapps.at/articles/</loc>
-    <lastmod>2018-10-03T16:02:48+02:00</lastmod>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/articles/smooth-graph-lines/</loc>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
   </url>
   
   <url>
@@ -61,8 +66,14 @@
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/categories/graphics/</loc>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/authors/mb/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
     <priority>0</priority>
   </url>
   

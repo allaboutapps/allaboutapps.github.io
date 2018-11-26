@@ -6,10 +6,20 @@
     <description>Recent content in iOS on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jul 2018 11:50:28 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 26 Nov 2018 21:12:27 +0100</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Drawing Smooth 2D Graphs using UIBezierPath</title>
+      <link>https://code.allaboutapps.at/articles/smooth-graph-lines/</link>
+      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/smooth-graph-lines/</guid>
+      <description>We have been working on multiple projects that required drawing 2D line graphs given a set of points. UIKit gives us the versatile UIBezierPath, which allows us to create a straight line graph by appending segments using addLineToPath for each point in our array. Easy, but not really pretty.
+There are two different kinds of curves in UIBezierPath: quadratic curves with a single control point (addQuadCurveToPoint) and cubic curves with two control points (addCurveToPoint).</description>
+    </item>
     
     <item>
       <title>Reactive Snippet: Access Control for Mutable Properties</title>

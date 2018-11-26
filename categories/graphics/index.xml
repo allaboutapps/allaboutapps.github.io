@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graphics on all about apps</title>
+    <link>https://code.allaboutapps.at/categories/graphics/</link>
+    <description>Recent content in Graphics on all about apps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 26 Nov 2018 21:12:27 +0100</lastBuildDate>
+    
+	<atom:link href="https://code.allaboutapps.at/categories/graphics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Drawing Smooth 2D Graphs using UIBezierPath</title>
+      <link>https://code.allaboutapps.at/articles/smooth-graph-lines/</link>
+      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/smooth-graph-lines/</guid>
+      <description>We have been working on multiple projects that required drawing 2D line graphs given a set of points. UIKit gives us the versatile UIBezierPath, which allows us to create a straight line graph by appending segments using addLineToPath for each point in our array. Easy, but not really pretty.
+There are two different kinds of curves in UIBezierPath: quadratic curves with a single control point (addQuadCurveToPoint) and cubic curves with two control points (addCurveToPoint).</description>
+    </item>
+    
+  </channel>
+</rss>
