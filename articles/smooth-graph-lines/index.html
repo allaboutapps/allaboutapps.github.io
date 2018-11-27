@@ -184,7 +184,7 @@ if (!doNotTrack) {
 <h3 id="our-result">Our Result</h3>
 
 <p>In our use-case, the above solutions were not acceptable as they may lead to wrong conclusions drawn by the user. To achieve our required results (= a smooth graph that respects global and local maxima and minima and passes through each point), we used quadratic curves. In order for the curve to go through every point, we have to divide each segment into two curves and calculate the control point for each part.
-Less than 40 lines of codes later, we have a nice extension of <code>UIBezierPath</code> with exactly the desired results:</p>
+Less than 40 lines of code later, we have a nice extension of <code>UIBezierPath</code> with exactly the desired results:</p>
 
 <p><img src="/images/smooth.png" alt="Smooth" /></p>
 
@@ -278,7 +278,7 @@ Less than 40 lines of codes later, we have a nice extension of <code>UIBezierPat
 
 <p>We draw the <code>UIBezierPath</code> using <code>CoreGraphics</code> and overriding <code>draw(rect:)</code> of our UIView subclass, but you could also use a <code>CAShapeLayer</code> and even <a href="https://oleb.net/blog/2010/12/animating-drawing-of-cgpath-with-cashapelayer/" target="_blank">animate the drawing of the path</a>.</p>
 
-<p>This implementation is part of <code>SimpleCharts</code>, which we hope to open source in the near future.</p>
+<p>This implementation is part of our <code>SimpleCharts</code> framework, which we hope to open source in the near future.</p>
 
 </div>
 
