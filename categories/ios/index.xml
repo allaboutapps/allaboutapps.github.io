@@ -6,20 +6,10 @@
     <description>Recent content in iOS on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Feb 2019 20:50:28 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 26 Nov 2018 21:12:27 +0100</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Reactive Swift: Progress HUD Extension and Order of Events</title>
-      <link>https://code.allaboutapps.at/articles/reactive-swift-events-order/</link>
-      <pubDate>Sun, 10 Feb 2019 20:50:28 +0200</pubDate>
-      
-      <guid>https://code.allaboutapps.at/articles/reactive-swift-events-order/</guid>
-      <description>A blocking progress HUD to show a network or any other asynchronous activity may not be the most elegant solution, but sometimes it just gets the job done. Using ReactiveSwift you can use a SignalProducer extension to quickly show &amp;amp; hide a HUD for any reactive operation:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  extension SignalProducer { public func bindToProgressHUD(_ viewDelay: Double = 0.</description>
-    </item>
     
     <item>
       <title>Drawing Smooth 2D Graphs using UIBezierPath</title>
