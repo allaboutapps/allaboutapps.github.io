@@ -6,13 +6,23 @@
     <description>Recent content in ReactiveSwift on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jul 2018 11:50:28 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 10 Feb 2019 20:50:28 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/reactiveswift/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Reactive Snippet: Access Control for Mutable Properties</title>
+      <title>Reactive Swift: Progress HUD Extension and Order of Events</title>
+      <link>https://code.allaboutapps.at/articles/reactive-swift-events-order/</link>
+      <pubDate>Sun, 10 Feb 2019 20:50:28 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/reactive-swift-events-order/</guid>
+      <description>A blocking progress HUD to show a network or any other asynchronous activity may not be the most elegant solution, but sometimes it just gets the job done. Using ReactiveSwift you can use a SignalProducer extension to quickly show &amp;amp; hide a HUD for any reactive operation:
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  extension SignalProducer { public func bindToProgressHUD(_ viewDelay: Double = 0.</description>
+    </item>
+    
+    <item>
+      <title>Reactive Swift: Access Control for Mutable Properties</title>
       <link>https://code.allaboutapps.at/articles/reactive-swift-properties/</link>
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
@@ -22,7 +32,7 @@ private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwif
     </item>
     
     <item>
-      <title>Reactive Snippet: flatMap, flatten and combineLatest</title>
+      <title>Reactive Swift: flatMap, flatten and combineLatest</title>
       <link>https://code.allaboutapps.at/articles/reactive-swift-flatmap/</link>
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
