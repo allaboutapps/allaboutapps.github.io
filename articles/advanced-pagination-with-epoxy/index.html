@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Many developers still avoid using Epoxy. I even hesitated for a long time because of the boilerplate coming a long with epoxy and its models, but after reading this post at the latest, you may consider using epoxy, when paging is needed.
+So in this post we gonna build pagination with the jetpack‘s paging library, and epoxy, which has an own controller for paging.
+We gonna use reddit as our api, by simply adding .'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Advanced Pagination With Epoxy &amp; Datasources • Kaan Köşe'>
+<meta property='og:description' content='Many developers still avoid using Epoxy. I even hesitated for a long time because of the boilerplate coming a long with epoxy and its models, but after reading this post at the latest, you may consider using epoxy, when paging is needed.
+So in this post we gonna build pagination with the jetpack‘s paging library, and epoxy, which has an own controller for paging.
+We gonna use reddit as our api, by simply adding .'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/cover-pagination.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-02-14T10:30:11&#43;01:00'/><meta property='article:modified_time' content='2019-02-14T10:30:11&#43;01:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/cover-pagination.png'>
+
+<meta name="generator" content="Hugo 0.46" />
+
+  <title>Advanced Pagination With Epoxy &amp; Datasources • Kaan Köşe</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-126367150-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+
+<body class='page type-articles has-cover has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Advanced Pagination With Epoxy &amp; Datasources</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2019-02-14T10:30:11&#43;01:00'>2019, Feb 14</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/kk'>Kaan Köşe</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='/images/cover-pagination.png'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  <p>Many developers still avoid using Epoxy. I even hesitated for a long time because of the boilerplate coming a long with epoxy and its models, but after reading this post at the latest, you may consider <strong>using epoxy, when paging is needed</strong>.</p>
+
+<p>So in this post we gonna build pagination with the <a href="https://developer.android.com/topic/libraries/architecture/paging/" target="_blank">jetpack‘s paging library</a>, and epoxy, which has an <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support" target="_blank">own controller for paging</a>.</p>
+
+<p>We gonna use reddit as our api, by simply <a href="https://www.reddit.com/r/javascript/comments/8yg6ig/adding_json_onto_the_end_of_most_reddit_urls/" target="_blank">adding <code>.json</code> at the end of a subreddit‘s url</a>.</p>
+
+<hr />
+
+<p>First we need to implement a Datasource from the architecture components, which will help us later to load our data as a <a href="https://developer.android.com/reference/android/arch/paging/PagedList" target="_blank">PagedList</a>.</p>
+
+<p>There are (for now) the following options as a Datasource:</p>
+
+<ul>
+<li><p>PageKeyedDataSource: if you have some sort of before and/or after fields in your response, to load the previous/next page</p></li>
+
+<li><p>ItemKeyedDataSource: if you need the key of your last item to load your next page</p></li>
+
+<li><p>PositionalDataSource: if you gonna load your data by their positional index in ranges</p></li>
+</ul>
+
+<p>We will use the <strong>PageKeyedDataSource</strong> in our guide, because the response of the reddit api provides us the proper before and after fields, but we could also use the <strong>ItemKeyedDatasource</strong>, where the after field of our last item would be our key for the next load.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PageKeyedFeedDataSource</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
+  PageKeyedDataSource&lt;String, RedditChildResponse&gt;() { 
+<span style="color:#75715e">// pass key (String) and item type (RedditChildResponse)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// initial loading of the list (first page
+</span><span style="color:#75715e">// pass the list and before/after fields to the given callback
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loadInitial</span>(
+    params: LoadInitialParams&lt;String&gt;, callback: LoadInitialCallback&lt;String, RedditChildResponse&gt;
+  ) {
+    redditApi.fetchNew(subreddit, limit = <span style="color:#ae81ff">10</span>)
+      .subscribeOn(Schedulers.io())
+      .map { it.<span style="color:#66d9ef">data</span> }
+      .subscribe({
+        callback.onResult(it.children, it.before, it.after)
+      }, {
+        Timber.e(it)
+        callback.onResult(emptyList(), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+      })
+  }
+
+<span style="color:#75715e">// load next page by the given parameter and pass the new data by the callback
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loadAfter</span>(
+    params: LoadParams&lt;String&gt;, callback: LoadCallback&lt;String, RedditChildResponse&gt;
+  ) {
+    redditApi.fetchNew(subreddit, limit = <span style="color:#ae81ff">10</span>, after = params.key)
+      .subscribeOn(Schedulers.io())
+      .map { it.<span style="color:#66d9ef">data</span> }
+      .subscribe({
+        callback.onResult(it.children, it.after)
+      }, {
+        Timber.e(it)
+        callback.onResult(emptyList(), <span style="color:#e6db74">&#34;&#34;</span>)
+      })
+  }
+
+<span style="color:#75715e">// load the previous page by the given parameter (not implemented since we just append pages)
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loadBefore</span>(
+    params: LoadParams&lt;String&gt;, callback: LoadCallback&lt;String, RedditChildResponse&gt;
+  ) = Unit
+
+  <span style="color:#66d9ef">companion</span> <span style="color:#66d9ef">object</span> {
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">val</span> subreddit = <span style="color:#e6db74">&#34;androiddev&#34;</span>
+  }
+}</code></pre></div>
+
+<p>After implementing our datasource, we need a factory for providing the data to create a LiveData<PagedList>. If you are using Room, you may want to load your data from the Dao already as a <a href="https://developer.android.com/reference/android/arch/paging/DataSource.Factory" target="_blank">Datasource.Factory</a>.</p>
+
+<p>It‘s a short class as a dagger singleton, where we have to implement the create()-function, to provide our datasource in the application.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">@Singleton
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedditFeedDataSourceFactory</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
+  DataSource.Factory&lt;String, RedditChildResponse&gt;() {
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): DataSource&lt;String, RedditChildResponse&gt; {
+    <span style="color:#66d9ef">return</span> PageKeyedFeedDataSource(redditApi)
+  }
+}</code></pre></div>
+
+<p>Since we have prepared the datasource factory, we can inject it to our viewmodel, and initialize our LiveData by the <strong>LivePagedListBuilder</strong>. This builder can either be used with a PagedList.Config for configuring some loading options, or by simply passing only the loading page size as an integer.</p>
+
+<p>Furthermore you are able to set a <a href="https://developer.android.com/reference/android/arch/paging/PagedList.BoundaryCallback" target="_blank">BoundaryCallback</a>, if you want to catch some events like the last item was loaded, or zero items were loaded initially.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedViewModel</span> @Inject <span style="color:#66d9ef">constructor</span>(sourceFactory: RedditFeedDataSourceFactory) : ViewModel() {
+
+    <span style="color:#75715e">// observe this for loading data
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> feed: LiveData&lt;PagedList&lt;RedditChildResponse&gt;&gt;
+
+    init {
+
+        <span style="color:#75715e">// this builder initalizes our LiveData with the given options
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// we could pass also an integer for the page size instead of the PageListConfig
+</span><span style="color:#75715e"></span>        feed = LivePagedListBuilder&lt;String, RedditChildResponse&gt;(sourceFactory, getPagedListConfig())
+        .setBoundaryCallback(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">: </span><span style="color:#a6e22e">PagedList</span>.BoundaryCallback&lt;RedditChildResponse&gt;() {
+            <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onItemAtEndLoaded</span>(itemAtEnd: RedditChildResponse) {
+            <span style="color:#66d9ef">super</span>.onItemAtEndLoaded(itemAtEnd)
+            Timber.v(<span style="color:#e6db74">&#34;reached end of feed&#34;</span>)
+            }
+        })
+        .build()
+    }
+
+    <span style="color:#75715e">//stops further loading
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">reload</span>() {
+        feed.value<span style="color:#f92672">?.</span>dataSource<span style="color:#f92672">?.</span>invalidate()
+    }
+
+    <span style="color:#75715e">// setting some loading options
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">getPagedListConfig</span>(): PagedList.Config {
+        <span style="color:#66d9ef">return</span> PagedList.Config.Builder()
+        .setEnablePlaceholders(<span style="color:#66d9ef">false</span>)
+        .setInitialLoadSizeHint(<span style="color:#ae81ff">5</span>)
+        .setPageSize(<span style="color:#ae81ff">20</span>)
+        .build()
+    }
+}</code></pre></div>
+
+<p>Finally, we need to implement the <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support" target="_blank">PagedListEpoxyController</a>.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedController</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> view: FeedActivity) :
+    PagedListEpoxyController&lt;RedditChildResponse&gt;
+    (modelBuildingHandler = EpoxyAsyncUtil.getAsyncBackgroundHandler()) {
+    <span style="color:#75715e">// pass a handler to avoid building in main thread!!
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// this is a flag which could be set from the boundary callback when the end is reached
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> endReached = <span style="color:#66d9ef">false</span>
+
+    <span style="color:#75715e">// receives the current position &amp; the nullable item as a parameter, 
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// and wants the epoxy model to be returned
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// ,, you may want to return a placeholder model for a null item
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">buildItemModel</span>(currentPosition: Int, item: RedditChildResponse?): EpoxyModel&lt;*&gt; {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> (item == <span style="color:#66d9ef">null</span>)
+            EmptyModel_()
+                .id(currentPosition)
+        <span style="color:#66d9ef">else</span>
+            RedditPostModel_()
+                .post(item)
+                .onClick { view.openLink(it) }
+                .id(item.<span style="color:#66d9ef">data</span>.permalink)
+    }
+
+    <span style="color:#75715e">// optionally you can override this function if you want to have some headers or footers
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// just add your models to the this controller before (headers) or after (footers) the super call 
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addModels</span>(models: List&lt;EpoxyModel&lt;*&gt;&gt;) {
+        <span style="color:#66d9ef">super</span>.addModels(models)
+        LoadingModel_()
+            .id(<span style="color:#e6db74">&#34;loading&#34;</span>)
+            .addIf(!endReached &amp;&amp; models.isNotEmpty(), <span style="color:#66d9ef">this</span>)
+    }
+}</code></pre></div>
+
+<p><strong>We did it.</strong> Our LiveData is ready to be observed, and the only thing our epoxy controller needs is the PagedList from our LiveData… <em>So let‘s unite this couple</em>:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">feed.observe(<span style="color:#66d9ef">this</span>, Observer { pagedlist -&gt;
+        controller.submitList(pagedlist)
+})</code></pre></div>
+
+<p><strong>Attention:</strong> only one PagedList will be received from the LiveData for each build. So dont wonder (like me), why you dont receive every page here :)</p>
+
+<p>This means we won‘t see the ~ pages ~ from the list in our code. It‘s the work of PagedList &amp; the Epoxycontroller, and <em>not our business</em> anymore.</p>
+
+<p>By the way, if you want to reload the data, just <a href="https://developer.android.com/reference/android/arch/paging/DataSource#invalidate" target="_blank">invalidate the datasource of the PagedList</a>.</p>
+
+<p><em><a href="https://github.com/kk-aaa/EpoxyPaginationSample" target="_blank">Check out the sample project on github</a></em></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/android'>Android</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/emoji-flags/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Emoji Flags</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2019 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kk on all about apps</title>
+    <link>https://code.allaboutapps.at/authors/kk/</link>
+    <description>Recent content in Kk on all about apps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 14 Feb 2019 10:30:11 +0100</lastBuildDate>
+    
+	<atom:link href="https://code.allaboutapps.at/authors/kk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Advanced Pagination With Epoxy &amp; Datasources</title>
+      <link>https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/</link>
+      <pubDate>Thu, 14 Feb 2019 10:30:11 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/</guid>
+      <description>Many developers still avoid using Epoxy. I even hesitated for a long time because of the boilerplate coming a long with epoxy and its models, but after reading this post at the latest, you may consider using epoxy, when paging is needed.
+So in this post we gonna build pagination with the jetpack‘s paging library, and epoxy, which has an own controller for paging.
+We gonna use reddit as our api, by simply adding .</description>
+    </item>
+    
+  </channel>
+</rss>

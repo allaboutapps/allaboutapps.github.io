@@ -4,12 +4,12 @@
   
   <url>
     <loc>https://code.allaboutapps.at/</loc>
-    <lastmod>2019-01-23T10:01:25+01:00</lastmod>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/categories/android/</loc>
-    <lastmod>2018-10-03T16:02:48+02:00</lastmod>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
   </url>
   
   <url>
@@ -23,11 +23,16 @@
   
   <url>
     <loc>https://code.allaboutapps.at/articles/</loc>
-    <lastmod>2019-01-23T10:01:25+01:00</lastmod>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/</loc>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
   </url>
   
   <url>
@@ -66,7 +71,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/</loc>
-    <lastmod>2018-10-03T16:02:48+02:00</lastmod>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -79,6 +84,12 @@
   <url>
     <loc>https://code.allaboutapps.at/categories/graphics/</loc>
     <lastmod>2018-11-26T21:12:27+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/authors/kk/</loc>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
     <priority>0</priority>
   </url>
   
