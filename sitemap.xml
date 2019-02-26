@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/</loc>
-    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
   </url>
   
   <url>
@@ -14,7 +14,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/ios/</loc>
-    <lastmod>2019-01-23T10:01:25+01:00</lastmod>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
   </url>
   
   <url>
@@ -23,11 +23,16 @@
   
   <url>
     <loc>https://code.allaboutapps.at/articles/</loc>
-    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/articles/cocoaheads/</loc>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
   </url>
   
   <url>
@@ -95,7 +100,13 @@
   
   <url>
     <loc>https://code.allaboutapps.at/authors/mb/</loc>
-    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/meetups/</loc>
+    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   

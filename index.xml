@@ -6,7 +6,7 @@
     <description>Recent content in Home on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Feb 2019 10:30:11 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 26 Feb 2019 11:30:08 +0100</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,16 @@
       <guid>https://code.allaboutapps.at/about/</guid>
       <description>All about apps is a market leader in the realisation of individual mobile solutions for industrial companies, financial service providers, commercial traders and medical organisations. We guide our partners from initial concepts right through to the end product.
 Visit allaboutapps.at to learn more about us and our services.</description>
+    </item>
+    
+    <item>
+      <title>Cocoaheads @ all about apps</title>
+      <link>https://code.allaboutapps.at/articles/cocoaheads/</link>
+      <pubDate>Tue, 26 Feb 2019 11:30:08 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/cocoaheads/</guid>
+      <description>Last Thursday we hosted the 109th edition of Cocoaheads Austria in our office and more than 30 local iOS and Mac developers showed up. Cocoaheads is a monthly meetup and always hosted at a different location, usually by local development companies here in Vienna.
+Michael Heinzl and myself, Matthias Buchetics, gave the main talk about App Architecture at all about apps before Peter Steinberger talked about Swizzling. Our own Gunter Hager then closed with a fun presentation of Emoji Flags before we had some great conversations with food &amp;amp; drinks.</description>
     </item>
     
     <item>
