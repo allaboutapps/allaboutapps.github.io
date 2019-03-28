@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/</loc>
-    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -14,7 +14,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/ios/</loc>
-    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -23,11 +23,16 @@
   
   <url>
     <loc>https://code.allaboutapps.at/articles/</loc>
-    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://code.allaboutapps.at/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/articles/reactive-swift-events-order/</loc>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
   </url>
   
   <url>
@@ -100,7 +105,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/authors/mb/</loc>
-    <lastmod>2019-02-26T11:30:08+01:00</lastmod>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -123,7 +128,7 @@
   
   <url>
     <loc>https://code.allaboutapps.at/categories/reactiveswift/</loc>
-    <lastmod>2018-07-17T11:50:28+02:00</lastmod>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
