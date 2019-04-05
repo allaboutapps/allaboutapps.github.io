@@ -6,7 +6,7 @@
     <description>Recent content in Home on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2019 11:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 04 Apr 2019 14:36:09 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,16 @@
       <guid>https://code.allaboutapps.at/about/</guid>
       <description>All about apps is a market leader in the realisation of individual mobile solutions for industrial companies, financial service providers, commercial traders and medical organisations. We guide our partners from initial concepts right through to the end product.
 Visit allaboutapps.at to learn more about us and our services.</description>
+    </item>
+    
+    <item>
+      <title>Fun With Time Zones Pt1</title>
+      <link>https://code.allaboutapps.at/articles/fun-with-time-zones-pt1/</link>
+      <pubDate>Thu, 04 Apr 2019 14:36:09 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/fun-with-time-zones-pt1/</guid>
+      <description>In our daily jobs as programmers we tackle coding challenges and abstract them in algorithms and functions, happy when we find an elegant solutions to a tricky problem. We find comfort in dealing with easily understandable, deterministic and logical concepts.
+Time is NOT one of them. And that’s a big problem. We are so used logical terms, that we try to apply our thinking to the concept of time as well.</description>
     </item>
     
     <item>
