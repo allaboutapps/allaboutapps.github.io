@@ -8,7 +8,7 @@
 Time is NOT one of them. And that’s a big problem. We are so used logical terms, that we try to apply our thinking to the concept of time as well.'>
 <meta name='theme-color' content='#EB5D24'>
 
-<meta property='og:title' content='Fun With Time Zones Pt1 • Gottfried Chen'>
+<meta property='og:title' content='Fun With Time Zones Part 1 • Gottfried Chen'>
 <meta property='og:description' content='In our daily jobs as programmers we tackle coding challenges and abstract them in algorithms and functions, happy when we find an elegant solutions to a tricky problem. We find comfort in dealing with easily understandable, deterministic and logical concepts.
 Time is NOT one of them. And that’s a big problem. We are so used logical terms, that we try to apply our thinking to the concept of time as well.'>
 <meta property='og:url' content='https://code.allaboutapps.at/articles/fun-with-time-zones-pt1/'>
@@ -17,7 +17,7 @@ Time is NOT one of them. And that’s a big problem. We are so used logical term
 
 <meta name="generator" content="Hugo 0.46" />
 
-  <title>Fun With Time Zones Pt1 • Gottfried Chen</title>
+  <title>Fun With Time Zones Part 1 • Gottfried Chen</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/fun-with-time-zones-pt1/'>
   
   
@@ -121,7 +121,7 @@ if (!doNotTrack) {
   <header class='header entry-header'>
   <div class='container sep-after'>
     <div class='header-info'>
-      <h1 class='title'>Fun With Time Zones Pt1</h1>
+      <h1 class='title'>Fun With Time Zones Part 1</h1>
       
 
     </div>
@@ -164,7 +164,7 @@ if (!doNotTrack) {
 
 <p>Time is <strong>NOT</strong> one of them. And that’s a big problem. We are so used logical terms, that we try to apply our thinking to the concept of time as well. But the truth is: Time is just a big mess.</p>
 
-<p>This first part about time zones is platform independent and illustrates some of the pitfalls when dealing with time</p>
+<p>This first part about time zones is platform independent and illustrates some of the pitfalls when dealing with time.</p>
 
 <h3 id="junior-level">Junior level</h3>
 
@@ -173,8 +173,8 @@ if (!doNotTrack) {
 <ul>
 <li>every day has 24 hours</li>
 <li>every year has 365 days, every fourth year is a leap year and has 366 days</li>
-<li>when you note the timestamp of the start and end of a task, then the end is always later than the start. The difference between the timestamps is the duration of the task.</li>
-<li>every timestamp in a day happens exactly once</li>
+<li>when you note the time of the start and end of a task, then the end is always later than the start. The difference between end and start is the duration of the task.</li>
+<li>every point in time in a day happens exactly once</li>
 </ul>
 
 <p>None of those is true</p>
@@ -183,7 +183,7 @@ if (!doNotTrack) {
 <li>when changing between summer and winter time, days can last 23 or 25 hours</li>
 <li>a year is a leap year, if divisible by 4, but not by 100 except if also divisible by 400</li>
 <li>when you boil an egg at 2:59 at the day when switching from summer to winter time, you’ll finish boiling at 2:02. You traveled back in time, the duration is negative</li>
-<li>when switching to summertime the timestamps between 2:00 and 3:00 never happen. when switching to wintertime, they happen twice</li>
+<li>when switching to summertime the moments between 2:00 and 3:00 never happen. when switching to wintertime, they happen twice</li>
 </ul>
 
 <h3 id="senior-level">Senior level</h3>
@@ -194,33 +194,33 @@ if (!doNotTrack) {
 <li>It’s ok to save time zones as UTC offsets (e.g. Austria is CET which is UTC+1)</li>
 <li>The time difference between two time zones is constant</li>
 <li>Time offsets are always +/- hours of UTC</li>
-<li>When you store the time zone of a City in your database that&rsquo;s unambiguous and you are safe. You can easily calculate from UTC to local time</li>
+<li>When you store the time zone of a city in your database that&rsquo;s unambiguous and you are safe. You can easily calculate from UTC to local time</li>
 <li>When you store the timestamps for events happening at a location then it’s ok to figure out the nearest city in the same time zone e.g. Vienna and always use that for your time calculations.</li>
 </ul>
 
 <p>Again none of the above is true</p>
 
 <ul>
-<li>Again due to summer time changes, Austria alternates between CET which is UTC+1 and CEST which is UTC+2. So you always have to store time zones in tz database format e.g. “Europe/Vienna”</li>
-<li>Countries do not change to summer time at the same point in UTC time. Some countries do not have summer time. So the difference between to timezones varies during a year.</li>
+<li>Due to summer time changes, Austria alternates between CET which is UTC+1 and CEST which is UTC+2. So you always have to store time zones in tz database format e.g. “Europe/Vienna”</li>
+<li>Countries do not change to summer time at the same point in UTC time. Some countries do not have summer time. So the difference between two timezones varies during a year.</li>
 <li>Some countries have 30 minutes time difference, some have 15 minutes to their neighbouring countries</li>
 <li>In the Gaza strip in 2011 Palestinians and Isreali people in the same geographical location followed different time zones!</li>
-<li>When you store events happening in Hainburg (East of Austria) then it would seem intuitive to save Europe/Bratislava as time zone as this is the nearest city time zone. But beware, in 2021 the EU will let each individual country decide on which time zone it wants to remain in. They can choose between CET or CEST. So from then on Events happening in Hainburg might be wrong if stored as Europe/Bratislava but should be stored in Europe/Vienna instead.</li>
+<li>When you store events happening in Hainburg (East of Austria) then it would seem intuitive to save Europe/Bratislava as time zone as this is the nearest tz time zone. But beware, in 2021 the EU will let each individual country decide which time zone it wants to remain in. They can choose between CET or CEST. So from then on events happening in Hainburg might be wrong if stored as Europe/Bratislava but should be stored with Europe/Vienna instead.</li>
 </ul>
 
-<p>But that’s not all. Countries change timezones sometimes within days, some opt out of summer time, back in, then out again, Wars move borders and time zones. Sometimes countries change time zones and drop whole days from their calendar. And that’s all just within the commonly used Gregorian calendar which has only be in use for a few hundred years, so don’t even try to properly handle historical dates.</p>
+<p>But that’s not all. Countries change timezones sometimes within days, some opt out of summer time, back in, then out again, Wars move borders and time zones. Sometimes countries change time zones and drop whole days from their calendar. And that’s all just within the commonly used Gregorian calendar which has only been in use for a few hundred years, so don’t even try to properly handle historical dates.</p>
 
 <h3 id="three-different-types-of-time">Three different types of time</h3>
 
 <p>When dealing with time, usually you should differentiate between three types of time</p>
 
 <ul>
-<li><strong>UTC</strong>, which is easiest to understand one universal time zone, no summer time. But be careful, it sounds universal, but only has been in existence since 1972, so who knows if it will stay that way. We might change to a <a href="https://en.wikipedia.org/wiki/Swatch_Internet_Time" target="_blank">decimal universal time</a> one day.</li>
+<li><strong>UTC</strong>, which is easiest to understand, one universal time zone, no summer time. But be careful, it sounds universal, but only has been in existence since 1972, so who knows if it will stay that way. We might change to a <a href="https://en.wikipedia.org/wiki/Swatch_Internet_Time" target="_blank">decimal universal time</a> one day.</li>
 <li><strong>Local time:</strong> The time at a certain geographical location for a certain political individual (e.g. time for an Israli citizen in the Gaza strip).</li>
-<li><strong>Wall time:</strong> The time a person observes on a clock independant of time zone. Wall time/date is used for many things like
+<li><strong>Wall time:</strong> The time a person observes on a clock independent of time zone. Wall time/date is used for many things like
 
 <ul>
-<li>Birthdays. You celebrate your birthday on the same day, no matter which time zone you are in</li>
+<li>Birthdays. You celebrate your birthday on the same calendar day, no matter which time zone you are currently in</li>
 <li>Daily events. You eat breakfast at 8:00 in the morning</li>
 <li>Calendar events. You note down: &ldquo;Meeting on Friday at 14:00&rdquo;, even if the meeting is happening in New York, and today you are in Singapore.</li>
 </ul></li>
@@ -233,9 +233,9 @@ if (!doNotTrack) {
 <ol>
 <li>When storing events in your database, always store UTC (either as UTC timestamp or ISO e.g. 2019-04-05T9:00Z)</li>
 <li>If you need the event later in local time, storing UTC offset is sufficient (additionally to UTC you store e.g. +2:00)</li>
-<li>If you need to do time calculations based on that event in local time, store tz time zone (additionally store e.g. Europe/Vienna)</li>
+<li>If you need to do time calculations based on that event in local time, store tz time zone (for example Europe/Vienna)</li>
 <li>If you need to do long term time calculations (like adding 10 years) for that event, then you simply can&rsquo;t do that in a reliable way. Do the same as in 3. and hope no war or political decision will interfere with your stored time zone. Good Luck!</li>
-<li>When storing wall time, don&rsquo;t use any time zone. Store as e.g. April 5th 2019, 9:00. Be careful when using time zone independent data types. Strange things can happen, which we will discuss in Part 2 of this series. Sometimes using string like &ldquo;2019-04-05 09:00&rdquo; is the safest way.</li>
+<li>When storing wall time, don&rsquo;t use any time zone. Store as April 5th 2019, 9:00. Be careful when using time zone independent data types. Strange things can happen, which we will discuss in Part 2 of this series. Sometimes using a string like &ldquo;2019-04-05 09:00&rdquo; is the safest way.</li>
 </ol>
 
 <h3 id="summary">Summary</h3>
@@ -250,6 +250,8 @@ Time is fleeting<br />
 <strong>Madness takes it&rsquo;s toll</strong></p>
 
 <p>Still not enough? Watch <a href="https://www.youtube.com/watch?v=-5wpm-gesOY" target="_blank">this video</a>.</p>
+
+<p>P.S. For the physics nerds out there. Yes, we know about general relativity and quantum effects. So to be really on the safe side you should store the following in your database: <em>UTC, velocity vector, mass of nearby objects like planets and/or black holes, scale to account for quantum physics and &ldquo;Europe/Vienna&rdquo;.</em></p>
 
 </div>
 
