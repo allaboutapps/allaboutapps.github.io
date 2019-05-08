@@ -6,10 +6,19 @@
     <description>Recent content in All Articles on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Apr 2019 14:36:09 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 07 May 2019 10:03:39 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/articles/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Jetpack Navigation Pitfalls &amp; Tricks</title>
+      <link>https://code.allaboutapps.at/articles/android-jetpack-navigation-pitfalls/</link>
+      <pubDate>Tue, 07 May 2019 10:03:39 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/android-jetpack-navigation-pitfalls/</guid>
+      <description>Table of content  Send Args to fragments within activities Use startActivityForResult with the Navigation library Use generic naming for action names Reuse fragments in multiple navigation graphs TLDR Further readings  Navigation library from Jetpack offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release.</description>
+    </item>
     
     <item>
       <title>Fun With Time Zones Part 1</title>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Table of content  Send Args to fragments within activities Use startActivityForResult with the Navigation library Use generic naming for action names Reuse fragments in multiple navigation graphs TLDR Further readings  Navigation library from Jetpack offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release.'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Android Jetpack Navigation Pitfalls &amp; Tricks • Lukas Baronyai'>
+<meta property='og:description' content='Table of content  Send Args to fragments within activities Use startActivityForResult with the Navigation library Use generic naming for action names Reuse fragments in multiple navigation graphs TLDR Further readings  Navigation library from Jetpack offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release.'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/android-jetpack-navigation-pitfalls/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/jetpack-navigation/cover_nav_graph.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-05-07T10:03:39&#43;02:00'/><meta property='article:modified_time' content='2019-05-07T10:03:39&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/jetpack-navigation/cover_nav_graph.png'>
+
+<meta name="generator" content="Hugo 0.46" />
+
+  <title>Android Jetpack Navigation Pitfalls &amp; Tricks • Lukas Baronyai</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/android-jetpack-navigation-pitfalls/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-126367150-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+
+<body class='page type-articles has-cover has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Android Jetpack Navigation Pitfalls &amp; Tricks</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2019-05-07T10:03:39&#43;02:00'>2019, May 07</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/lb'>Lukas Baronyai</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='/images/jetpack-navigation/cover_nav_graph.png'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="table-of-content">Table of content</h1>
+
+<ol>
+<li><a href="#send-args-to-fragments-within-activities">Send Args to fragments within activities</a></li>
+<li><a href="#use-startactivityforresult-with-the-navigation-library">Use startActivityForResult with the Navigation library</a></li>
+<li><a href="#use-generic-naming-for-action-names">Use generic naming for action names</a></li>
+<li><a href="#reuse-fragments-in-multiple-navigation-graphs">Reuse fragments in multiple navigation graphs</a></li>
+<li><a href="#tldr">TLDR</a></li>
+<li><a href="#further-readings">Further readings</a></li>
+</ol>
+
+<p><a href="https://developer.android.com/guide/navigation" target="_blank">Navigation library from Jetpack</a> offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release. With this article I would like to share some of the tricks and pitfalls I came across during development.</p>
+
+<p>This article assumes that the reader already knows the library &mdash; if not, I recommend the <a href="https://developer.android.com/guide/navigation" target="_blank">official documentation</a> as well as the linked articles in the <a href="#tldr">TLDR</a> section.</p>
+
+<h2 id="send-args-to-fragments-within-activities">Send Args to fragments within activities</h2>
+
+<p>Sometimes it is necessary to start an activity which itself is a NavHost and pass arguments to the hosted fragment. E.g. imagine a <code>ListFragment</code>, which starts a <code>DetailActivity</code> with a <code>DetailFragment</code>. The <code>DetailFragment</code> needs an <code>id</code> of the item it displays.</p>
+
+<p>With the classic Navigation Graph it would look like the following:</p>
+
+<p><details>
+  <summary>Click to expand!</summary></p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
+    <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/main_nav_graph&#34;</span>
+    <span style="color:#a6e22e">app:startDestination=</span><span style="color:#e6db74">&#34;@id/ListFragment&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/ListFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.ListFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_list&#34;</span>
+        <span style="color:#a6e22e">tools:layout=</span><span style="color:#e6db74">&#34;@layout/fragment_list&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;activity</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/DetailActivity&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.DetailActivity&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;activity_detail&#34;</span>
+        <span style="color:#a6e22e">tools:layout=</span><span style="color:#e6db74">&#34;@layout/activity_detail&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;argument</span>
+            <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;id&#34;</span>
+            <span style="color:#a6e22e">app:argType=</span><span style="color:#e6db74">&#34;long&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/activity&gt;</span>
+<span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
+    <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/detail_nav_graph&#34;</span>
+    <span style="color:#a6e22e">app:startDestination=</span><span style="color:#e6db74">&#34;@id/DetailFragment&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/DetailFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.DetailFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_detail&#34;</span>
+        <span style="color:#a6e22e">tools:layout=</span><span style="color:#e6db74">&#34;@layout/fragment_detail&#34;</span> 
+        <span style="color:#960050;background-color:#1e0010">&lt;argument</span>
+            <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;id&#34;</span>
+            <span style="color:#a6e22e">app:argType=</span><span style="color:#e6db74">&#34;long&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+<span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;FrameLayout</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/detailNavigationFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;androidx.navigation.fragment.NavHostFragment&#34;</span>
+        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span> 
+        <span style="color:#a6e22e">app:defaultNavHost=</span><span style="color:#e6db74">&#34;true&#34;</span>
+        <span style="color:#a6e22e">app:navGraph=</span><span style="color:#e6db74">&#34;@navigation/detail_nav_graph&#34;</span><span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/FrameLayout&gt;</span></code></pre></div>
+</details></p>
+
+<p>The question now is: how do we pass the <code>id</code> argument to the <code>DetailFragment</code>? The library doesn&rsquo;t offer us the option to define some kind of start argument for a navigation graph or similar. If we would deploy these two graphs with the default navigation attributes in the layout XML it would crash since the <code>DetailFragment</code> would not get the required arguments set and the library doesn&rsquo;t know, where to retrieve these.</p>
+
+<p>The trick is relatively simple:</p>
+
+<ul>
+<li>Don&rsquo;t set <code>app:defaultNavHost</code> and <code>app:navGraph</code> in the layout file</li>
+<li>Set the <code>NavHost</code> programmatically</li>
+<li>Set the arguments programmatically</li>
+</ul>
+
+<p>The layout now looks as following:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;FrameLayout</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+    <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/detailNavigationFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;androidx.navigation.fragment.NavHostFragment&#34;</span>
+        <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
+        <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/FrameLayout&gt;</span></code></pre></div>
+
+<p>And in the DetailActivity we need to add:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetailActivity</span> : AppCompatActivity() {
+
+  <span style="color:#66d9ef">val</span> args: DetailActivityArgs <span style="color:#66d9ef">by</span> navArgs()
+  
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onCreate</span>(savedInstanceState: Bundle?) {
+    <span style="color:#66d9ef">super</span>.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_detail)
+    findNavController(R.id.detailNavigationFragment).setGraph(R.navigation.detail_nav_graph, args.toBundle())
+  }
+ }</code></pre></div>
+
+<p>As you can see, it doesn&rsquo;t really cost us much effort to pass the arguments here. And since the arguments of DetailFragment and DetailActivity are called the same, the library can parse the fragment arguments and we have the <code>id</code> at the right place!</p>
+
+<h2 id="use-startactivityforresult-with-the-navigation-library">Use startActivityForResult with the Navigation library</h2>
+
+<p>Well, the simplest answer here is: you don&rsquo;t. At the moment of writing this article, there is no equivalent for <code>startActivityForResult</code>. There are (<a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2" target="_blank">some attempts to solve this</a>, but in most of the cases it&rsquo;s sufficient to use the default approach and still use <code>startActivityForResult</code> without the Navigation library.</p>
+
+<p>But in case you don&rsquo;t want to miss the type safety of the NavArgs and maybe extend the previous situation of passing arguments to the hosted fragment, it can look like this:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetailActivity</span> : AppCompatActivity() {
+  <span style="color:#66d9ef">companion</span> <span style="color:#66d9ef">object</span> {
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">val</span> EXTRA_ID = <span style="color:#e6db74">&#34;id&#34;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">val</span> ACTIVITY_RESULT = <span style="color:#e6db74">&#34;ACTIVITY_RESULT&#34;</span>
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">getIntent</span>(context: Context, id: Long): Intent =
+      Intent(context, DetailActivity<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>.java)
+        .putExtra(EXTRA_ID, id)
+  }
+  
+  <span style="color:#66d9ef">lateinit</span> <span style="color:#66d9ef">var</span> args: DetailActivityArgs
+  
+  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onCreate</span>(savedInstanceState: Bundle?) {
+    <span style="color:#66d9ef">super</span>.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_detail)
+	args = DetailActivityArgs.fromBundle(intent.extras<span style="color:#f92672">!!</span>)
+    findNavController(R.id.detailNavigationFragment).setGraph(R.navigation.detail_nav_graph, args.toBundle())
+  }
+  ...
+  <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">finishActivity</span>(result: String) {
+    <span style="color:#66d9ef">val</span> intent = Intent().putExtra(ACTIVITY_RESULT, result)
+    setResult(Activity.RESULT_OK, intent)
+    finish()
+  }
+ }</code></pre></div>
+
+<h2 id="use-generic-naming-for-action-names">Use generic naming for action names</h2>
+
+<p>Let&rsquo;s imagine the following situation: we have a registration of some sort with a lot of screens. In my case I had up to 12 fragments to handle:</p>
+
+<p><img src="/images/jetpack-navigation/registration.png" alt="Long registration" /></p>
+
+<p>Awesome, right? Now, let&rsquo;s say, we want to change the existing order of screens:</p>
+
+<ul>
+<li>Without the Navigation library it&rsquo;s a mess, every fragment has a reference to the next one and we don&rsquo;t have any overview which is linked to which at the moment.</li>
+<li>With the Navigation Editor of Android Studio we have at least an overview which fragment is currently linked to which. But still, if we change something in the graph, we need to change the fragments itself as well. Not really handy here.</li>
+</ul>
+
+<p>The solution is pretty simple: use generic action names. Don&rsquo;t use names like <code>goToFirstName()</code>, custom to each fragment, but use names like <code>next()</code>, which is used everywhere the same. The corresponding navigation graph to the image looks as following:</p>
+
+<p><details>
+  <summary>Click to expand!</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
+    <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/registration_nav_graph&#34;</span>
+    <span style="color:#a6e22e">app:startDestination=</span><span style="color:#e6db74">&#34;@id/RegisterNameFragment&#34;</span><span style="color:#f92672">&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterBirthFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterBirthFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_birth&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterStateFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterCompanionFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterCompanionFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_companion&#34;</span> <span style="color:#f92672">/&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterContactFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterContactFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_contact&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterCompanionFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterDestinationFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterDestinationFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_destination&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterTimeFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterEmailFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterEmailFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_destination&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterTelephoneFragment&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterGenderFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterGenderFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_gender&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterBirthFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterPassportFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterPassportFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_passport&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterEmailFragment&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterNameFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterNameFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_name&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterGenderFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterRouteFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterRouteFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_route&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterContactFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterStateFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterStateFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_state&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterPassportFragment&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterTelephoneFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterTelephoneFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_telephone&#34;</span> <span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterDestinationFragment&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+    <span style="color:#f92672">&lt;fragment</span>
+        <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/RegisterTimeFragment&#34;</span>
+        <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.RegisterTimeFragment&#34;</span>
+        <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_register_time&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;action</span>
+            <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/next&#34;</span>
+            <span style="color:#a6e22e">app:destination=</span><span style="color:#e6db74">&#34;@id/RegisterRouteFragment&#34;</span><span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/fragment&gt;</span>
+
+<span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
+</details></p>
+
+<p>With this setup we can easily change the order of the screens by simply changing the NavGraph &mdash; the library generates us the Directions and we don&rsquo;t need to touch the fragments!</p>
+
+<h2 id="reuse-fragments-in-multiple-navigation-graphs">Reuse fragments in multiple navigation graphs</h2>
+
+<p>There might be some circumstances where it makes sense to reuse the same fragment in different NavGraphs. E.g. if a registration uses in some sub-flows the same fragments.</p>
+
+<p>First: try to avoid this situation. The Navigation library is meant to be used within a single-activity application and doesn&rsquo;t really like the reuse of the same fragments in different NavGraphs. The ugly thing here is, that each NavGraph generates actions and arguments with the same name. And if two NavGraphs using the same fragment with different actions and arguments, they are overwriting each other in a non-deterministically way.</p>
+
+<p>There are some tricks to work around this:</p>
+
+<ul>
+<li><p><strong>Avoid this situation</strong></p>
+
+<p>Seriously, this is nasty. Since the NavGraph processing happens non-deterministically it can happen that the local build is fine but fails on the build server because it&rsquo;s overridden in a different way.</p></li>
+
+<li><p><strong>Use fake arguments</strong></p>
+
+<p>If one NavGraph uses more arguments for a fragment than another one, still include these arguments into both graphs and think about reasonable default values. Don&rsquo;t rely on it, that the NavGraph with more arguments gets processed first &mdash; in doubt that&rsquo;s not the case.</p></li>
+
+<li><p><strong>Use <code>navigate()</code> with bundle instead of actions in edge cases</strong></p>
+
+<p>In edge cases e.g. if a fragment is used at the end of a flow (meaning no further action) in one NavGraph and in the middle of the flow (meaning with further actions) don&rsquo;t (conditionally) call <code>findNavController().navigate(FragmentDirections.goToDetailFragment(id))</code> but instead use <code>findNavController().navigate(R.id.DetailFragment, bundleOf(&quot;id&quot; to 5))</code>. This way you don&rsquo;t rely on the generated direction but can still use the Navigation and SafeArgs features of the DetailFragment.</p></li>
+</ul>
+
+<h2 id="tldr">TLDR</h2>
+
+<ul>
+<li>Args can easily be passed from activity to fragment by setting the NavHost programmatically</li>
+<li>There is no equivalent of <code>startActivityForResult</code>, but we can generate the Args from the intent extras.</li>
+<li>Generic naming of actions helps to easily change the order of screens within a flow.</li>
+<li>Try to avoid using the same fragment with different arguments &amp; actions in multiple NavGraphs since the code might break due to nondeterministic class generation.</li>
+</ul>
+
+<h2 id="further-readings">Further readings</h2>
+
+<ul>
+<li><a href="https://developer.android.com/guide/navigation" target="_blank">Official Documentation</a></li>
+<li><a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2" target="_blank">Using Navigation Architecture Component in a large banking app</a> by David Vávra (advanced article)</li>
+<li>Android Navigation Components by Dario Mungoi (basic introduction)
+
+<ul>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-1-236b2a479d44" target="_blank">Part 1</a></li>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-2-ca643eb301e3" target="_blank">Part 2</a></li>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-3-19554ec9ae83" target="_blank">Part 3</a></li>
+</ul></li>
+<li><a href="https://proandroiddev.com/android-jetpack-navigationui-a7c9f17c510e" target="_blank">Android Jetpack - NavigationUI</a> by Sagar Viradiya (advanced article)</li>
+</ul>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/android'>Android</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/fun-with-time-zones-pt1/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Fun With Time Zones Part 1</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2019 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+
