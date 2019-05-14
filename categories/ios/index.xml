@@ -20,8 +20,6 @@
       <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://code.allaboutapps.at/images/ios-coordinator/mvvm-c.png&#34; alt=&#34;MVVM+C&#34; /&gt;&lt;/p&gt;
-
 &lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
