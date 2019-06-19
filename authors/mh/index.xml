@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Meetups on all about apps</title>
-    <link>https://code.allaboutapps.at/categories/meetups/</link>
-    <description>Recent content in Meetups on all about apps</description>
+    <title>Mh on all about apps</title>
+    <link>https://code.allaboutapps.at/authors/mh/</link>
+    <description>Recent content in Mh on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Jun 2019 08:48:46 +0200</lastBuildDate>
     
-	<atom:link href="https://code.allaboutapps.at/categories/meetups/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://code.allaboutapps.at/authors/mh/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,16 +20,6 @@
       <description>On the 4th of June we hosted the NodeJS June Meetup in our CreatePlayground office, with 3 presentations and ongoing discussions about various topics.
 The first talk with the title Private registry with Verdaccio was given by Juan Picado, follwed by a Lightning Talk about Fun with Time Zones by our Gottfried Chen. The last talk was held by Juho Vepsäläinen about JavaScript - Quo Vadis
 Related questions and notes about the talks as well as conversations about other NodeJS related topics have been discussed afterwards and we are already looking forward to host the next one.</description>
-    </item>
-    
-    <item>
-      <title>Cocoaheads @ all about apps</title>
-      <link>https://code.allaboutapps.at/articles/cocoaheads/</link>
-      <pubDate>Tue, 26 Feb 2019 11:30:08 +0100</pubDate>
-      
-      <guid>https://code.allaboutapps.at/articles/cocoaheads/</guid>
-      <description>Last Thursday we hosted the 109th edition of Cocoaheads Austria in our office and more than 30 local iOS and Mac developers showed up. Cocoaheads is a monthly meetup and always hosted at a different location, usually by local development companies here in Vienna.
-Michael Heinzl and myself, Matthias Buchetics, gave the main talk about App Architecture at all about apps before Peter Steinberger talked about Swizzling. Our own Gunter Hager then closed with a fun presentation of Emoji Flags before we had some great conversations with food &amp;amp; drinks.</description>
     </item>
     
   </channel>

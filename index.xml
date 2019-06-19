@@ -6,7 +6,7 @@
     <description>Recent content in Home on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 May 2019 10:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 08:48:46 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,6 +19,17 @@
       <guid>https://code.allaboutapps.at/about/</guid>
       <description>All about apps is a market leader in the realisation of individual mobile solutions for industrial companies, financial service providers, commercial traders and medical organisations. We guide our partners from initial concepts right through to the end product.
 Visit allaboutapps.at to learn more about us and our services.</description>
+    </item>
+    
+    <item>
+      <title>Nodejs June Meetup</title>
+      <link>https://code.allaboutapps.at/articles/nodejs-june-meetup/</link>
+      <pubDate>Wed, 19 Jun 2019 08:48:46 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/nodejs-june-meetup/</guid>
+      <description>On the 4th of June we hosted the NodeJS June Meetup in our CreatePlayground office, with 3 presentations and ongoing discussions about various topics.
+The first talk with the title Private registry with Verdaccio was given by Juan Picado, follwed by a Lightning Talk about Fun with Time Zones by our Gottfried Chen. The last talk was held by Juho Vepsäläinen about JavaScript - Quo Vadis
+Related questions and notes about the talks as well as conversations about other NodeJS related topics have been discussed afterwards and we are already looking forward to host the next one.</description>
     </item>
     
     <item>
