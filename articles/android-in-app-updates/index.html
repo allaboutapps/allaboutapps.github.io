@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='With the new Play Core Library Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.
+
+There are two modes how an update can be triggered:
+
+
+Flexible: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.
+Immediate: The user is forced to update the app and the app is unusable until the process is finished.
+
+
+The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.
+
+So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.
+
+Who decides to force an update?
+
+The library offers an easy way to detect if an update should be forced. All we have to do is implement ForceUpdateProvider and call doUpdate() when we need to update right away.
+
+class DemoForceUpdateProvider : ForceUpdateProvider {
+
+    override fun requestUpdateShouldBeImmediate(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
+        // place your logic here
+        // obtain force update decision from your source eg Firebase Remote Config
+
+        // if a forced update is needed, just call doUpdate
+        doUpdate()
+    }
+}
+
+inAppUpdateManager = InAppUpdateManager(this, DemoForceUpdateProvider())
+
+There are a lot of possible sources to decide if an update should be forced. Examples are Firebase Remote Config, File hosted on your server, Even/Odd available version code, &hellip;
+
+Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override onActivityResult to keep showing the update again to achieve an actually blocking update mechanism.
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    inAppUpdateManager.onActivityResult(requestCode, resultCode)
+    super.onActivityResult(requestCode, resultCode, data)
+}
+
+That&rsquo;s it. The end result looks like this:
+
+
+
+The library is available on GitHub: https://github.com/allaboutapps/InAppUpdater'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Force Android in App Updates • Markus Gursch'>
+<meta property='og:description' content='With the new Play Core Library Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.
+
+There are two modes how an update can be triggered:
+
+
+Flexible: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.
+Immediate: The user is forced to update the app and the app is unusable until the process is finished.
+
+
+The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.
+
+So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.
+
+Who decides to force an update?
+
+The library offers an easy way to detect if an update should be forced. All we have to do is implement ForceUpdateProvider and call doUpdate() when we need to update right away.
+
+class DemoForceUpdateProvider : ForceUpdateProvider {
+
+    override fun requestUpdateShouldBeImmediate(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
+        // place your logic here
+        // obtain force update decision from your source eg Firebase Remote Config
+
+        // if a forced update is needed, just call doUpdate
+        doUpdate()
+    }
+}
+
+inAppUpdateManager = InAppUpdateManager(this, DemoForceUpdateProvider())
+
+There are a lot of possible sources to decide if an update should be forced. Examples are Firebase Remote Config, File hosted on your server, Even/Odd available version code, &hellip;
+
+Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override onActivityResult to keep showing the update again to achieve an actually blocking update mechanism.
+
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    inAppUpdateManager.onActivityResult(requestCode, resultCode)
+    super.onActivityResult(requestCode, resultCode, data)
+}
+
+That&rsquo;s it. The end result looks like this:
+
+
+
+The library is available on GitHub: https://github.com/allaboutapps/InAppUpdater'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/android-in-app-updates/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/in-app-update-cover.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-06-21T09:45:12&#43;02:00'/><meta property='article:modified_time' content='2019-06-21T09:45:12&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@swordiapps'><meta property='twitter:image' content='https://code.allaboutapps.at/images/in-app-update-cover.png'>
+
+<meta name="generator" content="Hugo 0.55.5" />
+
+  <title>Force Android in App Updates • Markus Gursch</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/android-in-app-updates/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-46375725-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+
+<body class='page type-articles has-cover has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Force Android in App Updates</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2019-06-21T09:45:12&#43;02:00'>2019, Jun 21</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/mg'>Markus Gursch</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='/images/in-app-update-cover.png'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  <p>With the new <a href="https://developer.android.com/guide/app-bundle/playcore#include_playcore" target="_blank">Play Core Library</a> Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.</p>
+
+<p>There are two modes how an update can be triggered:</p>
+
+<ul>
+<li><em>Flexible</em>: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.</li>
+<li><em>Immediate</em>: The user is forced to update the app and the app is unusable until the process is finished.</li>
+</ul>
+
+<p>The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.</p>
+
+<p>So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.</p>
+
+<h5 id="who-decides-to-force-an-update">Who decides to force an update?</h5>
+
+<p>The library offers an easy way to detect if an update should be forced. All we have to do is implement <code>ForceUpdateProvider</code> and call <code>doUpdate()</code> when we need to update right away.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoForceUpdateProvider</span> : ForceUpdateProvider {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">requestUpdateShouldBeImmediate</span>(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
+        <span style="color:#75715e">// place your logic here
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// obtain force update decision from your source eg Firebase Remote Config
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// if a forced update is needed, just call doUpdate
+</span><span style="color:#75715e"></span>        doUpdate()
+    }
+}
+
+inAppUpdateManager = InAppUpdateManager(<span style="color:#66d9ef">this</span>, DemoForceUpdateProvider())</code></pre></div>
+
+<p>There are a lot of possible sources to decide if an update should be forced. Examples are <code>Firebase Remote Config</code>, <code>File hosted on your server</code>, <code>Even/Odd available version code</code>, &hellip;</p>
+
+<p>Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override <code>onActivityResult</code> to keep showing the update again to achieve an actually blocking update mechanism.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onActivityResult</span>(requestCode: Int, resultCode: Int, <span style="color:#66d9ef">data</span>: Intent?) {
+    inAppUpdateManager.onActivityResult(requestCode, resultCode)
+    <span style="color:#66d9ef">super</span>.onActivityResult(requestCode, resultCode, <span style="color:#66d9ef">data</span>)
+}</code></pre></div>
+
+<p>That&rsquo;s it. The end result looks like this:</p>
+
+<p><img src="/images/in_app_update_optimized.gif" alt="" /></p>
+
+<p>The library is available on GitHub: <a href="https://github.com/allaboutapps/InAppUpdater" target="_blank">https://github.com/allaboutapps/InAppUpdater</a></p>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/android'>Android</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/nodejs-june-meetup/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Nodejs June Meetup</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2019 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+

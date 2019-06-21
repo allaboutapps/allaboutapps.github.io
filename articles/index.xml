@@ -6,10 +6,62 @@
     <description>Recent content in All Articles on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2019 08:48:46 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 09:45:12 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/articles/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Force Android in App Updates</title>
+      <link>https://code.allaboutapps.at/articles/android-in-app-updates/</link>
+      <pubDate>Fri, 21 Jun 2019 09:45:12 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/android-in-app-updates/</guid>
+      <description>&lt;p&gt;With the new &lt;a href=&#34;https://developer.android.com/guide/app-bundle/playcore#include_playcore&#34; target=&#34;_blank&#34;&gt;Play Core Library&lt;/a&gt; Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.&lt;/p&gt;
+
+&lt;p&gt;There are two modes how an update can be triggered:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Flexible&lt;/em&gt;: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Immediate&lt;/em&gt;: The user is forced to update the app and the app is unusable until the process is finished.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.&lt;/p&gt;
+
+&lt;p&gt;So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.&lt;/p&gt;
+
+&lt;h5 id=&#34;who-decides-to-force-an-update&#34;&gt;Who decides to force an update?&lt;/h5&gt;
+
+&lt;p&gt;The library offers an easy way to detect if an update should be forced. All we have to do is implement &lt;code&gt;ForceUpdateProvider&lt;/code&gt; and call &lt;code&gt;doUpdate()&lt;/code&gt; when we need to update right away.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DemoForceUpdateProvider&lt;/span&gt; : ForceUpdateProvider {
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestUpdateShouldBeImmediate&lt;/span&gt;(availableVersionCode: Int, doUpdate: () -&amp;gt; Unit) {
+        &lt;span style=&#34;color:#75715e&#34;&gt;// place your logic here
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// obtain force update decision from your source eg Firebase Remote Config
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;// if a forced update is needed, just call doUpdate
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        doUpdate()
+    }
+}
+
+inAppUpdateManager = InAppUpdateManager(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, DemoForceUpdateProvider())&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There are a lot of possible sources to decide if an update should be forced. Examples are &lt;code&gt;Firebase Remote Config&lt;/code&gt;, &lt;code&gt;File hosted on your server&lt;/code&gt;, &lt;code&gt;Even/Odd available version code&lt;/code&gt;, &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override &lt;code&gt;onActivityResult&lt;/code&gt; to keep showing the update again to achieve an actually blocking update mechanism.&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;onActivityResult&lt;/span&gt;(requestCode: Int, resultCode: Int, &lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;: Intent?) {
+    inAppUpdateManager.onActivityResult(requestCode, resultCode)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.onActivityResult(requestCode, resultCode, &lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;)
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. The end result looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://code.allaboutapps.at/images/in_app_update_optimized.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34; target=&#34;_blank&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Nodejs June Meetup</title>
@@ -31,9 +83,7 @@ Related questions and notes about the talks as well as conversations about other
       <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
 
-&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;</description>
     </item>
     
     <item>

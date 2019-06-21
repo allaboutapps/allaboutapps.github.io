@@ -6,7 +6,7 @@
     <description>Recent content in Categories on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 May 2019 10:03:39 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 21 Jun 2019 09:45:12 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Android</title>
       <link>https://code.allaboutapps.at/categories/android/</link>
-      <pubDate>Tue, 07 May 2019 10:03:39 +0200</pubDate>
+      <pubDate>Fri, 21 Jun 2019 09:45:12 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/categories/android/</guid>
       <description></description>
@@ -39,15 +39,6 @@
     </item>
     
     <item>
-      <title>Graphics</title>
-      <link>https://code.allaboutapps.at/categories/graphics/</link>
-      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
-      
-      <guid>https://code.allaboutapps.at/categories/graphics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Meetups</title>
       <link>https://code.allaboutapps.at/categories/meetups/</link>
       <pubDate>Wed, 19 Jun 2019 08:48:46 +0200</pubDate>
@@ -62,6 +53,15 @@
       <pubDate>Thu, 28 Mar 2019 11:00:00 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/categories/reactiveswift/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graphics</title>
+      <link>https://code.allaboutapps.at/categories/graphics/</link>
+      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/categories/graphics/</guid>
       <description></description>
     </item>
     

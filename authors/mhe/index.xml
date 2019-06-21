@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mhe on all about apps</title>
+    <title>mhe on all about apps</title>
     <link>https://code.allaboutapps.at/authors/mhe/</link>
-    <description>Recent content in Mhe on all about apps</description>
+    <description>Recent content in mhe on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 14 May 2019 10:00:00 +0200</lastBuildDate>
@@ -20,9 +20,7 @@
       <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
 
-&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;</description>
     </item>
     
   </channel>
