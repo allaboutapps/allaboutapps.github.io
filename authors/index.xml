@@ -6,49 +6,12 @@
     <description>Recent content in Authors on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Jun 2019 09:45:12 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/authors/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>mg</title>
-      <link>https://code.allaboutapps.at/authors/mg/</link>
-      <pubDate>Fri, 21 Jun 2019 09:45:12 +0200</pubDate>
-      
-      <guid>https://code.allaboutapps.at/authors/mg/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mh</title>
-      <link>https://code.allaboutapps.at/authors/mh/</link>
-      <pubDate>Wed, 19 Jun 2019 08:48:46 +0200</pubDate>
-      
-      <guid>https://code.allaboutapps.at/authors/mh/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>mhe</title>
-      <link>https://code.allaboutapps.at/authors/mhe/</link>
-      <pubDate>Tue, 14 May 2019 10:00:00 +0200</pubDate>
-      
-      <guid>https://code.allaboutapps.at/authors/mhe/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>lb</title>
-      <link>https://code.allaboutapps.at/authors/lb/</link>
-      <pubDate>Tue, 07 May 2019 10:03:39 +0200</pubDate>
-      
-      <guid>https://code.allaboutapps.at/authors/lb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gc</title>
+      <title>Gc</title>
       <link>https://code.allaboutapps.at/authors/gc/</link>
       <pubDate>Thu, 04 Apr 2019 14:36:09 +0200</pubDate>
       
@@ -57,16 +20,16 @@
     </item>
     
     <item>
-      <title>mb</title>
-      <link>https://code.allaboutapps.at/authors/mb/</link>
-      <pubDate>Thu, 28 Mar 2019 11:00:00 +0200</pubDate>
+      <title>Gh</title>
+      <link>https://code.allaboutapps.at/authors/gh/</link>
+      <pubDate>Wed, 23 Jan 2019 10:01:25 +0100</pubDate>
       
-      <guid>https://code.allaboutapps.at/authors/mb/</guid>
+      <guid>https://code.allaboutapps.at/authors/gh/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>kk</title>
+      <title>Kk</title>
       <link>https://code.allaboutapps.at/authors/kk/</link>
       <pubDate>Thu, 14 Feb 2019 10:30:11 +0100</pubDate>
       
@@ -75,11 +38,47 @@
     </item>
     
     <item>
-      <title>gh</title>
-      <link>https://code.allaboutapps.at/authors/gh/</link>
-      <pubDate>Wed, 23 Jan 2019 10:01:25 +0100</pubDate>
+      <title>Lb</title>
+      <link>https://code.allaboutapps.at/authors/lb/</link>
+      <pubDate>Tue, 07 May 2019 10:03:39 +0200</pubDate>
       
-      <guid>https://code.allaboutapps.at/authors/gh/</guid>
+      <guid>https://code.allaboutapps.at/authors/lb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mb</title>
+      <link>https://code.allaboutapps.at/authors/mb/</link>
+      <pubDate>Wed, 03 Jul 2019 14:06:29 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/authors/mb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mg</title>
+      <link>https://code.allaboutapps.at/authors/mg/</link>
+      <pubDate>Fri, 21 Jun 2019 09:45:12 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/authors/mg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mh</title>
+      <link>https://code.allaboutapps.at/authors/mh/</link>
+      <pubDate>Wed, 19 Jun 2019 08:48:46 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/authors/mh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mhe</title>
+      <link>https://code.allaboutapps.at/authors/mhe/</link>
+      <pubDate>Tue, 14 May 2019 10:00:00 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/authors/mhe/</guid>
       <description></description>
     </item>
     

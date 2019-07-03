@@ -7,19 +7,23 @@
 <meta name='description' content='In our apps, we use the MVVM (Model-View-ViewModel) approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?
 
-The Coordinator!'>
+The Coordinator!
+
+'>
 <meta name='theme-color' content='#EB5D24'>
 
 <meta property='og:title' content='iOS Coordinators • Michael Heinzl'>
 <meta property='og:description' content='In our apps, we use the MVVM (Model-View-ViewModel) approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?
 
-The Coordinator!'>
+The Coordinator!
+
+'>
 <meta property='og:url' content='https://code.allaboutapps.at/articles/ios-coordinator/'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/ios-coordinator/mvvm-c.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-05-14T10:00:00&#43;02:00'/><meta property='article:modified_time' content='2019-05-14T10:00:00&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/ios-coordinator/mvvm-c.png'>
 
-<meta name="generator" content="Hugo 0.55.5" />
+<meta name="generator" content="Hugo 0.46" />
 
   <title>iOS Coordinators • Michael Heinzl</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/ios-coordinator/'>
@@ -30,7 +34,7 @@ The Coordinator!'>
 :root{--color-accent:#EB5D24;}
 </style>
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -171,6 +175,8 @@ if (!doNotTrack) {
 This concept manages the interaction within a view controller, but who manages the view controllers?</p>
 
 <h1 id="the-coordinator">The Coordinator!</h1>
+
+<p></p>
 
 <p>More precisely, multiple coordinators manage almost all view controllers in our apps. Coordinators are arranged in a tree structure, each coordinator is responsible for certain UI flow (a bunch of view controllers) in the app.</p>
 

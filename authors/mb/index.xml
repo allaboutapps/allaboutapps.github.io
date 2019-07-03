@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mb on all about apps</title>
+    <title>Mb on all about apps</title>
     <link>https://code.allaboutapps.at/authors/mb/</link>
-    <description>Recent content in mb on all about apps</description>
+    <description>Recent content in Mb on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2019 11:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 14:06:29 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/authors/mb/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>UIKonf 2019</title>
+      <link>https://code.allaboutapps.at/articles/uikonf2019/</link>
+      <pubDate>Wed, 03 Jul 2019 14:06:29 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/uikonf2019/</guid>
+      <description>UIKonf 2019 took place from May 26th to 29th in Berlin and is one of the largest iOS conferences in Europe. For us at all about apps it was the forth visit in a row and, as always, it was an awesome conference.
+While the talks don&amp;rsquo;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
+    </item>
     
     <item>
       <title>Reactive Swift: Progress HUD Extension and Order of Events</title>

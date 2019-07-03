@@ -6,10 +6,20 @@
     <description>Recent content in iOS on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 May 2019 10:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 14:06:29 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/ios/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>UIKonf 2019</title>
+      <link>https://code.allaboutapps.at/articles/uikonf2019/</link>
+      <pubDate>Wed, 03 Jul 2019 14:06:29 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/uikonf2019/</guid>
+      <description>UIKonf 2019 took place from May 26th to 29th in Berlin and is one of the largest iOS conferences in Europe. For us at all about apps it was the forth visit in a row and, as always, it was an awesome conference.
+While the talks don&amp;rsquo;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
+    </item>
     
     <item>
       <title>iOS Coordinators</title>
@@ -20,7 +30,9 @@
       <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
 
-&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;</description>
+&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
