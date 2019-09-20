@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
+Let&rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Proper Material Theming in a Multi-Module Setup • Lukas Baronyai'>
+<meta property='og:description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
+Let&rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/material-theming/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/material-theming/theming_demo.PNG'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-09-16T09:57:26&#43;02:00'/><meta property='article:modified_time' content='2019-09-16T09:57:26&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/material-theming/theming_demo.PNG'>
+
+<meta name="generator" content="Hugo 0.46" />
+
+  <title>Proper Material Theming in a Multi-Module Setup • Lukas Baronyai</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/material-theming/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-46375725-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+
+<body class='page type-articles has-cover has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Proper Material Theming in a Multi-Module Setup</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2019-09-16T09:57:26&#43;02:00'>2019, Sep 16</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/lb'>Lukas Baronyai</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='/images/material-theming/theming_demo.PNG'/>
+    
+  </figure>
+</div>
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="basic-setup">Basic Setup</h2>
+
+<p>Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.</p>
+
+<p>Let&rsquo;s start with the basic setup: as with all of our projects we use our <a href="https://github.com/allaboutapps/A3AndroidTemplate" target="_blank">A3AndroidTemplate</a> as a starting point. From there we extend the gradle module setup to prepare for the future: next to the main module <code>app</code>, we&rsquo;ll use some shared modules like <code>base</code> (contains e.g. BaseActivity or BaseFragment), <code>networking</code> (holds Retrofit dependencies) or <code>model</code> (contains shared data classes) and <code>feature</code> modules. The advantage of this kind of multi-module setup was already explained exhaustively by other authors at other blogs (see <a href="https://medium.com/google-developer-experts/modularizing-android-applications-9e2d18f244a0" target="_blank">here</a> or <a href="https://jeroenmols.com/blog/2019/03/18/modularizationarchitecture/" target="_blank">here</a>, so here we&rsquo;ll not go into this again.</p>
+
+<p>Some notes to the setup which will get relevant later:</p>
+
+<ul>
+<li><code>app</code> holds the AndroidManifest.xml, uses the <code>com.android.application</code> gradle plugin, generates the apk and only includes other modules, but is not included anywhere itself</li>
+<li><code>base</code> holds dependencies to the required shared modules like <code>model</code> or <code>ui-components</code></li>
+<li><code>feature</code> modules always include <code>base</code> and possibly along with other shared modules as needed (e.g. <code>networking</code>)</li>
+<li><code>ui-components</code> holds the theming &amp; styling configuration</li>
+</ul>
+
+<p><img src="/images/material-theming/module_setup.png" alt="Module Setup" /></p>
+
+<h2 id="understanding-what-needs-to-be-done-where">Understanding What Needs To Be Done Where</h2>
+
+<p>Let&rsquo;s begin with the first question that usually arises: <strong>Where shall the theming be placed?</strong></p>
+
+<p>It sounds like a simple question, but it&rsquo;s not a simple answer, because:</p>
+
+<ul>
+<li>The Theme has to be referenced from AndroidManifest in the <code>app</code> module</li>
+<li>The <code>app</code> module itself is not included in other modules, therefore the preview of the layout editor in AndroidStudio has no access to the Theme &mdash; which basically means, that we would have to work blind.</li>
+</ul>
+
+<p>The solution is to map the module dependency into the theme itself &mdash; meaning that there is a <code>AppTheme.Base</code> in the <code>ui-components</code> module, which defines the whole theming, and an <code>AppTheme</code> in the <code>app</code> module, which inherits from <code>AppTheme.Base</code>. Issue solved!</p>
+
+<h2 id="theme-vs-style">Theme VS Style</h2>
+
+<p>Before we can actually start the implementation, one last thing is missing: understanding the difference between &ldquo;style&rdquo; and &ldquo;theme&rdquo;. It might be a common concept, but it doesn&rsquo;t hurt to recall it once again.</p>
+
+<p>Chris Banes describes it as follows:</p>
+
+<blockquote>
+<p>So what exactly is the difference? Well they are both declared in exactly the same way (which you already know), the difference comes in how they’re used.</p>
+
+<p>Themes are meant to be the global source of styling for your app. The new functionality doesn’t change that, it just allows you to tweak it per view.</p>
+
+<p>Styles are meant to be applied at a view level. Internally, when you set style on a View, the LayoutInflater will read the style and apply it to the AttributeSet before any explicit attributes (this allows you to override style values on a view).</p>
+
+<p>Values in an attribute set can reference values from the View’s theme.</p>
+
+<p><strong>TL;DR: Themes are global, styles are local.</strong></p>
+</blockquote>
+
+<p>You can read more about it in his article <a href="https://chris.banes.dev/2014/11/12/theme-vs-style/" target="_blank">Theme vs Style</a></p>
+
+<h2 id="android-material-components-library">Android Material Components Library</h2>
+
+<p>So now that everything is set, we can finally start the theming &amp; styling. We use the new <a href="https://material.io/develop/android/docs/getting-started/" target="_blank">Android Material Components</a> library for this, as it is now the reccommended way of Google. The library offers a great varity of customization &mdash; far more than the we used to have. It took some time to look through all the possibilites and new named attributes. E.g. there are now color attributes like <code>colorOnPrimary</code>, <code>colorOnSecondary</code>, <code>colorTextPrimary</code> or <code>colorTextSecondary</code>. These attributes are theme colors and are therefore meant to be once set and globally used &mdash; no more <code>@color/colorYellow</code>, they are applied by the global theme! Same holds for the <code>TextAppearance</code> attributes.</p>
+
+<p>In general the library offers 3 theming areas:</p>
+
+<ul>
+<li><a href="https://material.io/develop/android/theming/color/" target="_blank">Color Theming</a></li>
+<li><a href="https://material.io/develop/android/theming/shape/" target="_blank">Shape Theming</a></li>
+<li><a href="https://material.io/develop/android/theming/typography/" target="_blank">Typography Theming</a></li>
+</ul>
+
+<h2 id="summary-the-final-setup">Summary: The final setup</h2>
+
+<p>The final result looks as follows:</p>
+
+<ul>
+<li>The <code>AppTheme.Base</code> Style is located in the <code>ui-components</code> module, we extend it with <code>AppTheme</code> in <code>app</code></li>
+<li>All styles are grouped in the <code>ui-components</code> module</li>
+</ul>
+
+<p>Since by having an extensive customized styling, the default <code>styles.xml</code> would simply explode, we started to group the different styles into separate files. At the moment of writing this includes:</p>
+
+<ul>
+<li><code>buttons.xml</code> &mdash; defines common button styles (see appendix 1)</li>
+<li><code>dialogs.xml</code> &mdash; defines common dialog styles</li>
+<li><code>text.xml</code> &mdash; defines inheritances from TextAppearance</li>
+<li><code>themes.xml</code> &mdash; defines the global theme</li>
+</ul>
+
+<h2 id="appendix-1-button-styling-example">Appendix 1: Button Styling Example</h2>
+
+<p><details>
+  <summary>button.xml</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;resources&gt;</span>
+
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Widget.App.Button.Shaped&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;@style/Widget.MaterialComponents.Button&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:elevation&#34;</span><span style="color:#f92672">&gt;</span>8dp<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;backgroundTint&#34;</span><span style="color:#f92672">&gt;</span>@color/button_round<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColor&#34;</span><span style="color:#f92672">&gt;</span>?colorOnPrimary<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;shapeAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/Appearance.App.Button.Shaped<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:padding&#34;</span><span style="color:#f92672">&gt;</span>16dp<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+    
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Widget.App.Button.Shaped.Inverted&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Widget.App.Button.Shaped&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;backgroundTint&#34;</span><span style="color:#f92672">&gt;</span>@color/button_shaped_inverted<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColor&#34;</span><span style="color:#f92672">&gt;</span>?colorPrimary<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;rippleColor&#34;</span><span style="color:#f92672">&gt;</span>@color/button_shaped_inverted_ripple<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+    
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Widget.App.Button.Shaped.Alarm&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Widget.App.Button.Shaped&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;backgroundTint&#34;</span><span style="color:#f92672">&gt;</span>@color/button_shaped_alarm<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColor&#34;</span><span style="color:#f92672">&gt;</span>?colorOnPrimary<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+    
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Appearance.App.Button.Shaped&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;cornerSizeTopLeft&#34;</span><span style="color:#f92672">&gt;</span>@dimen/cornerShapedBig<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;cornerSizeTopRight&#34;</span><span style="color:#f92672">&gt;</span>@dimen/cornerShapedSmall<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;cornerSizeBottomRight&#34;</span><span style="color:#f92672">&gt;</span>@dimen/cornerShapedBig<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;cornerSizeBottomLeft&#34;</span><span style="color:#f92672">&gt;</span>@dimen/cornerShapedSmall<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+    
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Widget.App.Button.Flat&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;Widget.MaterialComponents.Button.TextButton&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+    
+    <span style="color:#f92672">&lt;style</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Widget.App.Button&#34;</span> <span style="color:#a6e22e">parent=</span><span style="color:#e6db74">&#34;TextAppearance.MaterialComponents.Button&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;fontFamily&#34;</span><span style="color:#f92672">&gt;</span>?fontFamilyPrimary<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textColor&#34;</span><span style="color:#f92672">&gt;</span>?android:textColorPrimary<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;android:textStyle&#34;</span><span style="color:#f92672">&gt;</span>bold<span style="color:#f92672">&lt;/item&gt;</span>
+        <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;enforceTextAppearance&#34;</span><span style="color:#f92672">&gt;</span>@style/TextAppearance.App.Body1<span style="color:#f92672">&lt;/item&gt;</span>
+    <span style="color:#f92672">&lt;/style&gt;</span>
+<span style="color:#f92672">&lt;/resources&gt;</span></code></pre></div>
+</details></p>
+
+<p><details>
+  <summary>button_round.xml</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;selector</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorPrimaryVariant&#34;</span> <span style="color:#a6e22e">android:state_enabled=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorPrimary&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/selector&gt;</span></code></pre></div>
+</details></p>
+
+<p><details>
+  <summary>button_shaped_inverted_ripple.xml</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;selector</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorPrimaryVariant&#34;</span> <span style="color:#a6e22e">android:state_enabled=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorSurface&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/selector&gt;</span></code></pre></div>
+</details></p>
+
+<p><details>
+  <summary>button_shaped_inverted.xml</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;selector</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorPrimaryVariant&#34;</span> <span style="color:#a6e22e">android:state_enabled=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorSurface&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/selector&gt;</span></code></pre></div>
+</details></p>
+
+<p><details>
+  <summary>button_shaped_alarm.xml</summary></p>
+
+<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;selector</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorAlarm&#34;</span> <span style="color:#a6e22e">android:state_enabled=</span><span style="color:#e6db74">&#34;false&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;item</span> <span style="color:#a6e22e">android:color=</span><span style="color:#e6db74">&#34;?colorAlarm&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/selector&gt;</span></code></pre></div>
+</details></p>
+
+<h2 id="appendix-2-further-readings">Appendix 2: Further readings</h2>
+
+<ul>
+<li><a href="https://www.youtube.com/watch?v=sNSlDfaNq-0" target="_blank">Best Practices for Themes and Styles (Android Dev Summit &lsquo;18)</a></li>
+<li><a href="https://chris.banes.dev/2014/11/12/theme-vs-style/" target="_blank">Theme vs Style</a></li>
+<li><a href="https://www.youtube.com/watch?v=DPH3F0v1jB0" target="_blank">The Components of Material Design (Android Dev Summit &lsquo;18)</a></li>
+<li><a href="https://material.io/develop/android/docs/getting-started/" target="_blank">Android Material Components</a></li>
+</ul>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/android'>Android</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/uikonf2019/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>UIKonf 2019</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2019 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+
