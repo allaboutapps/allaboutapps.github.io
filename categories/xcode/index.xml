@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xcode on all about apps</title>
+    <link>https://code.allaboutapps.at/categories/xcode/</link>
+    <description>Recent content in Xcode on all about apps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Sep 2019 10:16:32 +0200</lastBuildDate>
+    
+	<atom:link href="https://code.allaboutapps.at/categories/xcode/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Xcode Alternative Icons</title>
+      <link>https://code.allaboutapps.at/articles/xcode-alternative-icons/</link>
+      <pubDate>Mon, 23 Sep 2019 10:16:32 +0200</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/xcode-alternative-icons/</guid>
+      <description>Xcode beta season is over but it&amp;rsquo;s still the time of the year where iOS developers usually have multiple Xcode version installed. Distinguishing one from another isn&amp;rsquo;t easy if you have multiple identical icons in the dock and, like me, getting reminded by Xcode that your project&amp;rsquo;s Swift version isn&amp;rsquo;t compatible.
+Alternative icons to the rescue! It&amp;rsquo;s actually quite easy to change any app&amp;rsquo;s icon in macOS. After opening the info panel of Xcode.</description>
+    </item>
+    
+  </channel>
+</rss>
