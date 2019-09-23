@@ -6,7 +6,7 @@
     <description>Recent content in Categories on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Sep 2019 09:57:26 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 23 Sep 2019 10:16:32 +0200</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -39,11 +39,11 @@
     </item>
     
     <item>
-      <title>Graphics</title>
-      <link>https://code.allaboutapps.at/categories/graphics/</link>
-      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
+      <title>Xcode</title>
+      <link>https://code.allaboutapps.at/categories/xcode/</link>
+      <pubDate>Mon, 23 Sep 2019 10:16:32 +0200</pubDate>
       
-      <guid>https://code.allaboutapps.at/categories/graphics/</guid>
+      <guid>https://code.allaboutapps.at/categories/xcode/</guid>
       <description></description>
     </item>
     
@@ -66,11 +66,11 @@
     </item>
     
     <item>
-      <title>Xcode</title>
-      <link>https://code.allaboutapps.at/categories/xcode/</link>
-      <pubDate>Mon, 23 Sep 2019 10:16:32 +0200</pubDate>
+      <title>Graphics</title>
+      <link>https://code.allaboutapps.at/categories/graphics/</link>
+      <pubDate>Mon, 26 Nov 2018 21:12:27 +0100</pubDate>
       
-      <guid>https://code.allaboutapps.at/categories/xcode/</guid>
+      <guid>https://code.allaboutapps.at/categories/graphics/</guid>
       <description></description>
     </item>
     

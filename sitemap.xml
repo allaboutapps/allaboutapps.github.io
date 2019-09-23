@@ -32,13 +32,42 @@
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/</loc>
+    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/</loc>
+    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/xcode/</loc>
+    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/xcode-alternative-icons/</loc>
     <lastmod>2019-09-23T10:16:32+02:00</lastmod>
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/mb/</loc>
+    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/material-theming/</loc>
     <lastmod>2019-09-16T09:57:26+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/authors/lb/</loc>
+    <lastmod>2019-09-16T09:57:26+02:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -52,13 +81,37 @@
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/mg/</loc>
+    <lastmod>2019-06-21T09:45:12+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/meetups/</loc>
+    <lastmod>2019-06-19T08:48:46+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/nodejs-june-meetup/</loc>
     <lastmod>2019-06-19T08:48:46+02:00</lastmod>
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/mh/</loc>
+    <lastmod>2019-06-19T08:48:46+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/ios-coordinator/</loc>
     <lastmod>2019-05-14T10:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/authors/mhe/</loc>
+    <lastmod>2019-05-14T10:00:00+02:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -72,8 +125,20 @@
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/gc/</loc>
+    <lastmod>2019-04-04T14:36:09+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/reactive-swift-events-order/</loc>
     <lastmod>2019-03-28T11:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/reactiveswift/</loc>
+    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -87,13 +152,31 @@
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/kk/</loc>
+    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/emoji-flags/</loc>
     <lastmod>2019-01-23T10:01:25+01:00</lastmod>
   </url>
   
   <url>
+    <loc>https://code.allaboutapps.at/authors/gh/</loc>
+    <lastmod>2019-01-23T10:01:25+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://code.allaboutapps.at/articles/smooth-graph-lines/</loc>
     <lastmod>2018-11-26T21:12:27+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://code.allaboutapps.at/categories/graphics/</loc>
+    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -117,94 +200,12 @@
   </url>
   
   <url>
-    <loc>https://code.allaboutapps.at/authors/</loc>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/categories/</loc>
-    <lastmod>2019-09-16T09:57:26+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/gc/</loc>
-    <lastmod>2019-04-04T14:36:09+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/gh/</loc>
-    <lastmod>2019-01-23T10:01:25+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/categories/graphics/</loc>
-    <lastmod>2018-11-26T21:12:27+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/kk/</loc>
-    <lastmod>2019-02-14T10:30:11+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/lb/</loc>
-    <lastmod>2019-09-16T09:57:26+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/mb/</loc>
-    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/categories/meetups/</loc>
-    <lastmod>2019-06-19T08:48:46+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/mg/</loc>
-    <lastmod>2019-06-21T09:45:12+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/mh/</loc>
-    <lastmod>2019-06-19T08:48:46+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/authors/mhe/</loc>
-    <lastmod>2019-05-14T10:00:00+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://code.allaboutapps.at/page/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://code.allaboutapps.at/categories/reactiveswift/</loc>
-    <lastmod>2019-03-28T11:00:00+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://code.allaboutapps.at/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://code.allaboutapps.at/categories/xcode/</loc>
-    <lastmod>2019-09-23T10:16:32+02:00</lastmod>
     <priority>0</priority>
   </url>
   

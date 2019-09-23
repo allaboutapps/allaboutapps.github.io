@@ -4,18 +4,18 @@
 <head>
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<meta name='description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
+<meta name='description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
 Let&rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.'>
 <meta name='theme-color' content='#EB5D24'>
 
 <meta property='og:title' content='Proper Material Theming in a Multi-Module Setup • Lukas Baronyai'>
-<meta property='og:description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
+<meta property='og:description' content='Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
 Let&rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.'>
 <meta property='og:url' content='https://code.allaboutapps.at/articles/material-theming/'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/material-theming/theming_demo.PNG'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-09-16T09:57:26&#43;02:00'/><meta property='article:modified_time' content='2019-09-16T09:57:26&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/material-theming/theming_demo.PNG'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.56.3" />
 
   <title>Proper Material Theming in a Multi-Module Setup • Lukas Baronyai</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/material-theming/'>
@@ -26,7 +26,7 @@ Let&rsquo;s start with the basic setup: as with all of our projects we use our A
 :root{--color-accent:#EB5D24;}
 </style>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -167,7 +167,7 @@ if (!doNotTrack) {
 
 <h2 id="basic-setup">Basic Setup</h2>
 
-<p>Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.</p>
+<p>Recently an opportunity opened up for us to fully utilize a Material Theming &amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.</p>
 
 <p>Let&rsquo;s start with the basic setup: as with all of our projects we use our <a href="https://github.com/allaboutapps/A3AndroidTemplate" target="_blank">A3AndroidTemplate</a> as a starting point. From there we extend the gradle module setup to prepare for the future: next to the main module <code>app</code>, we&rsquo;ll use some shared modules like <code>base</code> (contains e.g. BaseActivity or BaseFragment), <code>networking</code> (holds Retrofit dependencies) or <code>model</code> (contains shared data classes) and <code>feature</code> modules. The advantage of this kind of multi-module setup was already explained exhaustively by other authors at other blogs (see <a href="https://medium.com/google-developer-experts/modularizing-android-applications-9e2d18f244a0" target="_blank">here</a> or <a href="https://jeroenmols.com/blog/2019/03/18/modularizationarchitecture/" target="_blank">here</a>, so here we&rsquo;ll not go into this again.</p>
 
@@ -193,7 +193,7 @@ if (!doNotTrack) {
 <li>The <code>app</code> module itself is not included in other modules, therefore the preview of the layout editor in AndroidStudio has no access to the Theme &mdash; which basically means, that we would have to work blind.</li>
 </ul>
 
-<p>The solution is to map the module dependency into the theme itself &mdash; meaning that there is a <code>AppTheme.Base</code> in the <code>ui-components</code> module, which defines the whole theming, and an <code>AppTheme</code> in the <code>app</code> module, which inherits from <code>AppTheme.Base</code>. Issue solved!</p>
+<p>The solution is to map the module dependency into the theme itself &mdash; meaning that there is an <code>AppTheme.Base</code> in the <code>ui-components</code> module, which defines the whole theming, and an <code>AppTheme</code> in the <code>app</code> module, which inherits from <code>AppTheme.Base</code>. Issue solved!</p>
 
 <h2 id="theme-vs-style">Theme VS Style</h2>
 
@@ -217,9 +217,9 @@ if (!doNotTrack) {
 
 <h2 id="android-material-components-library">Android Material Components Library</h2>
 
-<p>So now that everything is set, we can finally start the theming &amp; styling. We use the new <a href="https://material.io/develop/android/docs/getting-started/" target="_blank">Android Material Components</a> library for this, as it is now the reccommended way of Google. The library offers a great varity of customization &mdash; far more than the we used to have. It took some time to look through all the possibilites and new named attributes. E.g. there are now color attributes like <code>colorOnPrimary</code>, <code>colorOnSecondary</code>, <code>colorTextPrimary</code> or <code>colorTextSecondary</code>. These attributes are theme colors and are therefore meant to be once set and globally used &mdash; no more <code>@color/colorYellow</code>, they are applied by the global theme! Same holds for the <code>TextAppearance</code> attributes.</p>
+<p>So now that everything is set, we can finally start the theming &amp; styling. We use the new <a href="https://material.io/develop/android/docs/getting-started/" target="_blank">Android Material Components</a> library for this, as it is now the recommended way of Google. The library offers a great variety of customization &mdash; far more than the we used to have. It took some time to look through all the possibilities and new named attributes. E.g. there are now color attributes like <code>colorOnPrimary</code>, <code>colorOnSecondary</code>, <code>colorTextPrimary</code> or <code>colorTextSecondary</code>. These attributes are theme colors and are therefore meant to be set once and used globally &mdash; no more <code>@color/colorYellow</code>, they are applied by the global theme! Same applies for the <code>TextAppearance</code> attributes.</p>
 
-<p>In general the library offers 3 theming areas:</p>
+<p>In general, the library offers 3 theming areas:</p>
 
 <ul>
 <li><a href="https://material.io/develop/android/theming/color/" target="_blank">Color Theming</a></li>
@@ -236,7 +236,7 @@ if (!doNotTrack) {
 <li>All styles are grouped in the <code>ui-components</code> module</li>
 </ul>
 
-<p>Since by having an extensive customized styling, the default <code>styles.xml</code> would simply explode, we started to group the different styles into separate files. At the moment of writing this includes:</p>
+<p>Since having an extensive customized styling, the default <code>styles.xml</code> would simply explode, we started to group the different styles into separate files. At the moment of writing, this includes:</p>
 
 <ul>
 <li><code>buttons.xml</code> &mdash; defines common button styles (see appendix 1)</li>

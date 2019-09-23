@@ -15,7 +15,7 @@ private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwif
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/reactive-swift-properties.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2018-07-17T11:50:28&#43;02:00'/><meta property='article:modified_time' content='2018-07-17T11:50:28&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@mbuchetics'><meta property='twitter:image' content='https://code.allaboutapps.at/images/reactive-swift-properties.png'>
 
-<meta name="generator" content="Hugo 0.46" />
+<meta name="generator" content="Hugo 0.56.3" />
 
   <title>Reactive Swift: Access Control for Mutable Properties • Matthias Buchetics</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/reactive-swift-properties/'>
@@ -26,7 +26,7 @@ private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwif
 :root{--color-accent:#EB5D24;}
 </style>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
@@ -170,7 +170,7 @@ if (!doNotTrack) {
 <p>When using <a href="https://github.com/ReactiveCocoa/ReactiveSwift" target="_blank">ReactiveSwift</a> (or similarly RxSwift) you usually work with <code>MutableProperty</code>. In order to limit modification of the property&rsquo;s <code>value</code> we can create a private writable <code>MutableProperty</code> and a public read-only <code>Property</code>:</p>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">let</span> isLoadingMutable = MutableProperty(<span style="color:#66d9ef">false</span>)
-<span style="color:#66d9ef">lazy</span> <span style="color:#66d9ef">var</span> isLoading: Property&lt;Bool<span style="color:#f92672">&gt;</span> = Property(<span style="color:#66d9ef">self</span>.isLoadingMutable)</code></pre></div>
+<span style="color:#66d9ef">lazy</span> <span style="color:#66d9ef">var</span> isLoading: Property&lt;Bool&gt; = Property(<span style="color:#66d9ef">self</span>.isLoadingMutable)</code></pre></div>
 
 <p>The read-only <code>Property</code> is now dependent on the <code>MutableProperty</code> and will always reflect it&rsquo;s value.</p>
 

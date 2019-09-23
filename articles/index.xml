@@ -27,7 +27,7 @@ Alternative icons to the rescue! It&amp;rsquo;s actually quite easy to change an
       <pubDate>Mon, 16 Sep 2019 09:57:26 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/material-theming/</guid>
-      <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made an clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
+      <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
 Let&amp;rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
     </item>
     
@@ -90,9 +90,7 @@ inAppUpdateManager = InAppUpdateManager(&lt;span style=&#34;color:#66d9ef&#34;&g
 
 &lt;p&gt;&lt;img src=&#34;https://code.allaboutapps.at/images/in_app_update_optimized.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34; target=&#34;_blank&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34; target=&#34;_blank&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -115,9 +113,7 @@ Related questions and notes about the talks as well as conversations about other
       <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
 
-&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;</description>
     </item>
     
     <item>
