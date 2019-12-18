@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>QA on all about apps</title>
+    <link>https://code.allaboutapps.at/categories/qa/</link>
+    <description>Recent content in QA on all about apps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Dec 2019 09:27:32 +0100</lastBuildDate>
+    
+	<atom:link href="https://code.allaboutapps.at/categories/qa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Load Testing</title>
+      <link>https://code.allaboutapps.at/articles/load-testing/</link>
+      <pubDate>Wed, 11 Dec 2019 09:27:32 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/load-testing/</guid>
+      <description>Load testing is a crucial part in the final testing phase of a software product and should be done for every application where a large number of concurrent users is expected. Since there are plenty of tools available for this purpose, the main objective remains the same. It is important to recreate realistic user paths and scenarios in order to obtain meaningful results for bottleneck analysis. Most of the time it is not easy to find the layer which has the highest impact on performance since there are many components involved like network, database, application server and so forth.</description>
+    </item>
+    
+  </channel>
+</rss>

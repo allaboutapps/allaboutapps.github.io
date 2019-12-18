@@ -13,7 +13,7 @@
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/jetpack-navigation/cover_nav_graph.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-05-07T10:03:39&#43;02:00'/><meta property='article:modified_time' content='2019-05-07T10:03:39&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/jetpack-navigation/cover_nav_graph.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Android Jetpack Navigation Pitfalls &amp; Tricks • Lukas Baronyai</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/android-jetpack-navigation-pitfalls/'>
@@ -72,6 +72,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -161,10 +162,7 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  
-
-<h1 id="table-of-content">Table of content</h1>
-
+  <h1 id="table-of-content">Table of content</h1>
 <ol>
 <li><a href="#send-args-to-fragments-within-activities">Send Args to fragments within activities</a></li>
 <li><a href="#use-startactivityforresult-with-the-navigation-library">Use startActivityForResult with the Navigation library</a></li>
@@ -173,20 +171,12 @@ if (!doNotTrack) {
 <li><a href="#tldr">TLDR</a></li>
 <li><a href="#further-readings">Further readings</a></li>
 </ol>
-
-<p><a href="https://developer.android.com/guide/navigation" target="_blank">Navigation library from Jetpack</a> offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release. With this article I would like to share some of the tricks and pitfalls I came across during development.</p>
-
-<p>This article assumes that the reader already knows the library &mdash; if not, I recommend the <a href="https://developer.android.com/guide/navigation" target="_blank">official documentation</a> as well as the linked articles in the <a href="#tldr">TLDR</a> section.</p>
-
+<p><a href="https://developer.android.com/guide/navigation">Navigation library from Jetpack</a> offers a great variety of helpful tools, especially with the SafeArgs extension. My last project contained many different navigation flows paired with a large number of screens, so I decided to try the new navigation library which had just reached a stable release. With this article I would like to share some of the tricks and pitfalls I came across during development.</p>
+<p>This article assumes that the reader already knows the library — if not, I recommend the <a href="https://developer.android.com/guide/navigation">official documentation</a> as well as the linked articles in the <a href="#tldr">TLDR</a> section.</p>
 <h2 id="send-args-to-fragments-within-activities">Send Args to fragments within activities</h2>
-
 <p>Sometimes it is necessary to start an activity which itself is a NavHost and pass arguments to the hosted fragment. E.g. imagine a <code>ListFragment</code>, which starts a <code>DetailActivity</code> with a <code>DetailFragment</code>. The <code>DetailFragment</code> needs an <code>id</code> of the item it displays.</p>
-
 <p>With the classic Navigation Graph it would look like the following:</p>
-
-<p><details>
-  <summary>Click to expand!</summary></p>
-
+<!-- raw HTML omitted -->
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
@@ -207,7 +197,6 @@ if (!doNotTrack) {
             <span style="color:#a6e22e">app:argType=</span><span style="color:#e6db74">&#34;long&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/activity&gt;</span>
 <span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span style="color:#a6e22e">xmlns:tools=</span><span style="color:#e6db74">&#34;http://schemas.android.com/tools&#34;</span>
@@ -218,13 +207,12 @@ if (!doNotTrack) {
         <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;at.allaboutapps.DetailFragment&#34;</span>
         <span style="color:#a6e22e">android:label=</span><span style="color:#e6db74">&#34;fragment_detail&#34;</span>
         <span style="color:#a6e22e">tools:layout=</span><span style="color:#e6db74">&#34;@layout/fragment_detail&#34;</span> 
-        <span style="color:#960050;background-color:#1e0010">&lt;argument</span>
+        <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#960050;background-color:#1e0010">a</span><span style="color:#960050;background-color:#1e0010">r</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">m</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">t</span>
             <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;id&#34;</span>
             <span style="color:#a6e22e">app:argType=</span><span style="color:#e6db74">&#34;long&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/fragment&gt;</span>
 <span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
-
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span style="color:#f92672">&lt;FrameLayout</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
     <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span><span style="color:#f92672">&gt;</span>
@@ -236,20 +224,15 @@ if (!doNotTrack) {
         <span style="color:#a6e22e">app:defaultNavHost=</span><span style="color:#e6db74">&#34;true&#34;</span>
         <span style="color:#a6e22e">app:navGraph=</span><span style="color:#e6db74">&#34;@navigation/detail_nav_graph&#34;</span><span style="color:#f92672">/&gt;</span>
 <span style="color:#f92672">&lt;/FrameLayout&gt;</span></code></pre></div>
-</details></p>
-
-<p>The question now is: how do we pass the <code>id</code> argument to the <code>DetailFragment</code>? The library doesn&rsquo;t offer us the option to define some kind of start argument for a navigation graph or similar. If we would deploy these two graphs with the default navigation attributes in the layout XML it would crash since the <code>DetailFragment</code> would not get the required arguments set and the library doesn&rsquo;t know, where to retrieve these.</p>
-
+<!-- raw HTML omitted -->
+<p>The question now is: how do we pass the <code>id</code> argument to the <code>DetailFragment</code>? The library doesn't offer us the option to define some kind of start argument for a navigation graph or similar. If we would deploy these two graphs with the default navigation attributes in the layout XML it would crash since the <code>DetailFragment</code> would not get the required arguments set and the library doesn't know, where to retrieve these.</p>
 <p>The trick is relatively simple:</p>
-
 <ul>
-<li>Don&rsquo;t set <code>app:defaultNavHost</code> and <code>app:navGraph</code> in the layout file</li>
+<li>Don't set <code>app:defaultNavHost</code> and <code>app:navGraph</code> in the layout file</li>
 <li>Set the <code>NavHost</code> programmatically</li>
 <li>Set the arguments programmatically</li>
 </ul>
-
 <p>The layout now looks as following:</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span style="color:#f92672">&lt;FrameLayout</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
@@ -260,9 +243,7 @@ if (!doNotTrack) {
         <span style="color:#a6e22e">android:layout_width=</span><span style="color:#e6db74">&#34;match_parent&#34;</span>
         <span style="color:#a6e22e">android:layout_height=</span><span style="color:#e6db74">&#34;match_parent&#34;</span> <span style="color:#f92672">/&gt;</span>
 <span style="color:#f92672">&lt;/FrameLayout&gt;</span></code></pre></div>
-
 <p>And in the DetailActivity we need to add:</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetailActivity</span> : AppCompatActivity() {
 
   <span style="color:#66d9ef">val</span> args: DetailActivityArgs <span style="color:#66d9ef">by</span> navArgs()
@@ -273,15 +254,10 @@ if (!doNotTrack) {
     findNavController(R.id.detailNavigationFragment).setGraph(R.navigation.detail_nav_graph, args.toBundle())
   }
  }</code></pre></div>
-
-<p>As you can see, it doesn&rsquo;t really cost us much effort to pass the arguments here. And since the arguments of DetailFragment and DetailActivity are called the same, the library can parse the fragment arguments and we have the <code>id</code> at the right place!</p>
-
+<p>As you can see, it doesn't really cost us much effort to pass the arguments here. And since the arguments of DetailFragment and DetailActivity are called the same, the library can parse the fragment arguments and we have the <code>id</code> at the right place!</p>
 <h2 id="use-startactivityforresult-with-the-navigation-library">Use startActivityForResult with the Navigation library</h2>
-
-<p>Well, the simplest answer here is: you don&rsquo;t. At the moment of writing this article, there is no equivalent for <code>startActivityForResult</code>. There are (<a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2" target="_blank">some attempts to solve this</a>, but in most of the cases it&rsquo;s sufficient to use the default approach and still use <code>startActivityForResult</code> without the Navigation library.</p>
-
-<p>But in case you don&rsquo;t want to miss the type safety of the NavArgs and maybe extend the previous situation of passing arguments to the hosted fragment, it can look like this:</p>
-
+<p>Well, the simplest answer here is: you don't. At the moment of writing this article, there is no equivalent for <code>startActivityForResult</code>. There are (<a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2">some attempts to solve this</a>, but in most of the cases it's sufficient to use the default approach and still use <code>startActivityForResult</code> without the Navigation library.</p>
+<p>But in case you don't want to miss the type safety of the NavArgs and maybe extend the previous situation of passing arguments to the hosted fragment, it can look like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetailActivity</span> : AppCompatActivity() {
   <span style="color:#66d9ef">companion</span> <span style="color:#66d9ef">object</span> {
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">val</span> EXTRA_ID = <span style="color:#e6db74">&#34;id&#34;</span>
@@ -306,26 +282,17 @@ if (!doNotTrack) {
     finish()
   }
  }</code></pre></div>
-
 <h2 id="use-generic-naming-for-action-names">Use generic naming for action names</h2>
-
-<p>Let&rsquo;s imagine the following situation: we have a registration of some sort with a lot of screens. In my case I had up to 12 fragments to handle:</p>
-
-<p><img src="/images/jetpack-navigation/registration.png" alt="Long registration" /></p>
-
-<p>Awesome, right? Now, let&rsquo;s say, we want to change the existing order of screens:</p>
-
+<p>Let's imagine the following situation: we have a registration of some sort with a lot of screens. In my case I had up to 12 fragments to handle:</p>
+<p><img src="/images/jetpack-navigation/registration.png" alt="Long registration"></p>
+<p>Awesome, right? Now, let's say, we want to change the existing order of screens:</p>
 <ul>
-<li>Without the Navigation library it&rsquo;s a mess, every fragment has a reference to the next one and we don&rsquo;t have any overview which is linked to which at the moment.</li>
+<li>Without the Navigation library it's a mess, every fragment has a reference to the next one and we don't have any overview which is linked to which at the moment.</li>
 <li>With the Navigation Editor of Android Studio we have at least an overview which fragment is currently linked to which. But still, if we change something in the graph, we need to change the fragments itself as well. Not really handy here.</li>
 </ul>
-
-<p>The solution is pretty simple: use generic action names. Don&rsquo;t use names like <code>goToFirstName()</code>, custom to each fragment, but use names like <code>next()</code>, which is used everywhere the same. The corresponding navigation graph to the image looks as following:</p>
-
-<p><details>
-  <summary>Click to expand!</summary></p>
-
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<p>The solution is pretty simple: use generic action names. Don't use names like <code>goToFirstName()</code>, custom to each fragment, but use names like <code>next()</code>, which is used everywhere the same. The corresponding navigation graph to the image looks as following:</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-XML" data-lang="XML"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span style="color:#f92672">&lt;navigation</span> <span style="color:#a6e22e">xmlns:android=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res/android&#34;</span>
     <span style="color:#a6e22e">xmlns:app=</span><span style="color:#e6db74">&#34;http://schemas.android.com/apk/res-auto&#34;</span>
     <span style="color:#a6e22e">android:id=</span><span style="color:#e6db74">&#34;@+id/registration_nav_graph&#34;</span>
@@ -436,54 +403,45 @@ if (!doNotTrack) {
     <span style="color:#f92672">&lt;/fragment&gt;</span>
 
 <span style="color:#f92672">&lt;/navigation&gt;</span></code></pre></div>
-</details></p>
-
-<p>With this setup we can easily change the order of the screens by simply changing the NavGraph &mdash; the library generates us the Directions and we don&rsquo;t need to touch the fragments!</p>
-
+<!-- raw HTML omitted -->
+<p>With this setup we can easily change the order of the screens by simply changing the NavGraph — the library generates us the Directions and we don't need to touch the fragments!</p>
 <h2 id="reuse-fragments-in-multiple-navigation-graphs">Reuse fragments in multiple navigation graphs</h2>
-
 <p>There might be some circumstances where it makes sense to reuse the same fragment in different NavGraphs. E.g. if a registration uses in some sub-flows the same fragments.</p>
-
-<p>First: try to avoid this situation. The Navigation library is meant to be used within a single-activity application and doesn&rsquo;t really like the reuse of the same fragments in different NavGraphs. The ugly thing here is, that each NavGraph generates actions and arguments with the same name. And if two NavGraphs using the same fragment with different actions and arguments, they are overwriting each other in a non-deterministically way.</p>
-
+<p>First: try to avoid this situation. The Navigation library is meant to be used within a single-activity application and doesn't really like the reuse of the same fragments in different NavGraphs. The ugly thing here is, that each NavGraph generates actions and arguments with the same name. And if two NavGraphs using the same fragment with different actions and arguments, they are overwriting each other in a non-deterministically way.</p>
 <p>There are some tricks to work around this:</p>
-
 <ul>
-<li><p><strong>Avoid this situation</strong></p>
-
-<p>Seriously, this is nasty. Since the NavGraph processing happens non-deterministically it can happen that the local build is fine but fails on the build server because it&rsquo;s overridden in a different way.</p></li>
-
-<li><p><strong>Use fake arguments</strong></p>
-
-<p>If one NavGraph uses more arguments for a fragment than another one, still include these arguments into both graphs and think about reasonable default values. Don&rsquo;t rely on it, that the NavGraph with more arguments gets processed first &mdash; in doubt that&rsquo;s not the case.</p></li>
-
-<li><p><strong>Use <code>navigate()</code> with bundle instead of actions in edge cases</strong></p>
-
-<p>In edge cases e.g. if a fragment is used at the end of a flow (meaning no further action) in one NavGraph and in the middle of the flow (meaning with further actions) don&rsquo;t (conditionally) call <code>findNavController().navigate(FragmentDirections.goToDetailFragment(id))</code> but instead use <code>findNavController().navigate(R.id.DetailFragment, bundleOf(&quot;id&quot; to 5))</code>. This way you don&rsquo;t rely on the generated direction but can still use the Navigation and SafeArgs features of the DetailFragment.</p></li>
+<li>
+<p><strong>Avoid this situation</strong></p>
+<p>Seriously, this is nasty. Since the NavGraph processing happens non-deterministically it can happen that the local build is fine but fails on the build server because it's overridden in a different way.</p>
+</li>
+<li>
+<p><strong>Use fake arguments</strong></p>
+<p>If one NavGraph uses more arguments for a fragment than another one, still include these arguments into both graphs and think about reasonable default values. Don't rely on it, that the NavGraph with more arguments gets processed first — in doubt that's not the case.</p>
+</li>
+<li>
+<p><strong>Use <code>navigate()</code> with bundle instead of actions in edge cases</strong></p>
+<p>In edge cases e.g. if a fragment is used at the end of a flow (meaning no further action) in one NavGraph and in the middle of the flow (meaning with further actions) don't (conditionally) call <code>findNavController().navigate(FragmentDirections.goToDetailFragment(id))</code> but instead use <code>findNavController().navigate(R.id.DetailFragment, bundleOf(&quot;id&quot; to 5))</code>. This way you don't rely on the generated direction but can still use the Navigation and SafeArgs features of the DetailFragment.</p>
+</li>
 </ul>
-
 <h2 id="tldr">TLDR</h2>
-
 <ul>
 <li>Args can easily be passed from activity to fragment by setting the NavHost programmatically</li>
 <li>There is no equivalent of <code>startActivityForResult</code>, but we can generate the Args from the intent extras.</li>
 <li>Generic naming of actions helps to easily change the order of screens within a flow.</li>
 <li>Try to avoid using the same fragment with different arguments &amp; actions in multiple NavGraphs since the code might break due to nondeterministic class generation.</li>
 </ul>
-
 <h2 id="further-readings">Further readings</h2>
-
 <ul>
-<li><a href="https://developer.android.com/guide/navigation" target="_blank">Official Documentation</a></li>
-<li><a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2" target="_blank">Using Navigation Architecture Component in a large banking app</a> by David Vávra (advanced article)</li>
+<li><a href="https://developer.android.com/guide/navigation">Official Documentation</a></li>
+<li><a href="https://medium.com/google-developer-experts/using-navigation-architecture-component-in-a-large-banking-app-ac84936a42c2">Using Navigation Architecture Component in a large banking app</a> by David Vávra (advanced article)</li>
 <li>Android Navigation Components by Dario Mungoi (basic introduction)
-
 <ul>
-<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-1-236b2a479d44" target="_blank">Part 1</a></li>
-<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-2-ca643eb301e3" target="_blank">Part 2</a></li>
-<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-3-19554ec9ae83" target="_blank">Part 3</a></li>
-</ul></li>
-<li><a href="https://proandroiddev.com/android-jetpack-navigationui-a7c9f17c510e" target="_blank">Android Jetpack - NavigationUI</a> by Sagar Viradiya (advanced article)</li>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-1-236b2a479d44">Part 1</a></li>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-2-ca643eb301e3">Part 2</a></li>
+<li><a href="https://medium.com/google-developer-experts/android-navigation-components-part-3-19554ec9ae83">Part 3</a></li>
+</ul>
+</li>
+<li><a href="https://proandroiddev.com/android-jetpack-navigationui-a7c9f17c510e">Android Jetpack - NavigationUI</a> by Sagar Viradiya (advanced article)</li>
 </ul>
 
 </div>

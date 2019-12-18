@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ReactiveSwift on all about apps</title>
@@ -27,8 +27,8 @@
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/reactive-swift-properties/</guid>
-      <description>Swift&amp;rsquo;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
-private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&amp;rsquo;s value we can create a private writable MutableProperty and a public read-only Property:</description>
+      <description>Swift&#39;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
+private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&#39;s value we can create a private writable MutableProperty and a public read-only Property:</description>
     </item>
     
     <item>

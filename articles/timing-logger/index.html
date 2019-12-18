@@ -13,7 +13,7 @@
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/c04128f255f491b09ba5360bb48d07fd?s=256'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2018-10-03T16:02:48&#43;02:00'/><meta property='article:modified_time' content='2018-10-03T16:02:48&#43;02:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@swordiapps'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>TimingLogger • Markus Gursch</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/timing-logger/'>
@@ -72,6 +72,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -156,14 +157,9 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  
-
-<h1 id="timinglogger">TimingLogger</h1>
-
+  <h1 id="timinglogger">TimingLogger</h1>
 <p>Sometimes developers needs to analyze performance of a small friction of code. Maybe a RecyclerView is not scrolling smoothly or a calculation needs too much time, we have to split it up and try to find the line or block that runs inefficently. We all know to get a smooth user experience we only have 16ms for each frame to render. So it is very important to locate and optimize inefficient code.</p>
-
 <p>In this cases TimingLogger class is our friend.</p>
-
 <pre><code>val logger = TimingLogger(„PerformanceCheck&quot;, „democheck“)
 //do something
 logger.addSplit („calculated $var1“)
@@ -173,37 +169,26 @@ logger.addSplit („calculated $var2“)
 // add as much addSplit as you need for your use case
 //
 logger.dumpToLog()
-</code></pre>
-
-<p>The dumpToLog call will produce the following log output:</p>
-
+</code></pre><p>The dumpToLog call will produce the following log output:</p>
 <pre><code> D/Logger: values: begin 
  D/Logger: democheck:      14 ms, calculated var1Value
  D/Logger: democheck:       2 ms, calculated var2Value
  D/Logger: democheck: end, 1131 ms
-</code></pre>
-
-<p>IMPORTANT:
+</code></pre><p>IMPORTANT:
 Enable the log output for this class with the following adb command:</p>
-
 <blockquote>
 <p>adb shell setprop log.tag.PerformanceCheck VERBOSE</p>
 </blockquote>
-
 <p>PerformanceCheck is the first parameter when creating a new TimingLogger object</p>
-
 <p><strong>ProTip:</strong>
 Strip out TimingLogger calls from code in production builds use ProGuard</p>
-
 <pre><code>-assumenosideeffects class android.util.TimingLogger {
     public void addSplit(java.lang.String))
     public void dumpToLog();
     public void reset()
     public void reset(java.lang.String, java.lang.String)
 }
-</code></pre>
-
-<p><a href="https://developer.android.com/reference/android/util/TimingLogger" target="_blank">TimingLogger - class reference</a></p>
+</code></pre><p><a href="https://developer.android.com/reference/android/util/TimingLogger">TimingLogger - class reference</a></p>
 
 </div>
 

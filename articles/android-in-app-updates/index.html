@@ -5,22 +5,15 @@
   <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='With the new Play Core Library Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.
-
 There are two modes how an update can be triggered:
-
 
 Flexible: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.
 Immediate: The user is forced to update the app and the app is unusable until the process is finished.
 
-
 The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.
-
 So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.
-
 Who decides to force an update?
-
 The library offers an easy way to detect if an update should be forced. All we have to do is implement ForceUpdateProvider and call doUpdate() when we need to update right away.
-
 class DemoForceUpdateProvider : ForceUpdateProvider {
 
     override fun requestUpdateShouldBeImmediate(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
@@ -33,41 +26,28 @@ class DemoForceUpdateProvider : ForceUpdateProvider {
 }
 
 inAppUpdateManager = InAppUpdateManager(this, DemoForceUpdateProvider())
-
 There are a lot of possible sources to decide if an update should be forced. Examples are Firebase Remote Config, File hosted on your server, Even/Odd available version code, &hellip;
-
 Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override onActivityResult to keep showing the update again to achieve an actually blocking update mechanism.
-
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     inAppUpdateManager.onActivityResult(requestCode, resultCode)
     super.onActivityResult(requestCode, resultCode, data)
 }
-
-That&rsquo;s it. The end result looks like this:
-
-
+That&#39;s it. The end result looks like this:
 
 The library is available on GitHub: https://github.com/allaboutapps/InAppUpdater'>
 <meta name='theme-color' content='#EB5D24'>
 
 <meta property='og:title' content='Force Android in App Updates • Markus Gursch'>
 <meta property='og:description' content='With the new Play Core Library Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.
-
 There are two modes how an update can be triggered:
-
 
 Flexible: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.
 Immediate: The user is forced to update the app and the app is unusable until the process is finished.
 
-
 The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.
-
 So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.
-
 Who decides to force an update?
-
 The library offers an easy way to detect if an update should be forced. All we have to do is implement ForceUpdateProvider and call doUpdate() when we need to update right away.
-
 class DemoForceUpdateProvider : ForceUpdateProvider {
 
     override fun requestUpdateShouldBeImmediate(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
@@ -80,26 +60,20 @@ class DemoForceUpdateProvider : ForceUpdateProvider {
 }
 
 inAppUpdateManager = InAppUpdateManager(this, DemoForceUpdateProvider())
-
 There are a lot of possible sources to decide if an update should be forced. Examples are Firebase Remote Config, File hosted on your server, Even/Odd available version code, &hellip;
-
 Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override onActivityResult to keep showing the update again to achieve an actually blocking update mechanism.
-
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     inAppUpdateManager.onActivityResult(requestCode, resultCode)
     super.onActivityResult(requestCode, resultCode, data)
 }
-
-That&rsquo;s it. The end result looks like this:
-
-
+That&#39;s it. The end result looks like this:
 
 The library is available on GitHub: https://github.com/allaboutapps/InAppUpdater'>
 <meta property='og:url' content='https://code.allaboutapps.at/articles/android-in-app-updates/'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/in-app-update-cover.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-06-21T09:45:12&#43;02:00'/><meta property='article:modified_time' content='2019-06-21T09:45:12&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@swordiapps'><meta property='twitter:image' content='https://code.allaboutapps.at/images/in-app-update-cover.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Force Android in App Updates • Markus Gursch</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/android-in-app-updates/'>
@@ -158,6 +132,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -247,23 +222,16 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  <p>With the new <a href="https://developer.android.com/guide/app-bundle/playcore#include_playcore" target="_blank">Play Core Library</a> Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.</p>
-
+  <p>With the new <a href="https://developer.android.com/guide/app-bundle/playcore#include_playcore">Play Core Library</a> Google offers us the possibility to prompt for app updates from within our app for the first time. Users get informed about new available versions and can decide to update their app. If needed, we can even force the update altogether. The Google library itself handles the download and installation of the new app version.</p>
 <p>There are two modes how an update can be triggered:</p>
-
 <ul>
 <li><em>Flexible</em>: The app update runs in the background. The User can continue using the app and the update will be applied when the user chooses to restart the app.</li>
 <li><em>Immediate</em>: The user is forced to update the app and the app is unusable until the process is finished.</li>
 </ul>
-
 <p>The downside is, that the library itself is not able to detect if an update should be flexible or immediate. Sometimes it might be necessary to force users to update right away due to some breaking changes or unwanted crashes.</p>
-
 <p>So we need to provide a way to decide between a flexible or immediate update. To simplify this process we published an Android library which allows us to decide on the type of update we need.</p>
-
 <h5 id="who-decides-to-force-an-update">Who decides to force an update?</h5>
-
 <p>The library offers an easy way to detect if an update should be forced. All we have to do is implement <code>ForceUpdateProvider</code> and call <code>doUpdate()</code> when we need to update right away.</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DemoForceUpdateProvider</span> : ForceUpdateProvider {
 
     <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">requestUpdateShouldBeImmediate</span>(availableVersionCode: Int, doUpdate: () -&gt; Unit) {
@@ -276,21 +244,15 @@ if (!doNotTrack) {
 }
 
 inAppUpdateManager = InAppUpdateManager(<span style="color:#66d9ef">this</span>, DemoForceUpdateProvider())</code></pre></div>
-
 <p>There are a lot of possible sources to decide if an update should be forced. Examples are <code>Firebase Remote Config</code>, <code>File hosted on your server</code>, <code>Even/Odd available version code</code>, &hellip;</p>
-
 <p>Since the forced-update screen that shows when we use this method can be closed through the back button, we need to override <code>onActivityResult</code> to keep showing the update again to achieve an actually blocking update mechanism.</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onActivityResult</span>(requestCode: Int, resultCode: Int, <span style="color:#66d9ef">data</span>: Intent?) {
     inAppUpdateManager.onActivityResult(requestCode, resultCode)
     <span style="color:#66d9ef">super</span>.onActivityResult(requestCode, resultCode, <span style="color:#66d9ef">data</span>)
 }</code></pre></div>
-
-<p>That&rsquo;s it. The end result looks like this:</p>
-
-<p><img src="/images/in_app_update_optimized.gif" alt="" /></p>
-
-<p>The library is available on GitHub: <a href="https://github.com/allaboutapps/InAppUpdater" target="_blank">https://github.com/allaboutapps/InAppUpdater</a></p>
+<p>That's it. The end result looks like this:</p>
+<p><img src="/images/in_app_update_optimized.gif" alt=""></p>
+<p>The library is available on GitHub: <a href="https://github.com/allaboutapps/InAppUpdater"><a href="https://github.com/allaboutapps/InAppUpdater">https://github.com/allaboutapps/InAppUpdater</a></a></p>
 </div>
 
   

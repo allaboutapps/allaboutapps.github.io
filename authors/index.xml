@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors on all about apps</title>
@@ -6,10 +6,19 @@
     <description>Recent content in Authors on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Sep 2019 10:16:32 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 09:27:32 +0100</lastBuildDate>
     
 	<atom:link href="https://code.allaboutapps.at/authors/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>mib</title>
+      <link>https://code.allaboutapps.at/authors/mib/</link>
+      <pubDate>Wed, 11 Dec 2019 09:27:32 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/authors/mib/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>mb</title>

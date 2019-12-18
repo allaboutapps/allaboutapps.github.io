@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Load testing is a crucial part in the final testing phase of a software product and should be done for every application where a large number of concurrent users is expected. Since there are plenty of tools available for this purpose, the main objective remains the same. It is important to recreate realistic user paths and scenarios in order to obtain meaningful results for bottleneck analysis. Most of the time it is not easy to find the layer which has the highest impact on performance since there are many components involved like network, database, application server and so forth.'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Load Testing • Michael Biber'>
+<meta property='og:description' content='Load testing is a crucial part in the final testing phase of a software product and should be done for every application where a large number of concurrent users is expected. Since there are plenty of tools available for this purpose, the main objective remains the same. It is important to recreate realistic user paths and scenarios in order to obtain meaningful results for bottleneck analysis. Most of the time it is not easy to find the layer which has the highest impact on performance since there are many components involved like network, database, application server and so forth.'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/load-testing/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/4eac1458343fe6b58414689364a2581e?s=256'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-12-11T09:27:32&#43;01:00'/><meta property='article:modified_time' content='2019-12-11T09:27:32&#43;01:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.1" />
+
+  <title>Load Testing • Michael Biber</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/load-testing/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-46375725-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+
+<body class='page type-articles has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Load Testing</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2019-12-11T09:27:32&#43;01:00'>2019, Dec 11</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/mib'>Michael Biber</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>Load testing is a crucial part in the final testing phase of a software product and should be done for every application where a large number of concurrent users is expected. Since there are plenty of tools available for this purpose, the main objective remains the same. It is important to recreate realistic user paths and scenarios in order to obtain meaningful results for bottleneck analysis.
+Most of the time it is not easy to find the layer which has the highest impact on performance since there are many components involved like network, database, application server and so forth.
+Therefore it requires close collaboration between software testers and developers for the sake of identifying and resolving bottlenecks in the backend and infrastructure.</p>
+<h2 id="we-used-jmeter">We used JMeter</h2>
+<p><a href="https://jmeter.apache.org/">JMeter</a></p>
+<p>Apache JMeter is an open source tool which provides all necessary functionalities in order to perform a meaningful load test.
+Sometimes a realistic scenario means that more than 1000 concurrent users will use your application in a live situation. Therefore it is possible to run a distributed load test where multiple machines are sending simultaneous requests to a target server.</p>
+<p><img src="/images/distributed.png" alt="Distributed Load testing"></p>
+<p>You can find more information about distributed load testing with <strong>JMeter</strong> here:</p>
+<p><a href="https://jmeter.apache.org/usermanual/remote-test.html">Remote Testing with JMeter</a></p>
+<h2 id="load-test-in-a-real-project-situation">Load Test in a real project situation</h2>
+<p>On a recent project, we analysed various user paths and scenarios to identify the critical ones.
+As a result, we shifted our focus to two different endpoints, where we expected the highest amount of requests in a short period. Our goal was to achieve reasonable response times under constant heavy load and therefore aligned our performance goals with APDEX (Application Performance Index), which calculates the ratio between users who are above and below a certain threshold. In our project the “toleration threshold” was set to 500 ms, which resulted in an APDEX value of 0.63. ( 1 = full user satisfaction, 0 = no user satisfaction).</p>
+<p>You can find more information about <strong>APDEX</strong> here:</p>
+<p><a href="http://apdex.org/overview.html">APDEX</a></p>
+<p>As a consequence, database queries were optimised and a caching solution was implemented in the backend in order to come close to our desired performance goal. Eventually we reached an APDEX value of 0.75, which is much better but still leaves room for improvement.</p>
+<h2 id="lessons-learned">Lessons learned</h2>
+<p>Once we had started multiple virtual machines to run a distributed load test, we quickly noticed that JMeter consumes a lot of machine resources to allocate 1000 users. Therefore we had to start more VM´s than planned, in order to achieve the desired number of users, which results in unexpected expenses. We tried to optimise the setup by starting load tests only in non GUI mode without any noticeable effect. JMeter is a great tool for recreating complex user paths with a lot of useful tools to create statistic reports and graphs, but for the purpose of simple measurement of response times we will do some further research to find other solutions.</p>
+<p>One possibility is to perform HTTP benchmarking , in case there is no necessity to create dedicated user paths or scenarios which makes sense if you want to get a first impression of your endpoint´s performance.</p>
+<h2 id="example-of-http-benchmarking-with-apache-bench">Example of HTTP benchmarking with Apache Bench</h2>
+<p><a href="https://httpd.apache.org/docs/2.4/programs/ab.html">Apache Bench</a></p>
+<p>The following example shows the report that apache bench will print into the console after firing 1000 requests with 10 virtual users to an endpoint:</p>
+<pre><code class="language-console" data-lang="console">ab -n 1000 -c 10 https://localhost/api/loadtest?query=test
+
+[1] 39896
+Michaels-MacBook-Pro:bin michael$ This is ApacheBench, Version 2.3 &lt;$Revision: 1826891 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        
+Server Hostname:        https://localhost
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,2048,256
+TLS Server Name:        https://localhost
+
+Document Path:          /api/loadtest?query=test
+Document Length:        4994 bytes
+
+Concurrency Level:      10
+Time taken for tests:   19.418 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      5306000 bytes
+HTML transferred:       4994000 bytes
+Requests per second:    51.50 [#/sec] (mean)
+Time per request:       194.177 [ms] (mean)
+Time per request:       19.418 [ms] (mean, across all concurrent requests)
+Transfer rate:          266.85 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       88  128  20.1    125     391
+Processing:    38   63  27.7     57     383
+Waiting:       35   58  27.4     52     376
+Total:        137  190  37.2    182     499
+
+Percentage of the requests served within a certain time (ms)
+  50%    182
+  66%    190
+  75%    196
+  80%    202
+  90%    221
+  95%    246
+  98%    317
+  99%    368
+ 100%    499 (longest request)
+</code></pre>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/qa'>QA</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/xcode-alternative-icons/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Xcode Alternative Icons</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2019 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mb on all about apps</title>
@@ -17,8 +17,8 @@
       <pubDate>Mon, 23 Sep 2019 10:16:32 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/xcode-alternative-icons/</guid>
-      <description>Xcode beta season is over but it&amp;rsquo;s still the time of the year where iOS developers usually have multiple Xcode version installed. Distinguishing one from another isn&amp;rsquo;t easy if you have multiple identical icons in the dock and, like me, getting reminded by Xcode that your project&amp;rsquo;s Swift version isn&amp;rsquo;t compatible.
-Alternative icons to the rescue! It&amp;rsquo;s actually quite easy to change any app&amp;rsquo;s icon in macOS. After opening the info panel of Xcode.</description>
+      <description>Xcode beta season is over but it&#39;s still the time of the year where iOS developers usually have multiple Xcode version installed. Distinguishing one from another isn&#39;t easy if you have multiple identical icons in the dock and, like me, getting reminded by Xcode that your project&#39;s Swift version isn&#39;t compatible.
+Alternative icons to the rescue! It&#39;s actually quite easy to change any app&#39;s icon in macOS. After opening the info panel of Xcode.</description>
     </item>
     
     <item>
@@ -28,7 +28,7 @@ Alternative icons to the rescue! It&amp;rsquo;s actually quite easy to change an
       
       <guid>https://code.allaboutapps.at/articles/uikonf2019/</guid>
       <description>UIKonf 2019 took place from May 26th to 29th in Berlin and is one of the largest iOS conferences in Europe. For us at all about apps it was the forth visit in a row and, as always, it was an awesome conference.
-While the talks don&amp;rsquo;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
+While the talks don&#39;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
     </item>
     
     <item>
@@ -67,8 +67,8 @@ There are two different kinds of curves in UIBezierPath: quadratic curves with a
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/reactive-swift-properties/</guid>
-      <description>Swift&amp;rsquo;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
-private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&amp;rsquo;s value we can create a private writable MutableProperty and a public read-only Property:</description>
+      <description>Swift&#39;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
+private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&#39;s value we can create a private writable MutableProperty and a public read-only Property:</description>
     </item>
     
     <item>

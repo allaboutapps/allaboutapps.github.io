@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>mhe on all about apps</title>
@@ -17,9 +17,8 @@
       <pubDate>Tue, 14 May 2019 10:00:00 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/ios-coordinator/</guid>
-      <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34; target=&#34;_blank&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
+      <description>&lt;p&gt;In our apps, we use the &lt;a href=&#34;https://www.objc.io/issues/13-architecture/mvvm/&#34;&gt;MVVM (Model-View-ViewModel)&lt;/a&gt; approach.
 This concept manages the interaction within a view controller, but who manages the view controllers?&lt;/p&gt;
-
 &lt;h1 id=&#34;the-coordinator&#34;&gt;The Coordinator!&lt;/h1&gt;</description>
     </item>
     

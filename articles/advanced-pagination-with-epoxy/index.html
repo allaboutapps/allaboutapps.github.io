@@ -17,7 +17,7 @@ We gonna use reddit as our api, by simply adding .'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/cover-pagination.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-02-14T10:30:11&#43;01:00'/><meta property='article:modified_time' content='2019-02-14T10:30:11&#43;01:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/cover-pagination.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Advanced Pagination With Epoxy &amp; Datasources • Kaan Köşe</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/'>
@@ -76,6 +76,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -166,33 +167,29 @@ if (!doNotTrack) {
 
   <div class='container entry-content'>
   <p>Many developers still avoid using Epoxy. I even hesitated for a long time because of the boilerplate coming a long with epoxy and its models, but after reading this post at the latest, you may consider <strong>using epoxy, when paging is needed</strong>.</p>
-
-<p>So in this post we gonna build pagination with the <a href="https://developer.android.com/topic/libraries/architecture/paging/" target="_blank">jetpack‘s paging library</a>, and epoxy, which has an <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support" target="_blank">own controller for paging</a>.</p>
-
-<p>We gonna use reddit as our api, by simply <a href="https://www.reddit.com/r/javascript/comments/8yg6ig/adding_json_onto_the_end_of_most_reddit_urls/" target="_blank">adding <code>.json</code> at the end of a subreddit‘s url</a>.</p>
-
-<hr />
-
-<p>First we need to implement a Datasource from the architecture components, which will help us later to load our data as a <a href="https://developer.android.com/reference/android/arch/paging/PagedList" target="_blank">PagedList</a>.</p>
-
+<p>So in this post we gonna build pagination with the <a href="https://developer.android.com/topic/libraries/architecture/paging/">jetpack‘s paging library</a>, and epoxy, which has an <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support">own controller for paging</a>.</p>
+<p>We gonna use reddit as our api, by simply <a href="https://www.reddit.com/r/javascript/comments/8yg6ig/adding_json_onto_the_end_of_most_reddit_urls/">adding <code>.json</code> at the end of a subreddit‘s url</a>.</p>
+<hr>
+<p>First we need to implement a Datasource from the architecture components, which will help us later to load our data as a <a href="https://developer.android.com/reference/android/arch/paging/PagedList">PagedList</a>.</p>
 <p>There are (for now) the following options as a Datasource:</p>
-
 <ul>
-<li><p>PageKeyedDataSource: if you have some sort of before and/or after fields in your response, to load the previous/next page</p></li>
-
-<li><p>ItemKeyedDataSource: if you need the key of your last item to load your next page</p></li>
-
-<li><p>PositionalDataSource: if you gonna load your data by their positional index in ranges</p></li>
+<li>
+<p>PageKeyedDataSource: if you have some sort of before and/or after fields in your response, to load the previous/next page</p>
+</li>
+<li>
+<p>ItemKeyedDataSource: if you need the key of your last item to load your next page</p>
+</li>
+<li>
+<p>PositionalDataSource: if you gonna load your data by their positional index in ranges</p>
+</li>
 </ul>
-
 <p>We will use the <strong>PageKeyedDataSource</strong> in our guide, because the response of the reddit api provides us the proper before and after fields, but we could also use the <strong>ItemKeyedDatasource</strong>, where the after field of our last item would be our key for the next load.</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PageKeyedFeedDataSource</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
   PageKeyedDataSource&lt;String, RedditChildResponse&gt;() { 
 <span style="color:#75715e">// pass key (String) and item type (RedditChildResponse)
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// initial loading of the list (first page
-</span><span style="color:#75715e">// pass the list and before/after fields to the given callback
+</span><span style="color:#75715e"></span><span style="color:#75715e">// pass the list and before/after fields to the given callback
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loadInitial</span>(
     params: LoadInitialParams&lt;String&gt;, callback: LoadInitialCallback&lt;String, RedditChildResponse&gt;
   ) {
@@ -231,11 +228,8 @@ if (!doNotTrack) {
     <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">val</span> subreddit = <span style="color:#e6db74">&#34;androiddev&#34;</span>
   }
 }</code></pre></div>
-
-<p>After implementing our datasource, we need a factory for providing the data to create a LiveData<PagedList>. If you are using Room, you may want to load your data from the Dao already as a <a href="https://developer.android.com/reference/android/arch/paging/DataSource.Factory" target="_blank">Datasource.Factory</a>.</p>
-
+<p>After implementing our datasource, we need a factory for providing the data to create a LiveData<!-- raw HTML omitted -->. If you are using Room, you may want to load your data from the Dao already as a <a href="https://developer.android.com/reference/android/arch/paging/DataSource.Factory">Datasource.Factory</a>.</p>
 <p>It‘s a short class as a dagger singleton, where we have to implement the create()-function, to provide our datasource in the application.</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">@Singleton
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedditFeedDataSourceFactory</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
   DataSource.Factory&lt;String, RedditChildResponse&gt;() {
@@ -243,11 +237,8 @@ if (!doNotTrack) {
     <span style="color:#66d9ef">return</span> PageKeyedFeedDataSource(redditApi)
   }
 }</code></pre></div>
-
 <p>Since we have prepared the datasource factory, we can inject it to our viewmodel, and initialize our LiveData by the <strong>LivePagedListBuilder</strong>. This builder can either be used with a PagedList.Config for configuring some loading options, or by simply passing only the loading page size as an integer.</p>
-
-<p>Furthermore you are able to set a <a href="https://developer.android.com/reference/android/arch/paging/PagedList.BoundaryCallback" target="_blank">BoundaryCallback</a>, if you want to catch some events like the last item was loaded, or zero items were loaded initially.</p>
-
+<p>Furthermore you are able to set a <a href="https://developer.android.com/reference/android/arch/paging/PagedList.BoundaryCallback">BoundaryCallback</a>, if you want to catch some events like the last item was loaded, or zero items were loaded initially.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedViewModel</span> @Inject <span style="color:#66d9ef">constructor</span>(sourceFactory: RedditFeedDataSourceFactory) : ViewModel() {
 
     <span style="color:#75715e">// observe this for loading data
@@ -258,7 +249,7 @@ if (!doNotTrack) {
         <span style="color:#75715e">// this builder initalizes our LiveData with the given options
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// we could pass also an integer for the page size instead of the PageListConfig
 </span><span style="color:#75715e"></span>        feed = LivePagedListBuilder&lt;String, RedditChildResponse&gt;(sourceFactory, getPagedListConfig())
-        .setBoundaryCallback(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">: </span><span style="color:#a6e22e">PagedList</span>.BoundaryCallback&lt;RedditChildResponse&gt;() {
+        .setBoundaryCallback(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">:</span><span style="color:#960050;background-color:#1e0010"> </span><span style="color:#a6e22e">PagedList</span>.BoundaryCallback&lt;RedditChildResponse&gt;() {
             <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onItemAtEndLoaded</span>(itemAtEnd: RedditChildResponse) {
             <span style="color:#66d9ef">super</span>.onItemAtEndLoaded(itemAtEnd)
             Timber.v(<span style="color:#e6db74">&#34;reached end of feed&#34;</span>)
@@ -281,9 +272,7 @@ if (!doNotTrack) {
         .build()
     }
 }</code></pre></div>
-
-<p>Finally, we need to implement the <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support" target="_blank">PagedListEpoxyController</a>.</p>
-
+<p>Finally, we need to implement the <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support">PagedListEpoxyController</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedController</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> view: FeedActivity) :
     PagedListEpoxyController&lt;RedditChildResponse&gt;
     (modelBuildingHandler = EpoxyAsyncUtil.getAsyncBackgroundHandler()) {
@@ -315,20 +304,14 @@ if (!doNotTrack) {
             .addIf(!endReached &amp;&amp; models.isNotEmpty(), <span style="color:#66d9ef">this</span>)
     }
 }</code></pre></div>
-
 <p><strong>We did it.</strong> Our LiveData is ready to be observed, and the only thing our epoxy controller needs is the PagedList from our LiveData… <em>So let‘s unite this couple</em>:</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">feed.observe(<span style="color:#66d9ef">this</span>, Observer { pagedlist -&gt;
         controller.submitList(pagedlist)
 })</code></pre></div>
-
 <p><strong>Attention:</strong> only one PagedList will be received from the LiveData for each build. So dont wonder (like me), why you dont receive every page here :)</p>
-
 <p>This means we won‘t see the ~ pages ~ from the list in our code. It‘s the work of PagedList &amp; the Epoxycontroller, and <em>not our business</em> anymore.</p>
-
-<p>By the way, if you want to reload the data, just <a href="https://developer.android.com/reference/android/arch/paging/DataSource#invalidate" target="_blank">invalidate the datasource of the PagedList</a>.</p>
-
-<p><em><a href="https://github.com/kk-aaa/EpoxyPaginationSample" target="_blank">Check out the sample project on github</a></em></p>
+<p>By the way, if you want to reload the data, just <a href="https://developer.android.com/reference/android/arch/paging/DataSource#invalidate">invalidate the datasource of the PagedList</a>.</p>
+<p><em><a href="https://github.com/kk-aaa/EpoxyPaginationSample">Check out the sample project on github</a></em></p>
 
 </div>
 

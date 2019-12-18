@@ -15,7 +15,7 @@ We walked through all our Project Setup Jira tickets and calculated the average 
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/setup.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2018-09-25T16:01:48&#43;02:00'/><meta property='article:modified_time' content='2018-09-25T16:01:48&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@swordiapps'><meta property='twitter:image' content='https://code.allaboutapps.at/images/setup.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Android Template Project • Markus Gursch</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/android-template-project/'>
@@ -74,6 +74,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -163,50 +164,34 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  
-
-<h1 id="team-android-project-template">Team Android Project Template</h1>
-
+  <h1 id="team-android-project-template">Team Android Project Template</h1>
 <p>As a software development company we are starting new projects every few weeks. With every project we create a jira ticket called <strong>Project Setup</strong>.</p>
-
 <p>We walked through all our <strong>Project Setup</strong> Jira tickets and calculated the average hours for this kind of task: In average every android project needs about 3.5 hours for a simple setup. On the other hand the project setup is boring and no developer likes that work.</p>
-
 <p>We decided to help developers out and created a simple but helpful template that contains the basic setup for our android projects.</p>
-
 <h2 id="what-does-the-template-contain">What does the template contain?</h2>
-
 <ol>
 <li>Our recommended package structure</li>
 <li>Most used library dependencies</li>
 <li>Built in flavors for dev, staging, live</li>
 <li>Basic retrofit setup in a separat module</li>
-<li>Setup for SplashScreenHelper (<a href="https://blog.davidmedenjak.com/android/2017/09/02/splash-screens.html" target="_blank">https://blog.davidmedenjak.com/android/2017/09/02/splash-screens.html</a>)</li>
+<li>Setup for SplashScreenHelper (<a href="https://blog.davidmedenjak.com/android/2017/09/02/splash-screens.html">https://blog.davidmedenjak.com/android/2017/09/02/splash-screens.html</a>)</li>
 </ol>
-
 <p>Just an empty project would not save a lot developer hours, so we decided to add a template engine to make the project setup more dynamic. After some research we started to use cookiecutter.</p>
-
-<p><img src="../cookiecutter.png" alt="Cookiecutter logo" /></p>
-
+<p><img src="../cookiecutter.png" alt="Cookiecutter logo"></p>
 <blockquote>
 <p>A command-line utility that creates projects from cookiecutters (project templates), e.g. creating a Python package project from a Python package project template.</p>
 </blockquote>
-
-<p>A typical project setup at Team Android @ <a href="https://www.allaboutapps.at" target="_blank">allaboutapps</a> looks like this:</p>
-
-<p><img src="../setup.png" alt="Simple Project Setup" /></p>
-
+<p>A typical project setup at Team Android @ <a href="https://www.allaboutapps.at">allaboutapps</a> looks like this:</p>
+<p><img src="../setup.png" alt="Simple Project Setup"></p>
 <p>Cookiecutter checks out the template project from github and starts asking the user for some values:</p>
-
 <ol>
 <li>Repository name -&gt; local folder name</li>
 <li>App name -&gt; Name of the app (fills out in strings.xml)</li>
 <li>Package Name -&gt; Sets the package name and creates the folder structure</li>
 <li>Strings Sheet ID -&gt; For our internal Internationalization Tool (there will be an own blog post about that in near future)</li>
 </ol>
-
 <p>et voila -&gt; project setup completed within just a few seconds</p>
-
-<p>The current version of our project setup template is available public on <a href="https://github.com/allaboutapps/A3AndroidTemplate" target="_blank">github</a></p>
+<p>The current version of our project setup template is available public on <a href="https://github.com/allaboutapps/A3AndroidTemplate">github</a></p>
 
 </div>
 

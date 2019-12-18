@@ -15,7 +15,7 @@ Often, you end up with an array of objects (e.g. View Models) which contain some
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/reactive-swift-flatMap.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2018-07-17T11:50:28&#43;02:00'/><meta property='article:modified_time' content='2018-07-17T11:50:28&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@mbuchetics'><meta property='twitter:image' content='https://code.allaboutapps.at/images/reactive-swift-flatMap.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Reactive Swift: flatMap, flatten and combineLatest • Matthias Buchetics</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/reactive-swift-flatmap/'>
@@ -74,6 +74,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -163,13 +164,11 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  <p>Most of our projects at <a href="https://allaboutapps.at" target="_blank">all about apps</a> are build using a MVVM architecture with <a href="https://github.com/ReactiveCocoa/ReactiveSwift" target="_blank">ReactiveSwift</a> as our reactive framework of choice. However, all code examples should be easily translatable to <a href="https://github.com/ReactiveX/RxSwift" target="_blank">RxSwift</a>.</p>
-
+  <p>Most of our projects at <a href="https://allaboutapps.at">all about apps</a> are build using a MVVM architecture with <a href="https://github.com/ReactiveCocoa/ReactiveSwift">ReactiveSwift</a> as our reactive framework of choice. However, all code examples should be easily translatable to <a href="https://github.com/ReactiveX/RxSwift">RxSwift</a>.</p>
 <p>Often, you end up with an array of objects (e.g. View Models) which contain some reactive property  that you want to bind to. The array itself is a <code>MutableProperty</code> as well and can change at any time (e.g. after a network request).</p>
-
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -183,7 +182,7 @@ if (!doNotTrack) {
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ViewModel</span> {    
     <span style="color:#66d9ef">let</span> value: MutableProperty&lt;String&gt;
     
@@ -199,12 +198,10 @@ if (!doNotTrack) {
 <span style="color:#66d9ef">let</span> viewModels = MutableProperty<span style="color:#f92672">&lt;</span>[ViewModel]<span style="color:#f92672">&gt;</span>([])</code></pre></td></tr></table>
 </div>
 </div>
-
 <p>Usually, you want to react to changes of the view model array and to changes within the view models itself. One way to accomplish this, is to create new bindings whenever the array changes:</p>
-
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -219,7 +216,7 @@ if (!doNotTrack) {
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">var</span> disposable = CompositeDisposable()
         
 viewModels.producer.startWithValues { (viewModels) <span style="color:#66d9ef">in</span>
@@ -230,19 +227,17 @@ viewModels.producer.startWithValues { (viewModels) <span style="color:#66d9ef">i
     
     <span style="color:#66d9ef">for</span> property <span style="color:#66d9ef">in</span> valueProperties {
         disposable <span style="color:#f92672">+=</span> property.signal.observeValues { (value) <span style="color:#66d9ef">in</span>
-            print(<span style="color:#e6db74">&#34;new value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+            print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">new value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
         }
     }
 }</code></pre></td></tr></table>
 </div>
 </div>
-
-<p>But this isn&rsquo;t a very elegant solution and we have to make sure to dispose the existing bindings whenever we create new ones.
-A better solution is to use our old friend, <a href="https://ruiper.es/2017/02/03/ras-s1e1/" target="_blank">flatMap</a>. <code>flatMap(.latest)</code> can be used to <a href="https://github.com/ReactiveCocoa/ReactiveSwift/blob/master/Documentation/Example.OnlineSearch.md" target="_blank">chain network requests</a>:</p>
-
+<p>But this isn't a very elegant solution and we have to make sure to dispose the existing bindings whenever we create new ones.
+A better solution is to use our old friend, <a href="https://ruiper.es/2017/02/03/ras-s1e1/">flatMap</a>. <code>flatMap(.latest)</code> can be used to <a href="https://github.com/ReactiveCocoa/ReactiveSwift/blob/master/Documentation/Example.OnlineSearch.md">chain network requests</a>:</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -251,23 +246,21 @@ A better solution is to use our old friend, <a href="https://ruiper.es/2017/02/0
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#75715e">// login returns a SignalProducer&lt;User, APIError&gt;</span>
-APIClient.login(user: <span style="color:#e6db74">&#34;test&#34;</span>, password: <span style="color:#e6db74">&#34;test&#34;</span>)
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">l</span><span style="color:#75715e">o</span><span style="color:#75715e">g</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e"> </span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e">t</span><span style="color:#75715e">u</span><span style="color:#75715e">r</span><span style="color:#75715e">n</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e"> </span><span style="color:#75715e">S</span><span style="color:#75715e">i</span><span style="color:#75715e">g</span><span style="color:#75715e">n</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">P</span><span style="color:#75715e">r</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">u</span><span style="color:#75715e">c</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e">&lt;</span><span style="color:#75715e">U</span><span style="color:#75715e">s</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e">,</span><span style="color:#75715e"> </span><span style="color:#75715e">A</span><span style="color:#75715e">P</span><span style="color:#75715e">I</span><span style="color:#75715e">E</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">&gt;</span>
+APIClient.login(user: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">test</span><span style="color:#e6db74">&#34;</span>, password: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">test</span><span style="color:#e6db74">&#34;</span>)
     .flatMap(.latest) { (user) -&gt; SignalProduder&lt;UserProfile, APIError&gt; <span style="color:#66d9ef">in</span>
         <span style="color:#66d9ef">return</span> APIClient.fetchProfile(user: user)
     }
     .startWithValue { (profile) <span style="color:#66d9ef">in</span>
-        <span style="color:#75715e">// do something with the user profile</span>
+        <span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">d</span><span style="color:#75715e">o</span><span style="color:#75715e"> </span><span style="color:#75715e">s</span><span style="color:#75715e">o</span><span style="color:#75715e">m</span><span style="color:#75715e">e</span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">i</span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">u</span><span style="color:#75715e">s</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">p</span><span style="color:#75715e">r</span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">e</span>
     }</code></pre></td></tr></table>
 </div>
 </div>
-
 <p>But you can also use <code>flatMap</code> to create a <code>Signal</code> or <code>SignalProducer</code> that is dependend on both, the mutable array and the mutable properties within the array without having to re-create the binding whenever the array changes:</p>
-
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -283,16 +276,16 @@ APIClient.login(user: <span style="color:#e6db74">&#34;test&#34;</span>, passwor
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">lazy</span> <span style="color:#66d9ef">var</span> valueChangedSignal: Signal&lt;String, NoError&gt; = {
 <span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">self</span>.viewModels.signal.flatMap(.latest) { (viewModels) <span style="color:#66d9ef">in</span>
 </span><span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#66d9ef">return</span> SignalProducer(viewModels.map { $0.value.signal }).flatten(.merge)
 </span><span style="display:block;width:100%;background-color:#3c3d38">    }
 </span>}()
 
-<span style="color:#75715e">// this will fire whenever the value of a view model changes</span>
+<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">i</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e">v</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">u</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">i</span><span style="color:#75715e">e</span><span style="color:#75715e">w</span><span style="color:#75715e"> </span><span style="color:#75715e">m</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">h</span><span style="color:#75715e">a</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span>
 valueChangedSignal.observeValues { (value) <span style="color:#66d9ef">in</span>
-    print(<span style="color:#e6db74">&#34;[valueChangedSignal] value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+    print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[valueChangedSignal] value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
 }
 
 -&gt; <span style="color:#66d9ef">set</span> new array: [a, b]
@@ -301,12 +294,10 @@ valueChangedSignal.observeValues { (value) <span style="color:#66d9ef">in</span>
 new value: x</code></pre></td></tr></table>
 </div>
 </div>
-
 <p>As you can observe above, the <code>Signal</code> will emit a new value whenever the <code>MutableProperty</code> of the view model changes. If we update the whole array though, the <code>Signal</code> will not emit anything. This can be changed by using a <code>SignalProducer</code> instead:</p>
-
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -325,17 +316,17 @@ new value: x</code></pre></td></tr></table>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">lazy</span> <span style="color:#66d9ef">var</span> valueChangedProducer: SignalProducer&lt;String, NoError&gt; = {
 <span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">self</span>.viewModels.producer.flatMap(.latest) { (viewModels) <span style="color:#66d9ef">in</span>
 </span><span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#66d9ef">return</span> SignalProducer(viewModels.map { $0.value.producer }).flatten(.merge)
 </span><span style="display:block;width:100%;background-color:#3c3d38">    }
 </span>}()
 
-<span style="color:#75715e">// this will fire whenever the array of view models changes (forwarding all inner values)</span>
-<span style="color:#75715e">// or the value of one of the view models is updated</span>
+<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">i</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e">v</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">a</span><span style="color:#75715e">y</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">i</span><span style="color:#75715e">e</span><span style="color:#75715e">w</span><span style="color:#75715e"> </span><span style="color:#75715e">m</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">h</span><span style="color:#75715e">a</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">(</span><span style="color:#75715e">f</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">w</span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e">d</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">u</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span><span style="color:#75715e">)</span>
+<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">u</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">i</span><span style="color:#75715e">e</span><span style="color:#75715e">w</span><span style="color:#75715e"> </span><span style="color:#75715e">m</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">i</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">d</span><span style="color:#75715e">a</span><span style="color:#75715e">t</span><span style="color:#75715e">e</span><span style="color:#75715e">d</span>
 valueChangedProducer.startWithValues { (value) <span style="color:#66d9ef">in</span>
-    print(<span style="color:#e6db74">&#34;[valueChangedProducer] value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+    print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[valueChangedProducer] value: </span><span style="color:#e6db74">\(</span>value<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
 }
 
 -&gt; <span style="color:#66d9ef">set</span> new array: [a, b]
@@ -346,12 +337,10 @@ valueChangedProducer.startWithValues { (value) <span style="color:#66d9ef">in</s
 new value: x</code></pre></td></tr></table>
 </div>
 </div>
-
 <p>Now, values are emitted whenever the <code>viewModels</code> array changes as well. However, using <code>flatten(.merge)</code> will result in emitted signals for every value within the array when we update the array. This could result in multiple unnecessary updates to our view. Instead of using <code>flatten(.merge)</code> we can use <code>combineLatest</code> to create our <code>SignalProducer</code>:</p>
-
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span></span><span style="display:block;width:100%;background-color:#3c3d38"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -369,18 +358,18 @@ new value: x</code></pre></td></tr></table>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">lazy</span> <span style="color:#66d9ef">var</span> valueChangedCombined: SignalProducer<span style="color:#f92672">&lt;</span>[String], NoError&gt; = {
 <span style="display:block;width:100%;background-color:#3c3d38">    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">self</span>.viewModels.producer.flatMap(.latest) { (viewModels) <span style="color:#66d9ef">in</span>
 </span><span style="display:block;width:100%;background-color:#3c3d38">        <span style="color:#66d9ef">return</span> SignalProducer.combineLatest(viewModels.map { $0.value.producer })
 </span><span style="display:block;width:100%;background-color:#3c3d38">    }
 </span>}()
 
-<span style="color:#75715e">/// this will fire whenever the array of view models changes or the value of</span>
-<span style="color:#75715e">// one of the view models is updated, always forwarding the all current values</span>
+<span style="color:#75715e">//</span><span style="color:#75715e">/</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">i</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">i</span><span style="color:#75715e">l</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">i</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">w</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e">v</span><span style="color:#75715e">e</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">a</span><span style="color:#75715e">y</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">i</span><span style="color:#75715e">e</span><span style="color:#75715e">w</span><span style="color:#75715e"> </span><span style="color:#75715e">m</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">h</span><span style="color:#75715e">a</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">u</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span>
+<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">n</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">o</span><span style="color:#75715e">f</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">i</span><span style="color:#75715e">e</span><span style="color:#75715e">w</span><span style="color:#75715e"> </span><span style="color:#75715e">m</span><span style="color:#75715e">o</span><span style="color:#75715e">d</span><span style="color:#75715e">e</span><span style="color:#75715e">l</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">i</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">u</span><span style="color:#75715e">p</span><span style="color:#75715e">d</span><span style="color:#75715e">a</span><span style="color:#75715e">t</span><span style="color:#75715e">e</span><span style="color:#75715e">d</span><span style="color:#75715e">,</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">w</span><span style="color:#75715e">a</span><span style="color:#75715e">y</span><span style="color:#75715e">s</span><span style="color:#75715e"> </span><span style="color:#75715e">f</span><span style="color:#75715e">o</span><span style="color:#75715e">r</span><span style="color:#75715e">w</span><span style="color:#75715e">a</span><span style="color:#75715e">r</span><span style="color:#75715e">d</span><span style="color:#75715e">i</span><span style="color:#75715e">n</span><span style="color:#75715e">g</span><span style="color:#75715e"> </span><span style="color:#75715e">t</span><span style="color:#75715e">h</span><span style="color:#75715e">e</span><span style="color:#75715e"> </span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">l</span><span style="color:#75715e"> </span><span style="color:#75715e">c</span><span style="color:#75715e">u</span><span style="color:#75715e">r</span><span style="color:#75715e">r</span><span style="color:#75715e">e</span><span style="color:#75715e">n</span><span style="color:#75715e">t</span><span style="color:#75715e"> </span><span style="color:#75715e">v</span><span style="color:#75715e">a</span><span style="color:#75715e">l</span><span style="color:#75715e">u</span><span style="color:#75715e">e</span><span style="color:#75715e">s</span>
 valueChangedCombined.startWithValues { (values) <span style="color:#66d9ef">in</span>
-    <span style="color:#66d9ef">let</span> valuesString = values.joined(separator: <span style="color:#e6db74">&#34;, &#34;</span>)
-    print(<span style="color:#e6db74">&#34;[valueChangedCombined] values: </span><span style="color:#e6db74">\(</span>valuesString<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
+    <span style="color:#66d9ef">let</span> valuesString = values.joined(separator: <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#34;</span>)
+    print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[valueChangedCombined] values: </span><span style="color:#e6db74">\(</span>valuesString<span style="color:#e6db74">)</span><span style="color:#e6db74">&#34;</span>)
 }
 
 -&gt; <span style="color:#66d9ef">set</span> new array: [a, b]
@@ -389,10 +378,8 @@ valueChangedCombined.startWithValues { (values) <span style="color:#66d9ef">in</
 [valueChangedCombined] values: x, b</code></pre></td></tr></table>
 </div>
 </div>
-
 <p>Now, instead of emitting the individual values, we <code>SignalProducer</code> emits an array of all current values. Whenever the array changes as a whole, we get the one new value, the new array. Whenever a value within the array changes, we get the array with updated values.</p>
-
-<p>Great! We have seen how <code>flatMap</code> can be used to create a dependent <code>Signal</code> or <code>SignalProducer</code> and demonstrated different operators to combine the inner reactive primitives. Details on more operators can be found in the <a href="https://github.com/ReactiveCocoa/ReactiveSwift/blob/master/Documentation/BasicOperators.md" target="_blank">ReactiveSwift documentation</a>.</p>
+<p>Great! We have seen how <code>flatMap</code> can be used to create a dependent <code>Signal</code> or <code>SignalProducer</code> and demonstrated different operators to combine the inner reactive primitives. Details on more operators can be found in the <a href="https://github.com/ReactiveCocoa/ReactiveSwift/blob/master/Documentation/BasicOperators.md">ReactiveSwift documentation</a>.</p>
 
 </div>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>lb on all about apps</title>
@@ -18,7 +18,7 @@
       
       <guid>https://code.allaboutapps.at/articles/material-theming/</guid>
       <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
-Let&amp;rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
+Let&#39;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
     </item>
     
     <item>

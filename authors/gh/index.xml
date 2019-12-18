@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>gh on all about apps</title>
@@ -17,7 +17,7 @@
       <pubDate>Wed, 23 Jan 2019 10:01:25 +0100</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/emoji-flags/</guid>
-      <description>Sometimes there&amp;rsquo;s the need to fly a flag in your project. You probably know the ISO code, more specifically the ISO 3166-1 alpha-2 code, a.k.a two-letter code. For Austria this would be AT. Now when thinking about converting these codes into emoji flags, a lookup table comes to mind. But instead of jumping straight into implementing the table it&amp;rsquo;s time to take a closer look at the Unicode Standard. The clever people that added the flag emojis to the Unicode character set invented a system of specifying the flags that makes an algorithmic conversion without lookup tables quite easy.</description>
+      <description>Sometimes there&#39;s the need to fly a flag in your project. You probably know the ISO code, more specifically the ISO 3166-1 alpha-2 code, a.k.a two-letter code. For Austria this would be AT. Now when thinking about converting these codes into emoji flags, a lookup table comes to mind. But instead of jumping straight into implementing the table it&#39;s time to take a closer look at the Unicode Standard. The clever people that added the flag emojis to the Unicode character set invented a system of specifying the flags that makes an algorithmic conversion without lookup tables quite easy.</description>
     </item>
     
   </channel>

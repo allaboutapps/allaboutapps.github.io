@@ -15,7 +15,7 @@ There are two different kinds of curves in UIBezierPath: quadratic curves with a
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/smooth.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2018-11-26T21:12:27&#43;01:00'/><meta property='article:modified_time' content='2018-11-26T21:12:27&#43;01:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@mbuchetics'><meta property='twitter:image' content='https://code.allaboutapps.at/images/smooth.png'>
 
-<meta name="generator" content="Hugo 0.56.3" />
+<meta name="generator" content="Hugo 0.60.1" />
 
   <title>Drawing Smooth 2D Graphs using UIBezierPath • Matthias Buchetics</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/smooth-graph-lines/'>
@@ -74,6 +74,7 @@ if (!doNotTrack) {
   <a href='/categories/android/'>Android</a></li><li class='item'>
   <a href='/categories/ios/'>iOS</a></li><li class='item'>
   <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
   <a href='/articles/'>All Articles</a></li><li class='item'>
   <a href='/about/'>About</a></li></ul>
     </div>
@@ -163,34 +164,21 @@ if (!doNotTrack) {
   
 
   <div class='container entry-content'>
-  
-
-<p>We have been working on multiple projects that required drawing 2D line graphs given a set of points. UIKit gives us the versatile <code>UIBezierPath</code>, which allows us to create a straight line graph by appending segments using <code>addLineToPath</code> for each point in our array. Easy, but not really pretty.</p>
-
+  <p>We have been working on multiple projects that required drawing 2D line graphs given a set of points. UIKit gives us the versatile <code>UIBezierPath</code>, which allows us to create a straight line graph by appending segments using <code>addLineToPath</code> for each point in our array. Easy, but not really pretty.</p>
 <p>There are two different kinds of curves in <code>UIBezierPath</code>: quadratic curves with a single control point (<code>addQuadCurveToPoint</code>) and cubic curves with two control points (<code>addCurveToPoint</code>). Calculating the control points is up to you and unfortunately <code>UIKit</code> does not come with any ready-to-use implementations of  interpolating curves.</p>
-
-<p>Two of the most commonly used techniques are Hermite and Catmull-Rom splines. Details can be found in an <a href="https://spin.atomicobject.com/2014/05/28/ios-interpolating-points/" target="_blank">in-depth article by John Fisher</a> and <a href="https://medium.com/@ramshandilya/draw-smooth-curves-through-a-set-of-points-in-ios-34f6d73c8f9" target="_blank">a blog post by Ramsundar Shandilya</a>.</p>
-
+<p>Two of the most commonly used techniques are Hermite and Catmull-Rom splines. Details can be found in an <a href="https://spin.atomicobject.com/2014/05/28/ios-interpolating-points/">in-depth article by John Fisher</a> and <a href="https://medium.com/@ramshandilya/draw-smooth-curves-through-a-set-of-points-in-ios-34f6d73c8f9">a blog post by Ramsundar Shandilya</a>.</p>
 <p>However, while great for arbitrary points, both have issues when being used for 2D graphs. Looking at the following screenshots you can see that they extend the curve above the actual maximum and below the minimum y-values. Additionally, even though the three values in the middle section are equal, the graph indicates otherwise.</p>
-
 <p><strong>Hermite</strong></p>
-
-<p><img src="/images/hermite.png" alt="Hermite" /></p>
-
+<p><img src="/images/hermite.png" alt="Hermite"></p>
 <p><strong>Catmull-Rom</strong></p>
-
-<p><img src="/images/catmull.png" alt="Catmull-rom" /></p>
-
+<p><img src="/images/catmull.png" alt="Catmull-rom"></p>
 <h3 id="our-result">Our Result</h3>
-
 <p>In our use-case, the above solutions were not acceptable as they may lead to wrong conclusions drawn by the user. To achieve our required results (= a smooth graph that respects global and local maxima and minima and passes through each point), we used quadratic curves. In order for the curve to go through every point, we have to divide each segment into two curves and calculate the control point for each part.
 Less than 40 lines of code later, we have a nice extension of <code>UIBezierPath</code> with exactly the desired results:</p>
-
-<p><img src="/images/smooth.png" alt="Smooth" /></p>
-
+<p><img src="/images/smooth.png" alt="Smooth"></p>
 <p><div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -231,7 +219,7 @@ Less than 40 lines of code later, we have a nice extension of <code>UIBezierPath
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
 </span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">extension</span> <span style="color:#a6e22e">UIBezierPath</span> {
     
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">convenience</span> <span style="color:#66d9ef">init</span>?(quadCurve points: [CGPoint]) {
@@ -274,10 +262,8 @@ Less than 40 lines of code later, we have a nice extension of <code>UIBezierPath
 }</code></pre></td></tr></table>
 </div>
 </div>
-<a href="https://gist.github.com/mbuchetics/e56a7ef7a2551af5089aa30ee246a976" target="_blank">Gist</a></p>
-
-<p>We draw the <code>UIBezierPath</code> using <code>CoreGraphics</code> and overriding <code>draw(rect:)</code> of our UIView subclass, but you could also use a <code>CAShapeLayer</code> and even <a href="https://oleb.net/blog/2010/12/animating-drawing-of-cgpath-with-cashapelayer/" target="_blank">animate the drawing of the path</a>.</p>
-
+<a href="https://gist.github.com/mbuchetics/e56a7ef7a2551af5089aa30ee246a976">Gist</a></p>
+<p>We draw the <code>UIBezierPath</code> using <code>CoreGraphics</code> and overriding <code>draw(rect:)</code> of our UIView subclass, but you could also use a <code>CAShapeLayer</code> and even <a href="https://oleb.net/blog/2010/12/animating-drawing-of-cgpath-with-cashapelayer/">animate the drawing of the path</a>.</p>
 <p>This implementation is part of our <code>SimpleCharts</code> framework, which we hope to open source in the near future.</p>
 
 </div>
