@@ -15,7 +15,7 @@ Time is NOT one of them. And that’s a big problem. We are so used logical term
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/397d418940ac70b970507351c36fe09b?s=256'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-04-04T14:36:09&#43;02:00'/><meta property='article:modified_time' content='2019-04-04T14:36:09&#43;02:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@gottfired'>
 
-<meta name="generator" content="Hugo 0.60.1" />
+<meta name="generator" content="Hugo 0.79.0" />
 
   <title>Fun With Time Zones Part 1 • Gottfried Chen</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/fun-with-time-zones-pt1/'>
@@ -40,7 +40,6 @@ if (!doNotTrack) {
   
 
 </head>
-
 
 <body class='page type-articles has-sidebar'>
 
@@ -183,7 +182,7 @@ if (!doNotTrack) {
 <li>It’s ok to save time zones as UTC offsets (e.g. Austria is CET which is UTC+1)</li>
 <li>The time difference between two time zones is constant</li>
 <li>Time offsets are always +/- hours of UTC</li>
-<li>When you store the time zone of a city in your database that's unambiguous and you are safe. You can easily calculate from UTC to local time</li>
+<li>When you store the time zone of a city in your database that&rsquo;s unambiguous and you are safe. You can easily calculate from UTC to local time</li>
 <li>When you store the timestamps for events happening at a location then it’s ok to figure out the nearest city in the same time zone e.g. Vienna and always use that for your time calculations.</li>
 </ul>
 <p>Again none of the above is true</p>
@@ -214,16 +213,16 @@ if (!doNotTrack) {
 <li>When storing events in your database, always store UTC (either as UTC timestamp or ISO e.g. 2019-04-05T9:00Z)</li>
 <li>If you need the event later in local time, storing UTC offset is sufficient (additionally to UTC you store e.g. +2:00)</li>
 <li>If you need to do time calculations based on that event in local time, store tz time zone (for example Europe/Vienna)</li>
-<li>If you need to do long term time calculations (like adding 10 years) for that event, then you simply can't do that in a reliable way. Do the same as in 3. and hope no war or political decision will interfere with your stored time zone. Good Luck!</li>
-<li>When storing wall time, don't use any time zone. Store as April 5th 2019, 9:00. Be careful when using time zone independent data types. Strange things can happen, which we will discuss in Part 2 of this series. Sometimes using a string like &ldquo;2019-04-05 09:00&rdquo; is the safest way.</li>
+<li>If you need to do long term time calculations (like adding 10 years) for that event, then you simply can&rsquo;t do that in a reliable way. Do the same as in 3. and hope no war or political decision will interfere with your stored time zone. Good Luck!</li>
+<li>When storing wall time, don&rsquo;t use any time zone. Store as April 5th 2019, 9:00. Be careful when using time zone independent data types. Strange things can happen, which we will discuss in Part 2 of this series. Sometimes using a string like &ldquo;2019-04-05 09:00&rdquo; is the safest way.</li>
 </ol>
 <h3 id="summary">Summary</h3>
 <p>Time is a <em>highly chaotic, politically motivated</em> concept that has absolutely nothing to do with logic or determinism. Try not to code time zone handling yourself.
 For web development use <a href="https://momentjs.com/timezone/">moment-timezone</a></p>
 <p>Last but not least, time is best described in <em>The Time Warp</em> song by Richard O’Brien:</p>
-<p>It's astounding<br>
+<p>It&rsquo;s astounding<br>
 Time is fleeting<br>
-<strong>Madness takes it's toll</strong></p>
+<strong>Madness takes it&rsquo;s toll</strong></p>
 <p>Still not enough? Watch <a href="https://www.youtube.com/watch?v=-5wpm-gesOY">this video</a>.</p>
 <p>P.S. For the physics nerds out there. Yes, we know about general relativity and quantum effects. So to be really on the safe side you should store the following in your database: <em>UTC, velocity vector, mass of nearby objects like planets and/or black holes, scale to account for quantum physics and &ldquo;Europe/Vienna&rdquo;.</em></p>
 
@@ -314,7 +313,7 @@ Time is fleeting<br>
       </li></ul>
   </nav>
 </section><div class='copyright'>
-  <p> &copy; 2018-2019 all about apps </p>
+  <p> &copy; 2018-2021 all about apps </p>
 </div>
 
         </div>

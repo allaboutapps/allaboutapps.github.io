@@ -6,10 +6,16 @@
     <description>Recent content in All Articles on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Dec 2019 09:27:32 +0100</lastBuildDate>
-    
-	<atom:link href="https://code.allaboutapps.at/articles/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 24 Mar 2020 12:32:36 +0100</lastBuildDate><atom:link href="https://code.allaboutapps.at/articles/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Snapping behaviour in Epoxy Carousel and its pitfalls</title>
+      <link>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</link>
+      <pubDate>Tue, 24 Mar 2020 12:32:36 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</guid>
+      <description>During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond to markers on the map. The details of the behaviour:
+ There is a selected element — one item, that is fully visible inside the carousel The carousel snaps to a newly selected element whenever we move it Once the selected item is chosen, we move the map to it’s corresponding map marker  For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.</description>
+    </item>
     
     <item>
       <title>Load Testing</title>
@@ -26,8 +32,8 @@
       <pubDate>Mon, 23 Sep 2019 10:16:32 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/xcode-alternative-icons/</guid>
-      <description>Xcode beta season is over but it&#39;s still the time of the year where iOS developers usually have multiple Xcode version installed. Distinguishing one from another isn&#39;t easy if you have multiple identical icons in the dock and, like me, getting reminded by Xcode that your project&#39;s Swift version isn&#39;t compatible.
-Alternative icons to the rescue! It&#39;s actually quite easy to change any app&#39;s icon in macOS. After opening the info panel of Xcode.</description>
+      <description>Xcode beta season is over but it&amp;rsquo;s still the time of the year where iOS developers usually have multiple Xcode version installed. Distinguishing one from another isn&amp;rsquo;t easy if you have multiple identical icons in the dock and, like me, getting reminded by Xcode that your project&amp;rsquo;s Swift version isn&amp;rsquo;t compatible.
+Alternative icons to the rescue! It&amp;rsquo;s actually quite easy to change any app&amp;rsquo;s icon in macOS. After opening the info panel of Xcode.</description>
     </item>
     
     <item>
@@ -37,7 +43,7 @@ Alternative icons to the rescue! It&#39;s actually quite easy to change any app&
       
       <guid>https://code.allaboutapps.at/articles/material-theming/</guid>
       <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
-Let&#39;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
+Let&amp;rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
     </item>
     
     <item>
@@ -47,7 +53,7 @@ Let&#39;s start with the basic setup: as with all of our projects we use our A3A
       
       <guid>https://code.allaboutapps.at/articles/uikonf2019/</guid>
       <description>UIKonf 2019 took place from May 26th to 29th in Berlin and is one of the largest iOS conferences in Europe. For us at all about apps it was the forth visit in a row and, as always, it was an awesome conference.
-While the talks don&#39;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
+While the talks don&amp;rsquo;t start until Monday, UIKonf always kicks off with a day of social events. These include a boat tour, guided tours through museums or the famous bike tour.</description>
     </item>
     
     <item>
@@ -68,7 +74,7 @@ While the talks don&#39;t start until Monday, UIKonf always kicks off with a day
 &lt;p&gt;The library offers an easy way to detect if an update should be forced. All we have to do is implement &lt;code&gt;ForceUpdateProvider&lt;/code&gt; and call &lt;code&gt;doUpdate()&lt;/code&gt; when we need to update right away.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DemoForceUpdateProvider&lt;/span&gt; : ForceUpdateProvider {
 
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestUpdateShouldBeImmediate&lt;/span&gt;(availableVersionCode: Int, doUpdate: () -&amp;gt; Unit) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestUpdateShouldBeImmediate&lt;/span&gt;(availableVersionCode: Int, doUpdate: () &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Unit) {
         &lt;span style=&#34;color:#75715e&#34;&gt;// place your logic here
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// obtain force update decision from your source eg Firebase Remote Config
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -84,9 +90,9 @@ inAppUpdateManager = InAppUpdateManager(&lt;span style=&#34;color:#66d9ef&#34;&g
     inAppUpdateManager.onActivityResult(requestCode, resultCode)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.onActivityResult(requestCode, resultCode, &lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;)
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;That&#39;s it. The end result looks like this:&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s it. The end result looks like this:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://code.allaboutapps.at/images/in_app_update_optimized.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;&lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -167,7 +173,7 @@ We gonna use reddit as our api, by simply adding .</description>
       <pubDate>Wed, 23 Jan 2019 10:01:25 +0100</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/emoji-flags/</guid>
-      <description>Sometimes there&#39;s the need to fly a flag in your project. You probably know the ISO code, more specifically the ISO 3166-1 alpha-2 code, a.k.a two-letter code. For Austria this would be AT. Now when thinking about converting these codes into emoji flags, a lookup table comes to mind. But instead of jumping straight into implementing the table it&#39;s time to take a closer look at the Unicode Standard. The clever people that added the flag emojis to the Unicode character set invented a system of specifying the flags that makes an algorithmic conversion without lookup tables quite easy.</description>
+      <description>Sometimes there&amp;rsquo;s the need to fly a flag in your project. You probably know the ISO code, more specifically the ISO 3166-1 alpha-2 code, a.k.a two-letter code. For Austria this would be AT. Now when thinking about converting these codes into emoji flags, a lookup table comes to mind. But instead of jumping straight into implementing the table it&amp;rsquo;s time to take a closer look at the Unicode Standard. The clever people that added the flag emojis to the Unicode character set invented a system of specifying the flags that makes an algorithmic conversion without lookup tables quite easy.</description>
     </item>
     
     <item>
@@ -205,8 +211,8 @@ We walked through all our Project Setup Jira tickets and calculated the average 
       <pubDate>Tue, 17 Jul 2018 11:50:28 +0200</pubDate>
       
       <guid>https://code.allaboutapps.at/articles/reactive-swift-properties/</guid>
-      <description>Swift&#39;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
-private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&#39;s value we can create a private writable MutableProperty and a public read-only Property:</description>
+      <description>Swift&amp;rsquo;s access control allows us to define separate access levels for the getter and setter of a property. This is nice if we want to provide read access to a property but should only be able to modify it internally:
+private(set) var isLoading = false When using ReactiveSwift (or similarly RxSwift) you usually work with MutableProperty. In order to limit modification of the property&amp;rsquo;s value we can create a private writable MutableProperty and a public read-only Property:</description>
     </item>
     
     <item>

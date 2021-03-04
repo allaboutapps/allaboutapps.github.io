@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond to markers on the map. The details of the behaviour:
+ There is a selected element — one item, that is fully visible inside the carousel The carousel snaps to a newly selected element whenever we move it Once the selected item is chosen, we move the map to it’s corresponding map marker  For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Snapping behaviour in Epoxy Carousel and its pitfalls • Szymon Duraj'>
+<meta property='og:description' content='During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond to markers on the map. The details of the behaviour:
+ There is a selected element — one item, that is fully visible inside the carousel The carousel snaps to a newly selected element whenever we move it Once the selected item is chosen, we move the map to it’s corresponding map marker  For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/custom-epoxy-carousel/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/1f13e70a237dae279c31110c9390f789?s=256'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2020-03-24T12:32:36&#43;01:00'/><meta property='article:modified_time' content='2020-03-24T12:32:36&#43;01:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.79.0" />
+
+  <title>Snapping behaviour in Epoxy Carousel and its pitfalls • Szymon Duraj</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/custom-epoxy-carousel/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-46375725-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+<body class='page type-articles has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Snapping behaviour in Epoxy Carousel and its pitfalls</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2020-03-24T12:32:36&#43;01:00'>2020, Mar 24</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/sdu'>Szymon Duraj</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond
+to markers on the map.
+The details of the behaviour:</p>
+<ol>
+<li>There is a selected element — one item, that is fully visible inside the carousel</li>
+<li>The carousel snaps to a newly selected element whenever we move it</li>
+<li>Once the selected item is chosen, we move the map to it’s corresponding map marker</li>
+</ol>
+<p>For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.
+Desired behaviour:</p>
+<p><img src="/images/custom-epoxy-carousel/DemoCarousel2.gif" alt=""></p>
+<hr>
+<h4 id="setup">Setup</h4>
+<p>We decided to use <strong><a href="https://github.com/airbnb/epoxy">Airbnb&rsquo;s Epoxy</a></strong> for the <code>Carousel</code>. We are assuming the reader is already familiar with it, but if not, there are some great resources to get to know this library, for example  <a href="https://github.com/airbnb/epoxy/wiki">the wiki</a>  or <a href="https://android.jlelse.eu/nachos-tutorial-for-airbnbs-epoxy-with-kotlin-d1e682fdeb05">this guide</a>.</p>
+<p>For the sake of simplification, we will be using an artificial data class <code>Item(val id: Int, val name: String)</code>.
+We use Epoxy with a very basic setup:</p>
+<ol>
+<li>An <code>EpoxyModel</code> to connect a simple xml layout with the data class</li>
+<li>An <code>EpoxyController</code> to store the value of the currently displayed list of items and in a <code>Carousel</code> and redraw the view once the data changes:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">var</span> items: List&lt;Item&gt; = emptyList()
+        <span style="color:#66d9ef">set</span>(value) {
+            <span style="color:#66d9ef">field</span> = value
+            requestModelBuild()
+        }
+
+<span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">buildModels</span>() {
+    <span style="color:#66d9ef">val</span> itemModels = items.map { item <span style="color:#f92672">-&gt;</span>
+        ItemModel_()
+                .id(item.id)
+                .item(item)
+    }
+    <span style="color:#66d9ef">val</span> carouselModel = CarouselModel_()
+        .numViewsToShowOnScreen(<span style="color:#ae81ff">1.1F</span>)
+        .id(<span style="color:#e6db74">&#34;carousel&#34;</span>)
+        .models(itemModels)
+
+    carouselModel.addTo(<span style="color:#66d9ef">this</span>)
+}</code></pre></div>
+<h4 id="snapping-behaviour">Snapping behaviour</h4>
+<p>What we can read in the <a href="https://github.com/airbnb/epoxy/wiki/Carousel">Epoxy documentation</a>:</p>
+<blockquote>
+<p>Snapping Support
+By default a LinearSnapHelper is attached to all Carousel instances. If you would like to change the
+default snap behavior you can call Carousel.setDefaultGlobalSnapHelperFactory(&hellip;) and pass a factory
+object to create your snap helper. Null can be passed to disable snapping by default.</p>
+</blockquote>
+<p>Having that information, we started by setting the global <code>SnapHelperFactory</code> from the controller&rsquo;s constructor. The <code>SnapHelper</code> it returns notifies the controller of any position updates when snapping to a view.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">var</span> selectedPosition = RecyclerView.NO_POSITION
+
+<span style="color:#66d9ef">init</span> {
+    <span style="color:#66d9ef">val</span> snapHelper = CarouselSnapHelperFactory()
+    Carousel.setDefaultGlobalSnapHelperFactory(snapHelper)
+}
+
+<span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CarouselSnapHelperFactory</span> : Carousel.SnapHelperFactory() {
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">buildSnapHelper</span>(context: Context): SnapHelper {
+        <span style="color:#66d9ef">return</span> CustomLinearSnapHelper()
+    }
+
+    <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomLinearSnapHelper</span> : LinearSnapHelper() { <span style="color:#75715e">//can also extend PagerSnapHelper - see the description in the last section 
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">findSnapView</span>(layoutManager: RecyclerView.LayoutManager): View? {
+            <span style="color:#66d9ef">val</span> view = <span style="color:#66d9ef">super</span>.findSnapView(layoutManager)
+            <span style="color:#66d9ef">if</span> (view <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+                <span style="color:#66d9ef">val</span> newPosition = layoutManager.getPosition(view)
+                <span style="color:#66d9ef">if</span> (newPosition <span style="color:#f92672">!=</span> selectedPosition) {
+                    onViewSnapped(newPosition)
+                    selectedPosition = newPosition
+                }
+            }
+            <span style="color:#66d9ef">return</span> view
+        }
+    }
+}</code></pre></div>
+<h4 id="the-problem">The problem</h4>
+<p><strong>The solution recommended by the documentation did not work</strong> — the TextView outside of the <code>EpoxyRecyclerView</code> would only change during the first visit to the fragment. When we went to another fragment and then came back, the changes in the <code>TextView</code> outside <code>EpoxyRecyclerView</code> would not occur.</p>
+<p>After an investigation it turned out that during the destruction of the <code>Fragment</code>, the <code>SnapHelper</code> and <code>Carousel</code> were not properly garbage collected. Not only that: we were also leaking memory.
+None of the usual quick fixes such as setting the global factory to <code>null</code> or applying <code>WeakReferences</code> worked.</p>
+<h4 id="the-solution">The solution</h4>
+<p>The recommended global setting should be replaced by providing one <code>SnapHelper</code> per <code>Carousel</code>. For that, we need to create a custom Epoxy <code>ModelView</code> that extends the <code>Carousel</code> class, and then create a <code>LinearSnapHelper</code> for every instance of the class. By annotating our subclass with <code>ModelView</code> Epoxy generates a new <code>EpoxyModel</code> for this view. The <code>autoLayout</code> param will adjust the size of the view.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#a6e22e">@ModelView</span>(autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomSnappingCarousel</span> <span style="color:#a6e22e">@JvmOverloads</span> <span style="color:#66d9ef">constructor</span>(
+        context: Context, attrs: AttributeSet? = <span style="color:#66d9ef">null</span>, defStyleAttr: Int = <span style="color:#ae81ff">0</span>
+) : Carousel(context, attrs, defStyleAttr) {
+
+    <span style="color:#66d9ef">var</span> selectedPosition = RecyclerView.NO_POSITION
+
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">setSnapHelperCallback</span>(callback: (Int) <span style="color:#f92672">-&gt;</span> Unit) {
+        <span style="color:#66d9ef">val</span> snapHelper = CustomLinearSnapHelper(callback)
+        <span style="color:#75715e">//workaround - do not remove
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//https://stackoverflow.com/questions/44043501/an-instance-of-onflinglistener-already-set-in-recyclerview/52850198
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span>.onFlingListener = <span style="color:#66d9ef">null</span>
+        snapHelper.attachToRecyclerView(<span style="color:#66d9ef">this</span>)
+    }
+
+    <span style="color:#66d9ef">inner</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CustomLinearSnapHelper</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> callback: (Int) <span style="color:#f92672">-&gt;</span> Unit) : LinearSnapHelper() {
+
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">findSnapView</span>(layoutManager: LayoutManager): View? {
+            <span style="color:#66d9ef">val</span> view = <span style="color:#66d9ef">super</span>.findSnapView(layoutManager)
+
+            <span style="color:#66d9ef">if</span> (view <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+                <span style="color:#66d9ef">val</span> newPosition = layoutManager.getPosition(view)
+                <span style="color:#66d9ef">if</span> (newPosition <span style="color:#f92672">!=</span> selectedPosition) {
+                    callback.invoke(newPosition)
+                    selectedPosition = newPosition
+                }
+            }
+            <span style="color:#66d9ef">return</span> view
+        }
+    }
+}</code></pre></div>
+<p>Our <code>EpoxyController</code> would then have to be altered so that we can supply the callback function to the <code>LinearSnapHelper</code> — we can do that <code>onBind</code> of the carousel:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">buildModels</span>() {
+     <span style="color:#66d9ef">val</span> itemModels = items.map { item <span style="color:#f92672">-&gt;</span>
+         ItemModel_()
+                 .id(item.id)
+                 .item(item)
+     }
+     <span style="color:#66d9ef">val</span> carouselModel = CustomSnappingCarouselModel_()
+         .id(<span style="color:#e6db74">&#34;carousel&#34;</span>)
+         .numViewsToShowOnScreen(numberOfViewsOnScreen)
+         .models(itemModels)
+         .onBind { _, view, _ <span style="color:#f92672">-&gt;</span>
+             view.setSnapHelperCallback { newPosition <span style="color:#f92672">-&gt;</span>
+                 onItemSnappedCallback(newPosition) <span style="color:#75715e">//define the callback as a constructor parameter of the EpoxyController
+</span><span style="color:#75715e"></span>             }
+         }
+     carouselModel.addTo(<span style="color:#66d9ef">this</span>)
+}</code></pre></div>
+<p>This way, the global <code>SnapHelperFactory</code> of class <code>Carousel</code> remains untouched and we still achieve the desired behaviour with everything being properly garbage collected upon fragment change.</p>
+<hr>
+<h4 id="side-note-linearsnaphelper-vs-pagersnaphelper">Side note: LinearSnapHelper vs. PagerSnapHelper</h4>
+<p>Our custom <code>CustomLinearSnapHelper</code> can extend one of two classes: <code>LinearSnapHelper</code> or <code>PagerSnapHelper</code>. Comparing these two classes, there are some similarities and differences:</p>
+<ul>
+<li>
+<p>Both classes are an implementation of an abstract class <code>SnapHelper</code> which is intended to support snapping behaviour for <code>RecyclerViews</code>.</p>
+</li>
+<li>
+<p>Both classes support snapping in either vertical or horizontal orientation.</p>
+</li>
+<li>
+<p>The <code>PagerSnapHelper</code> is intended to mimic the behaviour of a <code>ViewPager</code> — this means that <code>LinearSnapHelper</code> will work better when there are several smaller items visible on the screen.</p>
+</li>
+<li>
+<p>When we intend to have one bigger item visible at any given time (which is our case), the difference between those two classes boils down to the fling behaviour: with <code>LinearSnapHelper</code> you can scroll through multiple items with one fling; whereas <code>PagerSnapHelper</code> will only ever move to the next item in either direction.</p>
+</li>
+</ul>
+<p>Based on that, we decided to go with <code>LinearSnapHelper</code> as we wanted to preserve the ability to scroll through multiple items at once.</p>
+<h4 id="conclusion">Conclusion</h4>
+<p>Epoxy provides some really nifty tools to work with <code>Carousels</code> — however, having in mind that the <code>Carousel</code> feature is still in Beta, there are certain dangers we have to be aware of. That is why from our experience, you should avoid setting global listeners on the <code>Carousel</code>, and instead modify the snapping behaviour with a custom carousel implementation.</p>
+<p>The source code for the complete solution is available <a href="https://github.com/allaboutapps/CarouselDemo">on GitHub</a>.</p>
+<hr>
+<h4 id="further-reads">Further reads</h4>
+<p>We looked at a specific behaviour of the carousel, where the snapping event occurs once the carousel settles. However, we might need the snapping to occur while we are still scrolling, providing live updates:</p>
+<p><img src="/images/custom-epoxy-carousel/DemoCarousel2.gif" alt="">
+<img src="/images/custom-epoxy-carousel/SnapBehaviour2.gif" alt=""></p>
+<p>For this a nice read would be <a href="https://medium.com/over-engineering/detecting-snap-changes-with-androids-recyclerview-snaphelper-9e9f5e95c424">Nick Rout&rsquo;s article about detecting snap changes</a>, whose results could also be applied to the <code>EpoxyCarousel</code> here.</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/android'>Android</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/load-testing/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Load Testing</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2021 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+

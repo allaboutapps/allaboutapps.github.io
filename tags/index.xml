@@ -5,10 +5,6 @@
     <link>https://code.allaboutapps.at/tags/</link>
     <description>Recent content in Tags on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://code.allaboutapps.at/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://code.allaboutapps.at/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

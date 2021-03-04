@@ -17,7 +17,7 @@ We gonna use reddit as our api, by simply adding .'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/cover-pagination.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-02-14T10:30:11&#43;01:00'/><meta property='article:modified_time' content='2019-02-14T10:30:11&#43;01:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/cover-pagination.png'>
 
-<meta name="generator" content="Hugo 0.60.1" />
+<meta name="generator" content="Hugo 0.79.0" />
 
   <title>Advanced Pagination With Epoxy &amp; Datasources • Kaan Köşe</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/advanced-pagination-with-epoxy/'>
@@ -42,7 +42,6 @@ if (!doNotTrack) {
   
 
 </head>
-
 
 <body class='page type-articles has-cover has-sidebar'>
 
@@ -189,17 +188,17 @@ if (!doNotTrack) {
 <span style="color:#75715e">// pass key (String) and item type (RedditChildResponse)
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// initial loading of the list (first page
-</span><span style="color:#75715e"></span><span style="color:#75715e">// pass the list and before/after fields to the given callback
+</span><span style="color:#75715e">// pass the list and before/after fields to the given callback
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">loadInitial</span>(
     params: LoadInitialParams&lt;String&gt;, callback: LoadInitialCallback&lt;String, RedditChildResponse&gt;
   ) {
     redditApi.fetchNew(subreddit, limit = <span style="color:#ae81ff">10</span>)
       .subscribeOn(Schedulers.io())
-      .map { it.<span style="color:#66d9ef">data</span> }
+      .map { <span style="color:#66d9ef">it</span>.<span style="color:#66d9ef">data</span> }
       .subscribe({
-        callback.onResult(it.children, it.before, it.after)
+        callback.onResult(<span style="color:#66d9ef">it</span>.children, <span style="color:#66d9ef">it</span>.before, <span style="color:#66d9ef">it</span>.after)
       }, {
-        Timber.e(it)
+        Timber.e(<span style="color:#66d9ef">it</span>)
         callback.onResult(emptyList(), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>)
       })
   }
@@ -210,11 +209,11 @@ if (!doNotTrack) {
   ) {
     redditApi.fetchNew(subreddit, limit = <span style="color:#ae81ff">10</span>, after = params.key)
       .subscribeOn(Schedulers.io())
-      .map { it.<span style="color:#66d9ef">data</span> }
+      .map { <span style="color:#66d9ef">it</span>.<span style="color:#66d9ef">data</span> }
       .subscribe({
-        callback.onResult(it.children, it.after)
+        callback.onResult(<span style="color:#66d9ef">it</span>.children, <span style="color:#66d9ef">it</span>.after)
       }, {
-        Timber.e(it)
+        Timber.e(<span style="color:#66d9ef">it</span>)
         callback.onResult(emptyList(), <span style="color:#e6db74">&#34;&#34;</span>)
       })
   }
@@ -230,8 +229,8 @@ if (!doNotTrack) {
 }</code></pre></div>
 <p>After implementing our datasource, we need a factory for providing the data to create a LiveData<!-- raw HTML omitted -->. If you are using Room, you may want to load your data from the Dao already as a <a href="https://developer.android.com/reference/android/arch/paging/DataSource.Factory">Datasource.Factory</a>.</p>
 <p>It‘s a short class as a dagger singleton, where we have to implement the create()-function, to provide our datasource in the application.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">@Singleton
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedditFeedDataSourceFactory</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#a6e22e">@Singleton</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RedditFeedDataSourceFactory</span> <span style="color:#a6e22e">@Inject</span> <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> redditApi: RedditApi) :
   DataSource.Factory&lt;String, RedditChildResponse&gt;() {
   <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): DataSource&lt;String, RedditChildResponse&gt; {
     <span style="color:#66d9ef">return</span> PageKeyedFeedDataSource(redditApi)
@@ -239,17 +238,17 @@ if (!doNotTrack) {
 }</code></pre></div>
 <p>Since we have prepared the datasource factory, we can inject it to our viewmodel, and initialize our LiveData by the <strong>LivePagedListBuilder</strong>. This builder can either be used with a PagedList.Config for configuring some loading options, or by simply passing only the loading page size as an integer.</p>
 <p>Furthermore you are able to set a <a href="https://developer.android.com/reference/android/arch/paging/PagedList.BoundaryCallback">BoundaryCallback</a>, if you want to catch some events like the last item was loaded, or zero items were loaded initially.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedViewModel</span> @Inject <span style="color:#66d9ef">constructor</span>(sourceFactory: RedditFeedDataSourceFactory) : ViewModel() {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedViewModel</span> <span style="color:#a6e22e">@Inject</span> <span style="color:#66d9ef">constructor</span>(sourceFactory: RedditFeedDataSourceFactory) : ViewModel() {
 
     <span style="color:#75715e">// observe this for loading data
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">val</span> feed: LiveData&lt;PagedList&lt;RedditChildResponse&gt;&gt;
 
-    init {
+    <span style="color:#66d9ef">init</span> {
 
         <span style="color:#75715e">// this builder initalizes our LiveData with the given options
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// we could pass also an integer for the page size instead of the PageListConfig
 </span><span style="color:#75715e"></span>        feed = LivePagedListBuilder&lt;String, RedditChildResponse&gt;(sourceFactory, getPagedListConfig())
-        .setBoundaryCallback(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">:</span><span style="color:#960050;background-color:#1e0010"> </span><span style="color:#a6e22e">PagedList</span>.BoundaryCallback&lt;RedditChildResponse&gt;() {
+        .setBoundaryCallback(<span style="color:#66d9ef">object</span> <span style="color:#960050;background-color:#1e0010">: </span><span style="color:#a6e22e">PagedList</span>.BoundaryCallback&lt;RedditChildResponse&gt;() {
             <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">onItemAtEndLoaded</span>(itemAtEnd: RedditChildResponse) {
             <span style="color:#66d9ef">super</span>.onItemAtEndLoaded(itemAtEnd)
             Timber.v(<span style="color:#e6db74">&#34;reached end of feed&#34;</span>)
@@ -273,7 +272,7 @@ if (!doNotTrack) {
     }
 }</code></pre></div>
 <p>Finally, we need to implement the <a href="https://github.com/airbnb/epoxy/wiki/Paging-Support">PagedListEpoxyController</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedController</span> @Inject <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> view: FeedActivity) :
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FeedController</span> <span style="color:#a6e22e">@Inject</span> <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> view: FeedActivity) :
     PagedListEpoxyController&lt;RedditChildResponse&gt;
     (modelBuildingHandler = EpoxyAsyncUtil.getAsyncBackgroundHandler()) {
     <span style="color:#75715e">// pass a handler to avoid building in main thread!!
@@ -285,13 +284,13 @@ if (!doNotTrack) {
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// and wants the epoxy model to be returned
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// ,, you may want to return a placeholder model for a null item
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">buildItemModel</span>(currentPosition: Int, item: RedditChildResponse?): EpoxyModel&lt;*&gt; {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> (item == <span style="color:#66d9ef">null</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">if</span> (item <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>)
             EmptyModel_()
                 .id(currentPosition)
         <span style="color:#66d9ef">else</span>
             RedditPostModel_()
                 .post(item)
-                .onClick { view.openLink(it) }
+                .onClick { view.openLink(<span style="color:#66d9ef">it</span>) }
                 .id(item.<span style="color:#66d9ef">data</span>.permalink)
     }
 
@@ -301,11 +300,11 @@ if (!doNotTrack) {
         <span style="color:#66d9ef">super</span>.addModels(models)
         LoadingModel_()
             .id(<span style="color:#e6db74">&#34;loading&#34;</span>)
-            .addIf(!endReached &amp;&amp; models.isNotEmpty(), <span style="color:#66d9ef">this</span>)
+            .addIf(!endReached <span style="color:#f92672">&amp;&amp;</span> models.isNotEmpty(), <span style="color:#66d9ef">this</span>)
     }
 }</code></pre></div>
 <p><strong>We did it.</strong> Our LiveData is ready to be observed, and the only thing our epoxy controller needs is the PagedList from our LiveData… <em>So let‘s unite this couple</em>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">feed.observe(<span style="color:#66d9ef">this</span>, Observer { pagedlist -&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">feed.observe(<span style="color:#66d9ef">this</span>, Observer { pagedlist <span style="color:#f92672">-&gt;</span>
         controller.submitList(pagedlist)
 })</code></pre></div>
 <p><strong>Attention:</strong> only one PagedList will be received from the LiveData for each build. So dont wonder (like me), why you dont receive every page here :)</p>
@@ -400,7 +399,7 @@ if (!doNotTrack) {
       </li></ul>
   </nav>
 </section><div class='copyright'>
-  <p> &copy; 2018-2019 all about apps </p>
+  <p> &copy; 2018-2021 all about apps </p>
 </div>
 
         </div>

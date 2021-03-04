@@ -17,7 +17,7 @@ The Coordinator!'>
 <meta property='og:site_name' content='all about apps'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://code.allaboutapps.at/images/ios-coordinator/mvvm-c.png'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2019-05-14T10:00:00&#43;02:00'/><meta property='article:modified_time' content='2019-05-14T10:00:00&#43;02:00'/><meta name='twitter:card' content='summary_large_image'><meta property='twitter:image' content='https://code.allaboutapps.at/images/ios-coordinator/mvvm-c.png'>
 
-<meta name="generator" content="Hugo 0.60.1" />
+<meta name="generator" content="Hugo 0.79.0" />
 
   <title>iOS Coordinators • Michael Heinzl</title>
   <link rel='canonical' href='https://code.allaboutapps.at/articles/ios-coordinator/'>
@@ -42,7 +42,6 @@ if (!doNotTrack) {
   
 
 </head>
-
 
 <body class='page type-articles has-cover has-sidebar'>
 
@@ -196,7 +195,7 @@ This concept manages the interaction within a view controller, but who manages t
 		push(viewController, animated: <span style="color:#66d9ef">true</span>)
 	}
 
-	<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">.</span><span style="color:#75715e">.</span><span style="color:#75715e">.</span>
+	<span style="color:#75715e">// ...</span>
 }</code></pre></div>
 <p>As mentioned before, coordinators are organised in a hierarchy. At the root, we have an <code>AppCoordinator</code> which manages all user flows in our app. A coordinator can have multiple child coordinators, which represent features of the app such as the <code>RegistrationCoordinator</code> shown above.</p>
 <p>We have two kinds of base coordinators: <code>NavigationCoordinator</code> and <code>TabBarCoordinator</code>.</p>
@@ -205,11 +204,11 @@ This concept manages the interaction within a view controller, but who manages t
 <p>In our approach view controllers have a well-defined task and interface (= input &amp; output). For example, the task of a <code>TextInputViewController</code> is simple: it takes a text input from the user and reports it by calling the  <code>didEnterText</code> closure.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-swift" data-lang="swift"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TextInputViewController</span>: UIViewController {
 	
-	<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">MARK:</span><span style="color:#75715e"> </span><span style="color:#75715e">-</span><span style="color:#75715e"> </span><span style="color:#75715e">O</span><span style="color:#75715e">u</span><span style="color:#75715e">t</span><span style="color:#75715e">p</span><span style="color:#75715e">u</span><span style="color:#75715e">t</span>
+	<span style="color:#75715e">// </span><span style="color:#75715e">MARK:</span><span style="color:#75715e"> - Output</span>
 
 	<span style="color:#66d9ef">var</span> didEnterText: ((String) -&gt; Void)?
 
-	<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">MARK:</span><span style="color:#75715e"> </span><span style="color:#75715e">-</span><span style="color:#75715e"> </span><span style="color:#75715e">I</span><span style="color:#75715e">n</span><span style="color:#75715e">p</span><span style="color:#75715e">u</span><span style="color:#75715e">t</span>
+	<span style="color:#75715e">// </span><span style="color:#75715e">MARK:</span><span style="color:#75715e"> - Input</span>
 
 	<span style="color:#66d9ef">var</span> viewModel: TextInputViewModel!
 
@@ -219,7 +218,7 @@ This concept manages the interaction within a view controller, but who manages t
 		<span style="color:#66d9ef">return</span> viewController
 	}	
 
-	<span style="color:#75715e">//</span><span style="color:#75715e"> </span><span style="color:#75715e">.</span><span style="color:#75715e">.</span><span style="color:#75715e">.</span>
+	<span style="color:#75715e">// ...</span>
 }</code></pre></div>
 <p>The coordinator which uses the <code>TextInputViewController</code> implements this closure and acts accordingly. In our registration example the coordinator would present the next step or finish the registration. That view controller does not know which view controller will be presented next as this is the responsibility of the coordinator. That way the <code>TextInputViewController</code> can be easily <strong>reused</strong> on multiple occasions across the app in different user flows.</p>
 <h2 id="recap">Recap</h2>
@@ -319,7 +318,7 @@ This concept manages the interaction within a view controller, but who manages t
       </li></ul>
   </nav>
 </section><div class='copyright'>
-  <p> &copy; 2018-2019 all about apps </p>
+  <p> &copy; 2018-2021 all about apps </p>
 </div>
 
         </div>

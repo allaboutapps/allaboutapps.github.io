@@ -6,10 +6,16 @@
     <description>Recent content in Android on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Sep 2019 09:57:26 +0200</lastBuildDate>
-    
-	<atom:link href="https://code.allaboutapps.at/categories/android/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 24 Mar 2020 12:32:36 +0100</lastBuildDate><atom:link href="https://code.allaboutapps.at/categories/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Snapping behaviour in Epoxy Carousel and its pitfalls</title>
+      <link>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</link>
+      <pubDate>Tue, 24 Mar 2020 12:32:36 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</guid>
+      <description>During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond to markers on the map. The details of the behaviour:
+ There is a selected element — one item, that is fully visible inside the carousel The carousel snaps to a newly selected element whenever we move it Once the selected item is chosen, we move the map to it’s corresponding map marker  For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.</description>
+    </item>
     
     <item>
       <title>Proper Material Theming in a Multi-Module Setup</title>
@@ -18,7 +24,7 @@
       
       <guid>https://code.allaboutapps.at/articles/material-theming/</guid>
       <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
-Let&#39;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
+Let&amp;rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
     </item>
     
     <item>
@@ -39,7 +45,7 @@ Let&#39;s start with the basic setup: as with all of our projects we use our A3A
 &lt;p&gt;The library offers an easy way to detect if an update should be forced. All we have to do is implement &lt;code&gt;ForceUpdateProvider&lt;/code&gt; and call &lt;code&gt;doUpdate()&lt;/code&gt; when we need to update right away.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DemoForceUpdateProvider&lt;/span&gt; : ForceUpdateProvider {
 
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestUpdateShouldBeImmediate&lt;/span&gt;(availableVersionCode: Int, doUpdate: () -&amp;gt; Unit) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;requestUpdateShouldBeImmediate&lt;/span&gt;(availableVersionCode: Int, doUpdate: () &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Unit) {
         &lt;span style=&#34;color:#75715e&#34;&gt;// place your logic here
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// obtain force update decision from your source eg Firebase Remote Config
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -55,9 +61,9 @@ inAppUpdateManager = InAppUpdateManager(&lt;span style=&#34;color:#66d9ef&#34;&g
     inAppUpdateManager.onActivityResult(requestCode, resultCode)
     &lt;span style=&#34;color:#66d9ef&#34;&gt;super&lt;/span&gt;.onActivityResult(requestCode, resultCode, &lt;span style=&#34;color:#66d9ef&#34;&gt;data&lt;/span&gt;)
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;That&#39;s it. The end result looks like this:&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s it. The end result looks like this:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://code.allaboutapps.at/images/in_app_update_optimized.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;&lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;The library is available on GitHub: &lt;a href=&#34;https://github.com/allaboutapps/InAppUpdater&#34;&gt;https://github.com/allaboutapps/InAppUpdater&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

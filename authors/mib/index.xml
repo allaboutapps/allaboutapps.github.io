@@ -6,11 +6,7 @@
     <description>Recent content in mib on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Dec 2019 09:27:32 +0100</lastBuildDate>
-    
-	<atom:link href="https://code.allaboutapps.at/authors/mib/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 11 Dec 2019 09:27:32 +0100</lastBuildDate><atom:link href="https://code.allaboutapps.at/authors/mib/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Load Testing</title>
       <link>https://code.allaboutapps.at/articles/load-testing/</link>

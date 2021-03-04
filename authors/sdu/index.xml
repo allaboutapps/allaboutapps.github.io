@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sdu on all about apps</title>
+    <link>https://code.allaboutapps.at/authors/sdu/</link>
+    <description>Recent content in sdu on all about apps</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 24 Mar 2020 12:32:36 +0100</lastBuildDate><atom:link href="https://code.allaboutapps.at/authors/sdu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Snapping behaviour in Epoxy Carousel and its pitfalls</title>
+      <link>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</link>
+      <pubDate>Tue, 24 Mar 2020 12:32:36 +0100</pubDate>
+      
+      <guid>https://code.allaboutapps.at/articles/custom-epoxy-carousel/</guid>
+      <description>During the development of one of our apps, we were tasked to develop a carousel view connected to a Google map in such a way that items displayed in the carousel would correspond to markers on the map. The details of the behaviour:
+ There is a selected element — one item, that is fully visible inside the carousel The carousel snaps to a newly selected element whenever we move it Once the selected item is chosen, we move the map to it’s corresponding map marker  For the purpose of this article, we decided to skip the map entirely and simply display the information about the selected item outside the carousel.</description>
+    </item>
+    
+  </channel>
+</rss>

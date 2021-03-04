@@ -6,11 +6,7 @@
     <description>Recent content in lb on all about apps</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Sep 2019 09:57:26 +0200</lastBuildDate>
-    
-	<atom:link href="https://code.allaboutapps.at/authors/lb/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 16 Sep 2019 09:57:26 +0200</lastBuildDate><atom:link href="https://code.allaboutapps.at/authors/lb/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Proper Material Theming in a Multi-Module Setup</title>
       <link>https://code.allaboutapps.at/articles/material-theming/</link>
@@ -18,7 +14,7 @@
       
       <guid>https://code.allaboutapps.at/articles/material-theming/</guid>
       <description>Basic Setup Recently an opportunity opened up for us to fully utilize a Material Theming &amp;amp; Styling setup in one of our new projects. We took some time to dig into this topic and made a clean setup in order to prepare for a long-term running project. This article will describe the results and our learnings.
-Let&#39;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
+Let&amp;rsquo;s start with the basic setup: as with all of our projects we use our A3AndroidTemplate as a starting point.</description>
     </item>
     
     <item>
