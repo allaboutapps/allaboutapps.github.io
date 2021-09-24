@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Nested navigation is a useful approach when navigation inside a screen is required or when the provided designs requires specific transitions to and from a dialog. This article will cover the basics for nested navigation in Flutter with the Getx framework.
+Table of Contents  Introduction Navigator Arguments State management Bottom navigation Problems  Introduction Have you ever had the challenge to navigate on a screen while still showing the BottomNavigationBar or wanted to navigate inside a dialog?'>
+<meta name='theme-color' content='#EB5D24'>
+
+<meta property='og:title' content='Nested navigation with Getx • Jonas Poxleitner'>
+<meta property='og:description' content='Nested navigation is a useful approach when navigation inside a screen is required or when the provided designs requires specific transitions to and from a dialog. This article will cover the basics for nested navigation in Flutter with the Getx framework.
+Table of Contents  Introduction Navigator Arguments State management Bottom navigation Problems  Introduction Have you ever had the challenge to navigate on a screen while still showing the BottomNavigationBar or wanted to navigate inside a dialog?'>
+<meta property='og:url' content='https://code.allaboutapps.at/articles/nested-navigation-with-getx/'>
+<meta property='og:site_name' content='all about apps'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/7f10ac108599bd5c483bf95fc82894f8?s=256'><meta property='article:section' content='Articles'><meta property='article:published_time' content='2021-09-23T17:56:00&#43;02:00'/><meta property='article:modified_time' content='2021-09-23T17:56:00&#43;02:00'/><meta name='twitter:card' content='summary'><meta name='twitter:creator' content='@jonaspoxleitner'>
+
+<meta name="generator" content="Hugo 0.79.0" />
+
+  <title>Nested navigation with Getx • Jonas Poxleitner</title>
+  <link rel='canonical' href='https://code.allaboutapps.at/articles/nested-navigation-with-getx/'>
+  
+  
+  <link rel='icon' href='/favicon.ico'>
+<link rel='stylesheet' href='/assets/css/main.d599583a.css'><link rel='stylesheet' href='/css/custom.css'><style>
+:root{--color-accent:#EB5D24;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-46375725-3', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+
+<body class='page type-articles has-sidebar'>
+
+  <div class='site'>
+
+    <div id='sidebar' class='sidebar'>
+  <a class='screen-reader-text' href='#main-menu'>Skip to Main Menu</a>
+
+  <div class='container'><section class='widget widget-about sep-after'>
+  <header>
+    
+    <div class='logo'>
+      <a href='/'>
+        <img src='/images/logo.png'>
+      </a>
+    </div>
+    
+    <h2 class='title site-title '>
+    all about apps
+    </h2>
+    <div class='desc'>
+    code
+    </div>
+  </header>
+
+</section>
+<section class='widget widget-sidebar_menu sep-after'><nav id='sidebar-menu' class='menu sidebar-menu' aria-label='Sidebar Menu'>
+    <div class='container'>
+      <ul><li class='item'>
+  <a href='/'>Home</a></li><li class='item'>
+  <a href='/categories/android/'>Android</a></li><li class='item'>
+  <a href='/categories/ios/'>iOS</a></li><li class='item'>
+  <a href='/categories/web/'>Web</a></li><li class='item'>
+  <a href='/categories/qa/'>QA</a></li><li class='item'>
+  <a href='/categories/flutter/'>Flutter</a></li><li class='item'>
+  <a href='/articles/'>All Articles</a></li><li class='item'>
+  <a href='/about/'>About</a></li></ul>
+    </div>
+  </nav>
+
+</section></div>
+
+  <div class='sidebar-overlay'></div>
+</div>
+
+    <div class='main'>
+
+      <a class='screen-reader-text' href='#content'>Skip to Content</a>
+
+<button id='sidebar-toggler' class='sidebar-toggler' aria-controls='sidebar'>
+  <span class='screen-reader-text'>Toggle Sidebar</span>
+  <span class='open'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="3" y1="12" x2="21" y2="12" />
+  <line x1="3" y1="6" x2="21" y2="6" />
+  <line x1="3" y1="18" x2="21" y2="18" />
+  
+</svg>
+</span>
+  <span class='close'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+  
+</svg>
+</span>
+</button>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>all about apps</p>
+              <p class='desc site-desc'>code</p></div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Nested navigation with Getx</h1>
+      
+
+    </div>
+    
+<div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2021-09-23T17:56:00&#43;02:00'>2021, Sep 23</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='/authors/jp'>Jonas Poxleitner</a></span>
+  
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p>Nested navigation is a useful approach when navigation inside a screen is required or when the provided designs requires specific transitions to and from a dialog. This article will cover the basics for nested navigation in Flutter with the Getx framework.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#navigator">Navigator</a></li>
+<li><a href="#arguments">Arguments</a></li>
+<li><a href="#state-management">State management</a></li>
+<li><a href="#bottom-navigation">Bottom navigation</a></li>
+<li><a href="#problems">Problems</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>Have you ever had the challenge to navigate on a screen while still showing the <code>BottomNavigationBar</code> or wanted to navigate inside a dialog? Well, thats what nested navigation is for. With this approach, we can navigate independet from the root navigator of our application. First of all, we have to implement the root navigation for our app by following the Getx docs, which will result in the following <code>GetMaterialApp</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NestedNavigation</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#66d9ef">const</span> NestedNavigation({Key<span style="color:#f92672">?</span> key}) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> GetMaterialApp(
+      title: <span style="color:#e6db74">&#39;Nested Navigation&#39;</span>,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      getPages: <span style="color:#f92672">&lt;</span>GetPage<span style="color:#f92672">&gt;</span>[
+        GetPage(name: <span style="color:#e6db74">&#39;/dialog&#39;</span>, page: () <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">const</span> DialogWrapper(), fullscreenDialog: <span style="color:#66d9ef">true</span>),
+        GetPage(name: <span style="color:#e6db74">&#39;/home&#39;</span>, page: () <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">const</span> HomeScreen()),
+      ],
+      initialRoute: <span style="color:#e6db74">&#39;/home&#39;</span>,
+    );
+  }
+}</code></pre></div>
+<p>Basically, this root of our application supports the navigation to our <code>DialogWrapper</code> and our <code>HomeScreen</code>. We are now also able to navigate to this screens with named routes, which improves the readability of our code.</p>
+<h2 id="navigator">Navigator</h2>
+<p>Based on the very limited information from the official Getx documentation, we use the nested navigation with a widget called <code>Navigator</code> which is already provided by Flutter itself. This widget will be the root of our soon to be implemented dialog flow.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#75715e">// the navigation inside the dialog
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DialogNavigation</span> {
+  DialogNavigation._();
+
+  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> dialogOne <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/dialog-one&#39;</span>;
+  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">const</span> dialogTwo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/dialog-two&#39;</span>;
+}
+
+<span style="color:#75715e">// our wrapper, where our main navigation will navigate to
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DialogWrapper</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#66d9ef">const</span> DialogWrapper({Key<span style="color:#f92672">?</span> key}) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> Navigator(
+      key: Get.nestedKey(DialogNavigation.id),
+      onGenerateRoute: (settings) {
+        <span style="color:#75715e">// navigate to a route by name with settings.name
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (settings.name <span style="color:#f92672">==</span> DialogNavigation.dialogTwo) {
+          <span style="color:#66d9ef">return</span> GetPageRoute(
+            routeName: DialogNavigation.dialogTwo,
+            page: () <span style="color:#f92672">=&gt;</span> DialogScreen(
+              id: DialogNavigation.id,
+              first: <span style="color:#66d9ef">false</span>,
+            ),
+          );
+        } <span style="color:#66d9ef">else</span> {
+          <span style="color:#66d9ef">return</span> GetPageRoute(
+            routeName: DialogNavigation.dialogOne,
+            page: () <span style="color:#f92672">=&gt;</span> DialogScreen(
+              id: DialogNavigation.id,
+              first: <span style="color:#66d9ef">true</span>,
+            ),
+          );
+        }
+      },
+    );
+  }
+}</code></pre></div>
+<p>To make it a little bit easier, I created the class <code>DialogNavigation</code>, which handles all the available keys for now and also stores the id of the nested navigator. It is also recommented store the ids for the navigation in a seperate class when using multiple nested navigators to prevent duplicate keys. From now on, we can navigate inside the dialog, and we can also close the whole dialog without having to think about the right animation with <code>Get.back()</code>. There is also an option to provide an id inside the <code>Get.back()</code> function. As you might have already guessed: By providing the <code>DialogNavigation.id</code> to the function, we are able to navigate back inside our nested navigation.</p>
+<h2 id="arguments">Arguments</h2>
+<p>Next, we might want to use <code>Get.arguments</code>, to move data from the current screen to the next. Unfortunately, <code>Get.arguments</code> only works when using the main navigator inside our application. Here&rsquo;s a simple experiment to show the problems I encountered:</p>
+<p>First, we navigate to the dialog with <code>Get.toNamed('/dialog', arguments: 'test')</code> and after that, we navigate to the next screen inside the nested naviation with <code>Get.toNamed(DialogNavigation.dialogTwo, id: DialogNavigation.id, arguments: 'test 2')</code>. In the following screen recording, you can see, that the second screen also shows &lsquo;test&rsquo;.</p>
+<p><img src="/images/nested-navigation-with-getx/arguments.gif" alt="Arguments"></p>
+<p>Now it&rsquo;s getting a bit complicated: If <code>Get.arguments</code> doesn&rsquo;t work, how should we then pass arguments between screens? Well, as it turns out, with the <code>RouteSettings</code> in our <code>onGenerateRoute</code> inside the <code>Navigator</code> widget, we are able to use the arguments with <code>settings.arguments</code>, and we&rsquo;re able to pass them als normal parameters to our screens.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DialogWrapper</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#66d9ef">const</span> DialogWrapper({Key<span style="color:#f92672">?</span> key}) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> Navigator(
+      key: Get.nestedKey(DialogNavigation.id),
+      onGenerateRoute: (settings) {
+        <span style="color:#66d9ef">if</span> (settings.name <span style="color:#f92672">==</span> DialogNavigation.dialogTwo) {
+          <span style="color:#75715e">// do error handling here
+</span><span style="color:#75715e"></span>          print(settings.arguments <span style="color:#66d9ef">is</span> <span style="color:#66d9ef">String</span>);
+
+          <span style="color:#66d9ef">return</span> GetPageRoute(
+            routeName: DialogNavigation.dialogTwo,
+            page: () <span style="color:#f92672">=&gt;</span> DialogScreen(
+              id: DialogNavigation.id,
+              first: <span style="color:#66d9ef">false</span>,
+              arguments: settings.arguments,
+            ),
+          );
+        } <span style="color:#66d9ef">else</span> {
+          <span style="color:#66d9ef">return</span> GetPageRoute(
+            routeName: DialogNavigation.dialogOne,
+            page: () <span style="color:#f92672">=&gt;</span> DialogScreen(
+              id: DialogNavigation.id,
+              first: <span style="color:#66d9ef">true</span>,
+              arguments: settings.arguments,
+            ),
+          );
+        }
+      },
+    );
+  }
+}</code></pre></div>
+<p>With this, modification, we can now pass arguments to the screens inside the the nested navigation. As you can see in the code above, you could even do some simple error handling here to redirect to an error screen when the argument is not valid.</p>
+<h2 id="state-management">State management</h2>
+<p>As you may know, state management with Getx is pretty simple when using bindings to push and pop routes. Controllers will then be automatically initialized and disposed when the screen is pushed and poped respecively. This apporoach can also be used with nested navigation, although I recommend using a single controller for your screens inside the nested navigator. In our current code, the <code>GetPage</code> provided inside our <code>GetMaterialApp</code> would look similar to the following code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart">GetPage(
+  name: <span style="color:#e6db74">&#39;/dialog&#39;</span>,
+  page: () <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">const</span> DialogWrapper(),
+  fullscreenDialog: <span style="color:#66d9ef">true</span>,
+  binding: BindingsBuilder.put(() <span style="color:#f92672">=&gt;</span> DialogController()),
+)</code></pre></div>
+<p>The <code>DialogController</code> will then be available for all nested routes.</p>
+<h2 id="bottom-navigation">Bottom navigation</h2>
+<p>As I&rsquo;ve mentioned above, nested navigation is also useful when using bottom navigation. With this approach, the <code>BottomNavigationBar</code> will always be the same and this part of the screen doesn&rsquo;t need to be repainted. First of all, let me show you what exactly we want to accomplish:</p>
+<p><img src="/images/nested-navigation-with-getx/bottom-navigation.gif" alt="Bottom navigation"></p>
+<p>Ok, let&rsquo;s take a step back again and analyze what exactly happens in the screen recording:</p>
+<ol>
+<li>The user is able to navigate between the home and the settings screen.</li>
+<li>When navigating to the detail in settings, the bottom navigation bar is still visible.</li>
+<li>When tapping on the settings-item in the bottom navigation again, the the app navigates back to the previous screen inside the settings-tab.</li>
+</ol>
+<p>To accomplish this, I had to make a few changes to our <code>GetMaterialApp</code>, which now initializes a controller for handling the taps in the <code>BottomNavigationBar</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NestedNavigation</span> <span style="color:#66d9ef">extends</span> StatelessWidget {
+  <span style="color:#66d9ef">const</span> NestedNavigation({Key<span style="color:#f92672">?</span> key}) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> GetMaterialApp(
+      title: <span style="color:#e6db74">&#39;Nested Navigation - BNB&#39;</span>,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      getPages: <span style="color:#f92672">&lt;</span>GetPage<span style="color:#f92672">&gt;</span>[
+        GetPage(name: <span style="color:#e6db74">&#39;/settings&#39;</span>, page: () <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">const</span> SettingsWrapper(), fullscreenDialog: <span style="color:#66d9ef">true</span>),
+        GetPage(name: <span style="color:#e6db74">&#39;/home&#39;</span>, page: () <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">const</span> HomeScreen()),
+      ],
+      initialRoute: <span style="color:#e6db74">&#39;/home&#39;</span>,
+      initialBinding: BindingsBuilder.put(() <span style="color:#f92672">=&gt;</span> HomeController()),
+    );
+  }
+}</code></pre></div>
+<p>Our <code>HomeScreen</code> now listens for changes to the <code>HomeController</code> and is used for changing the current screen.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dart" data-lang="dart"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HomeScreen</span> <span style="color:#66d9ef">extends</span> GetView<span style="color:#f92672">&lt;</span>HomeController<span style="color:#f92672">&gt;</span> {
+  <span style="color:#66d9ef">const</span> HomeScreen({Key<span style="color:#f92672">?</span> key}) <span style="color:#f92672">:</span> <span style="color:#66d9ef">super</span>(key: key);
+
+  <span style="color:#960050;background-color:#1e0010">@</span>override
+  Widget build(BuildContext context) {
+    <span style="color:#66d9ef">return</span> Obx(() <span style="color:#f92672">=&gt;</span> Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: controller.state.value <span style="color:#f92672">==</span> HomeState.home <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>,
+            onTap: (index) <span style="color:#f92672">=&gt;</span> index <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> controller.selectHome() <span style="color:#f92672">:</span> controller.selectSettings(),
+            items: <span style="color:#66d9ef">const</span> [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: <span style="color:#e6db74">&#39;Home&#39;</span>),
+              BottomNavigationBarItem(icon: Icon(Icons.settings), label: <span style="color:#e6db74">&#39;Settings&#39;</span>),
+            ],
+          ),
+          body: Builder(
+            builder: (context) {
+              <span style="color:#66d9ef">switch</span> (controller.state.value) {
+                <span style="color:#66d9ef">case</span> HomeState.home:
+                  <span style="color:#66d9ef">return</span> Scaffold(
+                    appBar: AppBar(title: <span style="color:#66d9ef">const</span> Text(<span style="color:#e6db74">&#39;BottomNavigationBar&#39;</span>)),
+                    body: <span style="color:#66d9ef">const</span> Center(child: Text(<span style="color:#e6db74">&#39;Home&#39;</span>)),
+                  );
+                <span style="color:#66d9ef">case</span> HomeState.settings:
+                  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">const</span> SettingsWrapper();
+              }
+            },
+          ),
+        ));
+  }
+}
+
+enum HomeState { home, settings }
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HomeController</span> <span style="color:#66d9ef">extends</span> GetxController {
+  <span style="color:#66d9ef">final</span> state <span style="color:#f92672">=</span> HomeState.home.obs;
+
+  <span style="color:#66d9ef">void</span> selectHome() <span style="color:#f92672">=&gt;</span> state.value <span style="color:#f92672">=</span> HomeState.home;
+  Future<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span> selectSettings() <span style="color:#66d9ef">async</span> {
+    <span style="color:#75715e">// check if current route is settings
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (state.value <span style="color:#f92672">==</span> HomeState.settings) {
+      <span style="color:#66d9ef">try</span> {
+        <span style="color:#75715e">// try to pop e.g. current route in settings is the detail
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">await</span> Get.keys[SettingsNavigation.id]<span style="color:#f92672">!</span>.currentState<span style="color:#f92672">!</span>.maybePop();
+      } <span style="color:#66d9ef">catch</span> (e) {
+        <span style="color:#75715e">// error
+</span><span style="color:#75715e"></span>      }
+    }
+    state.value <span style="color:#f92672">=</span> HomeState.settings;
+  }
+}</code></pre></div>
+<p>The <code>selectHome()</code> method seems pretty simple, but what happens inside the <code>selectSettings()</code> method? Well, at first the method checks if the current state is already the settings route. This could mean that the nested navigator is used and we don&rsquo;t really know where the user is at the moment. Then we try to pop current routes in our nested navigator by getting the current <code>NavigatorState</code> from Get itself. Make sure to wrap this inside a try-catch.</p>
+<h2 id="problems">Problems</h2>
+<p>There is still one unfortunate issue with the current implementation of the nested navigation: It is not possible to use the <code>Get.until((route) =&gt; route.settings.name == '/route-name')</code> method to pop all routes until the route called &lsquo;/route-name&rsquo;, because <code>route.settings.name</code> always returns null.</p>
+<hr>
+<p>The source code for the complete solution is available <a href="https://github.com/jonaspoxleitner/articles">on GitHub</a>.</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  <div class='categories'>
+  <span class='taxonomy-icon'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+</span>
+  <span class='screen-reader-text'>Categories: </span><a class='category' href='/categories/flutter'>Flutter</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='/articles/custom-epoxy-carousel/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Snapping behaviour in Epoxy Carousel and its pitfalls</a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <div style="margin-top: 40px; padding: 0 20px; display: flex; align-items: center;">
+        <img src="/images/texterify_logo_white_background_rounded.png" style="max-height: 56px; margin-right: 8px;" />
+        <p style="font-size: 14px; margin: 0;">
+          <span style="font-weight: bold;">Looking for a tool to manage all your software translations in one single place?</span>
+          <br/>
+          Checkout <a href="https://texterify.com?utm_source=aaa_blog" style="color: #06f;" target="_blank">texterify.com</a> the new localization and translation management platform.
+        </p>
+      </div>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/allaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://facebook.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Facebook account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/itsallaboutapps' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:office@allaboutapps.at' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p> &copy; 2018-2021 all about apps </p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__public_path__='\/assets\/js\/'</script>
+
+<script src='/assets/js/main.d853fa3a.js'></script><script src='/js/custom.js'></script>
+
+
+
+</body>
+
+</html>
+
